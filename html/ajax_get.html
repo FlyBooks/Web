@@ -20,15 +20,15 @@
 			} else {
 				xhr = new ActiveXObject("Microsoft.XMLHTTP"); //for IE	
 			}
-
-			xhr.open("GET", "../files/a.txt", true);
+			//step3 设置请求方式跟地址
+			xhr.open("GET", "../files/a.txt?t=" + (new Date().getTime()), true);
 			xhr.send();
 			//step4 监听状态
 			xhr.onreadystatechange = function(ev2) {
 				if (xhr.readyState === 4) { //ajax请求完成
 					if (xhr.status >= 200 && xhr.status < 300
 							|| xhr.status === 304) {
-
+						//step5 处理返回结果
 						alert(xhr.responseText);
 					} else {
 

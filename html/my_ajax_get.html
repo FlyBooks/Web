@@ -13,7 +13,11 @@
 		var oBtn = document.querySelector("button");
 
 		oBtn.onclick = function(ev1) {
-			myAJAX("../files/a.txt",function(xhr){
+			myAJAX("../files/a.txt",{
+				user:'c5268836',
+				pwd: '123456'
+				
+			},function(xhr){
 				alert(xhr.responseText);
 				
 			},function(xhr){

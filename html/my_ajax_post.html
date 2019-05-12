@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>model</title>
+<meta charset="utf-8">
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script src="../js/myAjaxPost.js">
+</script>
+
+<script>
+$(document).ready(function(){//url, obj, timeout, success, error
+	$("button").click(function(ev1){
+		myPostAjax(
+			'../php/ajax_get.php',
+			{
+				'name':'liu',
+				'pwd': 'lili'
+			},
+			30000,
+			function(xhr){
+				alert(xhr.reponseTxt);
+			},
+			function(xhr){
+				alert("failed");
+			}
+			
+		);
+		
+	});
+});
+</script>
+</head>
+<body>
+<button>post</button>
+</body>
+</html>

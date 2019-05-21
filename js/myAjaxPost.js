@@ -18,17 +18,17 @@ function myPostAjax(url, obj, timeout, success, error) {
 		xhr = new XMLHttpRequest();
 		alert(xhr);
 
-	}
-	else
-	{
+	} else {
 
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-   var additionalUrl = objStr(obj);console.log(additionalUrl);
-	xhr.open("POST", url,true);
-	xhr.send();
-//onreadystatechange
-	xhr.onreadystatechange(function(ev2) {
+	var additionalUrl = objStr(obj);
+	console.log(additionalUrl);
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "aoolication/x-222-form-urlencode");
+	xhr.send(additionalUrl);
+	// onreadystatechange
+	xhr.onreadystatechange = function(ev2) {
 		if (xhr.readyState === 4) {
 			clearInterval(timer);
 			if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
@@ -40,7 +40,7 @@ function myPostAjax(url, obj, timeout, success, error) {
 			}
 		}
 
-	});
+	};
 
 	if (timeout) {
 		timer = setInterval(function() {

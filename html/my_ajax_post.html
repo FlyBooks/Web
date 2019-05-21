@@ -5,31 +5,28 @@
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
 	
 </script>
-<script src="../js/myAjax.js"></script>
-<style>
-</style>
-
+<script src="../js/myAjaxPost.js">
+	
+</script>
 <script>
-	window.onload = function(ev) {
-		var oBtn = document.querySelector("button");
-
-		oBtn.onclick = function(ev1) {
-			myAJAX("../php/ajax_get.php", {
-				user : 'c5268836',
-				pwd : '123456'
-
+	window.onload = function(ev1) {
+		var obt = document.querySelector("button");
+		obt.onclick = function(ev1) {
+			myPostAjax('../php/ajax_get.php', {
+				'name' : 'liu',
+				'pwd' : 'lili'
 			}, 3000, function(xhr) {
 				alert(xhr.responseText);
-
 			}, function(xhr) {
 				alert("failed");
+			}
 
-			});
+			);
 		}
 	}
 </script>
 </head>
 <body>
-	<button>ajax</button>
+	<button>post</button>
 </body>
 </html>

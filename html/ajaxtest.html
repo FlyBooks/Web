@@ -34,18 +34,17 @@ background: pink;
 $(document).ready(function(){
 	var oImg = document.querySelector("img");
 	var oBtns = document.querySelectorAll("button");
-	console.log(oBtns);
-	console.log(oImg);
+
 	oBtns[0].onclick = function(){
-		$.ajax({
-			type: 'post',
+		Ajax({
+			type: "GET",
 			timeout: 3000,
 			url: '../php/ajax_test.php',
-			data:{name: this.getAttribute("name")},
+			data:{"name": this.getAttribute("name")},
 			success: function(xhr){
 				alert(xhr.responseText);
 			},
-			error: function(){
+			error: function(xhr){
 				
 				alert("failed!");
 			}

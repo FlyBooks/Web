@@ -2,68 +2,85 @@
 <head>
 <title>model</title>
 <meta charset="utf-8">
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
-</script>
+
 <style>
-*{
-padding:0;
-margin:0;
+* {
+	padding: 0;
+	margin: 0;
 }
-div{
-width: 300px;
-height:300px;
-border: 1px solid #000;
-margin: 50px auto;
-text-align: center;
-background: #ccc;
+
+div {
+	width: 300px;
+	height: 300px;
+	border: 1px solid #000;
+	margin: 50px auto;
+	text-align: center;
+	background: #ccc;
 }
-img{
-width:200px;
-height:200px;
-display:block;
-margin: 10px auto 10px;
-border: 1px solid #000;
+
+img {
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin: 10px auto 10px;
+	border: 1px solid #000;
 }
-p{
-text-align: center;
-background: pink;
+
+p {
+	text-align: center;
+	background: pink;
 }
 </style>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 <script src="../js/jqueryAjax.js"></script>
+<script src="../js/myAjax.js"></script>
 <script>
-$(document).ready(function(){
-	var oImg = document.querySelector("img");
-	var oBtns = document.querySelectorAll("button");
+	window.onload = function(ev) {
+		var oImg = document.querySelector("img");
+		var oBtns = document.querySelectorAll("button");
 
-	oBtns[0].onclick = function(){
-		Ajax({
-			type: "GET",
-			timeout: 3000,
-			url: '../php/ajax_test.php',
-			data:{"name": this.getAttribute("name")},
-			success: function(xhr){
+		oBtns[0].onclick = function(ev1) {
+
+			myAJAX("../php/ajax_test.php", {
+				name : this.getAttribute("name")
+
+			}, 30000, function(xhr) {
 				alert(xhr.responseText);
-			},
-			error: function(xhr){
-				
-				alert("failed!");
-			}
-		});
-		
-	}
-	
-	
-});
+
+			}, function(xhr) {
+				alert("failed");
+
+			});
+			/*
+			 $.ajax({
+			 type: "post",
+			 timeout: 3000,
+			 url: '../php/ajax_test.php',
+			 data:{"name": this.getAttribute("name")},
+			 success: function(xhr){
+			 alert(xhr.responseText);
+
+			 },
+			 error: function(xhr){
+			
+			 alert("failed!");
+			 }
+			 });
+			 */
+
+		}
+
+	};
 </script>
 </head>
 <body>
-<div>
-<p id="title">商品名称</p>
-<img src="" alt="">
-<p id="des">商品描述</p>
-<button name="nv">女装</button>
-<button name="bb">包包</button>
-<button name="xz">鞋子</button>
-</div>
+	<div>
+		<p id="title">商品名称</p>
+		<img src="" alt="">
+		<p id="des">商品描述</p>
+		<button name="nv">女装</button>
+		<button name="bb">包包</button>
+		<button name="xz">鞋子</button>
+	</div>
 </body>
 </html>

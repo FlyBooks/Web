@@ -6,16 +6,16 @@ $products = array(
 		"tx" => array("title"=>"键盘拖鞋", "des"=>"程序员专属拖鞋，屌丝气息浓郁，你值得拥有","images"=>"../image/3.jpg")		
 );
 //2.获取前端传递的参数
-$name = $_GET("name");
-
+// echo $name = $_GET("name");
+$name= $_GET("name");
 //3.根据前端传入的key,获取对应的字典
 $product = $products[$name];
-
+echo $name;
 //4.将小字典中的内容取出来返回给前端
-echo $product["title"];
-echo "|";
-echo $product["des"];
-echo "|";
-echo $product["image"];
-echo "123";
+// echo $product["title"];
+// echo "|";
+// echo $product["des"];
+// echo "|";
+// echo $product["image"];
+// echo "123";
 ?>

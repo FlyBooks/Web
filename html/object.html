@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>对象的属性--方法</title>
+<script type="text/javascript">
+	var obj = new Object();
+
+	obj['name'] = 'Justin';
+	obj['age'] = 25;
+
+	obj['none_func'] = function() {
+
+		console.log(2333);
+	};
+
+	//调用对象里面的函数
+	obj['none_func']();//2333
+
+	/*
+	函数也可以是对象的属性
+	-如果一个函数作为一个对象的属性被保存，那么我们就称这个函数是对象的方法，
+	-调用函数就是调用对象的方法	
+	 */
+
+	//字面量
+	var obj2 = {
+		name : "justin",
+		age : 25,
+		sayHello : function() {
+			console.log("helloworld");
+
+		}
+	};
+
+	obj2.sayHello();//helloworld
+	console.log(obj2.sayHello); //打印出函数
+
+	//枚举对象的属性
+	var objList = {
+		name : 'Selena',
+		gender : 'male',
+		address : 'America'
+	};
+
+	/*
+	枚举对象中的属性：
+	使用for...in语句：
+	语法： for (var 变量 in 对象){}
+	 */
+
+	for ( var key in objList) {
+
+		console.log(key + '<==>' + objList[key]);
+		//结果：
+		//name<==>Selena object.html:54:11
+		//gender<==>male object.html:54:11
+		//address<==>America
+
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

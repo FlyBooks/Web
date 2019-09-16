@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>函数的作用域</title>
+</head>
+
+<script>
+	/*
+	 * 作用域：一个变量的使用范围
+	 种类：1.全局作用域
+	 -直接编写在script标签中的js代码，都在全局作用域
+	 -全局作用域在页面打开时创建，在页面关闭时销毁
+	 -在全局作用域中有一个全局对象window,可以直接使用
+	 *window代表的是一个浏览器的窗口，由浏览器创建，可以直接被使用
+	 -在全局作用域中创建的对象都会作为window对象的属性被保存，
+	 创建的函数都会作为window对象的方法保存
+	
+	 2.函数作用域
+	
+	 */
+
+	console.log(window);//object window
+
+	var a = 10;
+	console.log(window.a);//10
+
+	//b我们没有声明，但是使用window.c就不会报错（对象没有该属性是不会报错的）
+	//但是如果我们写console.log(b);就会报错
+	console.log(window.b);//undefined
+
+	function funn() {
+		console.log("funn function");
+	}
+
+	window.funn(); //funn function
+	funn(); //funn function
+
+	//变量的声明提前
+	// 使用var关键字声明的变量会在所有代码执行之前被声明（但是不会赋值）
+	// 如果没有使用var声明对象，则不会提前声明
+
+	console.log("d=" + d);//d=undefined 这里不会报错，但是如果把var d = 123中的var去掉就会报错
+	var d = 123;
+	
+	
+	
+	
+	
+</script>
+
+<body>
+
+</body>
+</html>

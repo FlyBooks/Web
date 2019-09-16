@@ -47,16 +47,32 @@
 	枚举对象中的属性：
 	使用for...in语句：
 	语法： for (var 变量 in 对象){}
+	在for...in 语句中对象有几个属性就执行几次
+		每次执行的时候会将对象的属性名赋值给变量
 	 */
 
 	for ( var key in objList) {
 
-		console.log(key + '<==>' + objList[key]);
+		console.log(key + '<==>' + objList[key]);//这里要使用[]比较方便，因为objList.key代表objList中一个属性为key，但是objList没有key这个属性
 		//结果：
 		//name<==>Selena object.html:54:11
 		//gender<==>male object.html:54:11
 		//address<==>America
 
+	}
+	/*
+	函数的声明提前：
+		使用函数声明形式创建函数： function 函数名(){} 会在所有代码执行之前就被创建
+		使用表达式创建的函数，不会提前被声明
+	
+	 */
+
+	www();//任意位置都可以调用我哦~~~
+
+	//全局作用域中的变量都是全局变量，在页面任意位置都可以访问到
+	function www() {
+
+		console.log("任意位置都可以调用我哦~~~");
 	}
 </script>
 </head>

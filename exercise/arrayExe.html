@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>获取数组特定的值</title>
+<script type="text/javascript">
+	function Person(name, age) {
+
+		this.name = name;
+		this.age = age;
+
+	}
+
+	Person.prototype.toString = function() {
+	return "[" + this.name + ", " + this.age + "]";
+	};
+
+	var Per = new Person('Selena', 18);
+	var Per2 = new Person('Taylor', 29);
+	var Per3 = new Person('Ben', 9);
+	var Per4 = new Person('Hash', 11);
+
+	var arr = [ Per, Per2, Per3, Per4 ];
+
+	function getNewArr(oldArr) {
+		var newArr = [];
+
+		for (var i = 0; i < oldArr.length; i++) {
+			if (oldArr[i]['age'] < 18) {
+
+				newArr.push(oldArr[i]);
+			}
+
+		}
+
+		return newArr;
+	}
+
+	var newArr = getNewArr(arr);
+
+	console.log(newArr);
+
+	//forEach(function(){})
+	//数组中有几个元素，函数就会被调用几次，每次在执行的时候，浏览器会将遍历到元素以实参的形式传递回来，我们可以定义形参来读取
+	//像这种由我们创建，但是不是我们调用的函数称为回调函数
+	//第三个参数就是我们正在遍历的数组
+	//第二个参数是索引
+	//第一个参数是值 ;;;IE8以上的浏览器才支持forEach函数
+	
+	arr.forEach(function(value,index,obj) {
+		console.log("forEach works");
+		console.log("value "+value);
+		console.log("index "+index);
+		console.log("obj "+obj);
+
+	});
+</script>
+</head>
+<body>
+
+</body>
+</html>

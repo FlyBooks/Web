@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数组自变量</title>
+
+<script type="text/javascript">
+	/*
+	 使用字面量来创建数组
+	 语法： []
+	 var arr = [];
+	 */
+
+	var arr = [ 1, 2, 3, 4, 5, 6 ];
+	console.log(arr); //Array(6) [ 1, 2, 3, 4, 5, 6 ]
+	console.log(arr[0]); //1
+
+	//使用构造函数创建数组时，也可以同时添加元素
+	var arr2 = new Array(10, 20, 30);
+	console.log(arr2); //Array(3) [ 10, 20, 30 ]
+
+	//创建一个长度为10的数组
+	arr2 = new Array(10);
+
+	console.log(arr2.length); //10
+	console.log(arr2);//[ undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined ]
+
+	//数组中的元素可以是任意的数据类型
+	arr = [ "hello", 1, true, null, undefined ];
+
+	console.log(arr); //[ "hello", 1, true, null, undefined ]
+
+	//当然也可以加对象
+	var obj = {
+		name : 'wukong'
+	};
+
+	arr[arr.length] = obj;
+
+	console.log(arr[5]); //Object { name: "wukong" }
+
+	//也可以是函数
+	arr = [ function() {
+		alert(1);
+	}, function() {
+	} ];
+
+	arr[0]();
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

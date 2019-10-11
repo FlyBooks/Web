@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom 简介</title>
+<script type="text/javascript">
+	window.onload = function() {
+
+		/*文档节点： 整个html文档
+		 * 元素节点： html文档中的html标签
+		 属性节点： 元素的属性 比如： id
+		 文本节点： html标签中的文本内容
+		 
+		 浏览器已经为什么提供文档节点对象，这个对象是window属性，可以在页面中直接使用，文档节点代表的是整个网页
+		 
+		 
+		 */
+
+		console.log(document); //HTMLDocument file:///C:/Software/wamp64/www/html/dom/introduction.html
+
+		var btn = document.getElementById('btn');
+
+		btn.innerHTML = 'CHANGE THE WORLD';
+
+		// 事件： 就是用户跟浏览器之间的一些交互行为
+		// -像：  点击按钮，鼠标移动，关闭窗口
+
+		btn.onclick = function() {
+
+			console.log("你不要过来，烦人");
+		};
+
+		var txt = document.getElementById("txt");
+		console.log('type: ' + typeof txt);
+		console.log(txt);
+
+	}
+</script>
+
+</head>
+<body>
+	<!-- 这种写法我们称为行为跟结构耦合，我们不推荐使用  -->
+	<!--  <button id="btn" onclick="alert('why click me')">我是一个按钮</button> -->
+	<button id="btn">我是button</button>
+	<input type="text" id="txt" />
+</body>
+</html>

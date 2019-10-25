@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数组的其他常用方法</title>
+<script type="text/javascript">
+	/*
+	 * sort():
+	 可以用来对数组中的元素进行排序
+	 直接影响原数组，默认会按照Unicode编码进行排序
+	 */
+
+	var arr = [ 'd', 'o', 'ku', 'op', 'l' ];
+	arr.sort();
+
+	console.log(arr);
+
+	arr = [ 1, 11, 9, 0, 23 ];
+	arr.sort();
+	console.log(arr);//[ 0, 1, 11, 23, 9 ]
+	/*
+	sort方法即使对纯数字的数组也只是按照unicode编码来排序
+	所以我们需要按照自己指定的顺序来排序
+	
+	在sort()添加一个回调函数，来指定排序规则
+	   回调函数需要定义两个形参，浏览器将会分别使用数组中的元素作为实参去调用回调函数
+	   使用哪个元素调用不确定，但是肯定的是在数组中a一定在b前面
+	   如果返回值大于0，则交换位置，
+	   返回值小于等于0，位置不动。
+	
+	 */
+
+	arr.sort(function(a, b) {
+
+		return a - b;//升序排列
+
+	});
+
+	console.log(arr);
+</script>
+</head>
+<body>
+
+</body>
+</html>

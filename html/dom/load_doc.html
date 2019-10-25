@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文档的加载</title>
+
+<script type="text/javascript">
+	/*
+	1. 浏览器在加载一个 页面时，是按照自上而下的顺序加载的
+	读取到一行就运行一行，在代码执行时页面还没有加载
+	
+	 */
+
+	//onload会在整个页面完全加载完成之后才触发
+	//为window绑定一个onload事件
+	//该事件对应的响应函数将会在整个页面加载完毕后执行，这样就可以确保我们的代码执行时所用的DOM对象都已经加载完毕
+	window.onload = function() {
+		//getElementByTagName:可以根据标签名来获取一组元素节点对象，返回一个类数组对象
+		//lst[i].innerHTML
+
+		//getElementsByName('xxx')
+		//innerHTML对于自结束标签是不会起作用的，如果需要读取元素节点属性直接使用 元素.属性名 xxx.value
+		//class属性不能采用这种方式，读取class属性时， 使用  元素.className
+
+	}
+</script>
+</head>
+<body>
+	<button id="btn">click me</button>
+</body>
+</html>

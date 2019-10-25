@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date</title>
+<script type="text/javascript">
+	/*
+	 * 创建一个Date对象：如果直接使用构造函数创建一个Date对象，则会封装为当前代码执行的时间
+	 */
+	var d = new Date();
+
+	console.log(d);
+
+	//创建一个指定的时间对象
+	//需要在构造函数中传递一个表示时间的字符串作为参数
+	//日期格式： 月份/日/年 时：分：秒
+
+	var d2 = new Date("12/03/2019 11:10:30");
+	console.log(d2);
+	console.log(d2.getFullYear());
+	//getDate(): 获取当前日期是几号
+	//getDay(): 获取当前日期是星期几， 返回一个0-6的值，0表示周日，1表示周一， ...
+	//getMonth(): 获取当前日期的月份，返回0-11， 0表示一月，1表示2月
+	//getFullYear(): 获取当前日期的年份，
+	
+	/*
+	getTime():获取当前日期对象的时间戳
+	 时间戳： 指的是从格林威治标准时间的1970年1月1日0时0分0秒到当前日期所花费的毫秒数（1秒=1000毫秒）
+	 计算机底层使用的都是时间戳来保存时间
+	*/
+	var d3 = new Date("1/1/1970 0:0:0");
+	console.log(d3.getTime());
+	
+	//获取当前的时间戳 
+	var time = Date.now();
+	console.log(time);
+</script>
+</head>
+<body>
+
+</body>
+</html>

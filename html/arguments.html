@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>arguments</title>
+<script type="text/javascript">
+	/*
+	 * 封装实参的对象 arguments: 
+	 arguments是一个类数组对象，它也可以通过索引来操作数据，也可以获取长度
+	 在调用函数时，我们所传递的实参都会在arguments中保存
+	 -所以我们即使不定义形参也可以通过arguments来使用实参，只不过有点麻烦
+	 arguments[0]表示第一个实参
+	 arguments[1]表示第二个实参
+	 arguments[n]表示第n个实参
+
+	 
+	 arguments里面有一个属性叫做callee,这个属性对应一个函数对象就是我们当前正在执行的函数
+	 */
+
+	function fun() {
+		console.log(arguments);
+		console.log(Array.isArray(arguments)); //false
+		console.log(arguments instanceof Array); //false
+		console.log(arguments.length); //arguments.length就是我们传入的实参的个数
+		console.log(arguments[0]); //hello
+		console.log(arguments[1]); //true
+		console.log(arguments.callee === fun); //true
+	}
+
+	fun('hello', true);
+</script>
+</head>
+<body>
+
+</body>
+</html>

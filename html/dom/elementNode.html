@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom 查询</title>
+<script type="text/javascript">
+	window.onload = function() {
+		var city = document.getElementById("city");
+		var cityLi = city.getElementsByTagName("li");
+
+		for (var i = 0; i < cityLi.length; i++) {
+
+			console.log(cityLi[i].innerHTML);
+		}
+
+		//childNodes:子节点 会获取包括文本节点在内的所有节点（空白也会被算上）
+		//注意： 在IE8及其以下的浏览器不会把空白文本当成子节点
+		var cityChild = city.childNodes;
+		console.log('the number of city childnodes: ' + cityChild.length); //the number of city childnodes: 15 elementNode.html:19:11
+
+		//children可以获取当前元素的所有子元素，推荐使用
+		var cityChildren = city.children;
+		console.log("子元素： " + cityChildren.length); //子元素： 7
+	}
+</script>
+</head>
+<body>
+	<ul id="city">
+		<li>Beijing</li>
+		<li>Shanghai</li>
+		<li>Nanjing</li>
+		<li>Zhenjiang</li>
+		<li>Hongkong</li>
+		<li>Hangzhou</li>
+		<li>Danyang</li>
+	</ul>
+</body>
+</html>

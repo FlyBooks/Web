@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>员工信息删除与添加</title>
+<style>
+div {
+	border: 1px dashed #000;
+	width: 300px;
+	height: 200px;
+}
+</style>
+<script type="text/javascript">
+	/*
+	点击超链接后，超链接会跳转页面，这个是超链接的默认行为，但是此时我们不希望出现默认行为，可以通过响应函数的最后return false来取消默认行为
+	或者： javascript:void(0);
+	
+	confirm()用于弹出一个带有确认和取消按钮的提示框，需要一个字符串作为参数，该参数将会作为提示文字显示出来
+	返回值： 如果用户点击确认返回true,取消返回false;
+	
+	 */
+
+	function delTr() {
+		var tr = this.parentNode.parentNode;
+		var flag = confirm("Are you sure to delete " + tr.children[0].innerText);
+
+		if (flag) {
+
+			tr.parentNode.removeChild(tr);
+		}
+
+	}
+	window.onload = function() {
+		var as = document.getElementsByTagName('a');
+
+		for (var i = 0; i < as.length; i++) {
+
+			as[i].onclick = delTr;
+		}
+
+		var addNewEmployee = document.getElementById("addNewEmployee");
+
+		addNewEmployee.onclick = function() {
+			var name = document.getElementById("name").value;
+			var email = document.getElementById("email").value;
+			var salary = document.getElementById("salary").value;
+
+			var tr = document.createElement("tr");
+			tr.innerHTML = "<td>" + name + "</td><td>" + email + "</td><td>"
+					+ salary
+					+ "</td><td><a href='javascript:void(0)'>Delete</a></td>";
+
+			//获取a标签
+			var a = tr.getElementsByTagName("a")[0];
+
+			a.onclick = delTr;
+			var employeeInfo = document.getElementById("employeeInfo");
+			var tbody = employeeInfo.getElementsByTagName("tbody")[0];
+
+			tbody.appendChild(tr);
+		};
+	};
+</script>
+</head>
+<body>
+	<table border="1px" id="employeeInfo">
+		<tr>
+			<td>Name</td>
+			<td>Email</td>
+			<td>Salary</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Sam</td>
+			<td>sam.wu@qq.com</td>
+			<td>5000</td>
+			<td><a href="javascript:void(0)">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Tom</td>
+			<td>tom.cat@qq.com</td>
+			<td>6000</td>
+			<td><a href="javascript: void(0)">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Haili</td>
+			<td>haili.bao@qq.com</td>
+			<td>0</td>
+			<td><a href="javascript: void(0)">Delete</a></td>
+		</tr>
+	</table>
+
+	<div>
+		<p>添加新员工</p>
+		name:<input type="text" id="name"><br> email:<input
+			type="text" id="email"><br> salary:<input type="text"
+			id="salary"><br> <input type="button" value="提交"
+			id="addNewEmployee">
+	</div>
+
+</body>
+</html>
+

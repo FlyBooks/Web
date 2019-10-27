@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		//在document中有一个属性body, 它保存的是body的引用
+		var body = document.body;
+
+		//document.documentElement保存的是html根目录
+		var html = document.documentElement;
+
+		console.log(html);
+
+		console.log("all====all=======");
+
+		//document.all可以获取页面的所有内容，跟document.getElementByTagName("*")类似，但是推荐使用documnet.all比较简单 ；）
+		var all = document.all;
+
+		console.log(typeof all);
+		for (var i = 0; i < all.length; i++) {
+
+			console.log(all[i]);
+		}
+
+		/*
+		根据元素的class属性值查询一组元素节点对象
+		 */
+		var box1 = document.getElementsByClassName("xxx");
+
+		//document.querySelector(): 需要一个选择器的字符串作为参数， 可以根据一个css选择器来查询一个元素节点对象
+		//document。querySelector(), IE8支持超， 等价于getElementByClassName()
+		//缺点： querySelector只会返回满足条件的第一个元素
+		
+		
+		/*
+		document.querySelectorAll(): 用法跟querySelector类似，不同的是太将符合条件的元素封装到一个数组中返回
+		*/
+		document.querySelectorAll();
+
+	};
+</script>
+
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dom查询</title>
+<script type="text/javascript">
+	window.onload = function() {
+
+		function myClick(idStr, fun) {
+			var myAction = document.getElementById(idStr);
+
+			myAction.onclick = fun;
+		}
+
+		//parentNode获取一个元素的父节点
+		myClick("show_node2", function() {
+
+			var bj = document.getElementById("bj");
+			var nodes = bj.parentNode;
+
+			console.log(nodes.innerHTML);
+
+		});
+
+		var show_node = document.getElementById('show_node');
+
+		show_node.onclick = function() {
+			var bj = document.getElementById("bj");
+
+			var nodes = bj.parentNode;
+
+			//innerText: 可以获取到元素内部的文本内容
+			//跟innerHTML类似，不同的是会将html标签去除
+			console.log(nodes.innerText);
+
+			console.log(nodes.innerHTML);
+		};
+
+		//previousSibling:前一个兄弟节点（也可能获取到空白的文本）
+		//previousElementSibling:前一个兄弟元素（不包括空白文本，IE8及其以下不支持）
+
+		myClick("pre", function() {
+			var apple = document.getElementById("apple");
+			var preSibling = apple.previousSibling;
+			console.log(preSibling);
+		});
+		myClick("pre2", function() {
+			var apple = document.getElementById("apple");
+			var preSiblingElement = apple.previousElementSibling;
+
+			console.log(preSiblingElement);
+		});
+
+		//文本框的value属性值就是文本框中填写的内容
+		myClick("setValue", function() {
+			var txt = document.getElementById("txt");
+			txt.value = '嘻嘻';
+		});
+
+		myClick("getValue", function() {
+			var txt = document.getElementById("txt");
+			console.log(txt.value);
+
+		});
+
+		//获取北京的文本值
+		myClick("BJValue", function() {
+			var bj = document.getElementById("bj");
+
+			console.log(bj.firstChild.nodeValue); //北京
+			console.log(bj.innerText); //北京，这种方式更加推荐
+
+		});
+	}
+</script>
+
+</head>
+<body>
+	<ul id='city'>
+		<li id='bj'>北京</li>
+		<li>上海</li>
+		<li>广州</li>
+		<li>深圳</li>
+		<li>南京</li>
+		<li>苏州</li>
+	</ul>
+
+
+	<ul id="phone">
+		<li>安卓</li>
+		<li id="apple">苹果</li>
+		<li>window phone</li>
+		<li>诺基亚</li>
+	</ul>
+	<input type="text" id="txt" value="巴拉巴拉哈哈" />
+	<br>
+	<button id="show_node">获取北京的父节点</button>
+	<button id="show_node2">获取北京的父节点2</button>
+	<button id="pre">获取苹果手机的前一个兄弟节点</button>
+	<button id="pre2">获取苹果手机的前一个兄弟元素</button>
+	<button id="setValue">设置input的内容</button>
+	<button id="getValue">得到input的内容</button>
+	<button id="BJValue">获取北京的文本节点</button>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	window.onload = function() {
+
+		/*
+		document.createElement():可以用于创建一个元素节点对象
+		它需要一个标签名作为参数，将会根据该标签创建元素节点对象并将创建好的对象作为返回值返回
+		 */
+
+		/*
+		document.createTextNode(): 可以用来创建一个文本节点，需要一个文本内容作为参数，将会根据该内容创建文本节点，并将新的节点返回
+		 */
+
+		/*
+		appendChild(): 可以向一个父节点中添加一个新的子节点
+		用法： 父节点.appendChild(子节点);
+		 */
+
+		/*
+		insertBefore():可以在指定的子节点前插入新的子节点
+		用法： 父节点.insertBefore(新节点，旧节点);
+		 */
+
+		/*
+		replaceChild(): 可以使用指定的子节点替换已有的子节点
+		用法： 父节点.replaceChild(新节点，旧节点);
+		 */
+
+		/*
+		removeChild(): 可以删除一个子节点
+		语法： 父节点.removeChild(子节点);
+		    子节点.parentNode.removeChild(子节点);
+		 */
+
+		//使用innerHTML也可以完成DOM增删的操作，一般会两种方式结合使用
+		var city = document.getElementById("city");
+		var bj = document.getElementById("bj");
+		function myClick(strId, fun) {
+			var id = document.getElementById(strId);
+			id.onclick = fun;
+		}
+
+		myClick("add1", function() {
+			var li = document.createElement("li");
+
+			li.innerHTML = "广州";
+			city.appendChild(li);
+		});
+
+		myClick("add2", function() {
+			var li = document.createElement("li");
+
+			li.innerHTML = "广州";
+			city.insertBefore(li, bj);
+		});
+		
+		myClick("add3", function(){
+			var li = document.createElement("li");
+			li.innerHTML = "广州";
+			
+			city.replaceChild(li,bj);
+		});
+		
+		myClick("add4",function(){
+			
+			bj.parentNode.removeChild(bj);
+			
+		});
+		
+		myClick("add5", function(){
+			
+			console.log(city.innerHTML);
+			
+		});
+
+	};
+</script>
+
+</head>
+<body>
+	<div>
+		<ul id="city">
+			<li id="bj">北京</li>
+			<li>上海</li>
+			<li>东京</li>
+			<li>首尔</li>
+		</ul>
+	</div>
+	<div>
+		<button id="add1">创建一个“广州”节点并添加到#city中</button>
+		<button id="add2">将“广州”节点插入到#bj前面</button>
+		<button id="add3">使用“广州”节点替换#bj节点</button>
+		<button id="add4">删除#bj节点</button>
+		<button id="add5">读取#city内的HTML代码</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>全选练习</title>
+<script type="text/javascript">
+	window.onload = function() {
+		var checks = document.getElementsByName("sportsHobby"); //这里使用的是ByName
+		var allOrNothing = document.getElementById("revertALL");
+
+		function myClick(strID, fun) {
+			var id = document.getElementById(strID);
+			id.onclick = fun;
+		}
+
+		myClick("allChoose", function() {
+			for (var i = 0; i < checks.length; i++) {
+				checks[i].checked = true;
+			}
+			allOrNothing.checked = true;
+		});
+
+		myClick("allDiscard", function() {
+			for (var i = 0; i < checks.length; i++) {
+				checks[i].checked = false;
+			}
+			allOrNothing.checked = false;
+		});
+
+		myClick("notToYes", function() {
+			for (var i = 0; i < checks.length; i++) {
+				allOrNothing.checked = true;
+				//if (checks[i].checked) {
+				//	checks[i].checked = false;
+				//} else {
+				//	checks[i].checked = true;
+				//}
+				checks[i].checked = !checks[i].checked; //这样取反更加高明
+
+				if (!checks[i].checked) {
+					allOrNothing.checked = false;
+				}
+			}
+		});
+
+		//弹出多选框的value值
+		myClick("submit", function() {
+			for (var i = 0; i < checks.length; i++) {
+				if (checks[i].checked) {
+					console.log(checks[i].value);
+				}
+			}
+		});
+
+		myClick("revertALL", function() {
+			for (var i = 0; i < checks.length; i++) {
+				//在事件的响应函数中，响应函数是给谁绑定的this就是谁
+				checks[i].checked = this.checked;
+			}
+		});
+
+		for (var i = 0; i < checks.length; i++) {
+			checks[i].onclick = function() {
+				allOrNothing.checked = true;
+				for (var j = 0; j < checks.length; j++) {
+					if (!checks[j].checked) {
+						allOrNothing.checked = false;
+						break;
+					}
+				}
+			};
+
+		}
+
+	};
+</script>
+</head>
+<body>
+	<p>你喜欢的运动是？</p>
+	<form action="http://www.baidu.com">
+		全选或者全不选：<input type="checkbox" id="revertALL"><br> 足球：<input
+			type="checkbox" name="sportsHobby" value="足球"><br> 篮球：<input
+			type="checkbox" name="sportsHobby" value="篮球"><br> 羽毛球：
+		<input type="checkbox" name="sportsHobby" value="羽毛球"><br>
+		乒乓球： <input type="checkbox" name="sportsHobby" value="乒乓球"><br>
+		<br> <input type="button" value="全选" id="allChoose"> <input
+			type="button" value="全不选" id="allDiscard"> <input
+			type="button" value="反选" id="notToYes"> <input type="submit"
+			value="提交" id="submit">
+	</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>内联样式</title>
+<script type="text/javascript">
+	/*
+	 * 通过JS修改元素的样式：
+	 语法： 元素.style.样式名 = 样式值；
+	
+	 注意： 如果css样式名中含有-,在js中是不合法的，比如background-color,需要将这种样式名修改为驼峰命名法
+	 解决方法：去掉-,然后将-后的字母大写; box1.style.backgroundColor = "yellow";
+	
+	 border-top-width => boderTopWidth
+	
+	 通过style属性设置的样式都是内联样式，而内联样式有较高的优先级，所以通过JS修改的样式往往会立即显示
+	
+	 但是如果在样式中写了!important,则此时样式会有最高的优先级，即使通过JS也不能覆盖样式，
+	
+	
+	 读取样式：  元素.style.样式名
+	 通过style属性设置和读取的都是内联样式，无法读取样式表中的样式
+	
+	
+	 获取元素的当前显示的样式，只有IE浏览器支持:
+	 元素.currentStyle.样式名
+	
+	其他浏览器可以使用getComputedStyle()这个方法来获取元素的当前样式，这个方法是window的方法，可以直接使用
+	getComputedStyle()需要两个参数，第一个需要获取的元素，第二个可以传递一个伪元素，一般都传null
+	
+	console.log(getComputedStyle(box1,null).width);
+	
+	 */
+</script>
+<style>
+</style>
+</head>
+<body>
+<div style="width:200px;background">
+</div>
+</body>
+</html>

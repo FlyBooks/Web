@@ -4,4 +4,6 @@ use warnings;
 
 sub showGroup { }
 
+xxx
+yy
 1;

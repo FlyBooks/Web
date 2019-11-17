@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>div跟随鼠标移动</title>
+<style type="text/css">
+#div1 {
+	width: 50px;
+	height: 50px;
+	background-color: blue;
+	position: absolute;
+}
+</style>
+<script type="text/javascript">
+	/*
+	
+	clientX,clientY是用于获取鼠标在当前可见窗口的坐标
+	
+	div的偏移量是相对于整个页面的
+	
+	
+	pageX和pageY可以获取鼠标相对于当前页面的坐标，IE8不支持
+	
+	scrollTop
+	
+	chrome:
+	document.body.scrollTop 获取滚动条滚动的距离
+	火狐等浏览器认为是html：
+	document.documentElement.srollTop
+	
+	scrollLeft
+	
+	 */
+
+	window.onload = function() {
+		var div1 = document.getElementById("div1");
+
+		document.onmousemove = function(event) {
+
+			event = event || window.event;
+
+			//console.log('x轴：' + event.clientX + ",y轴：" + event.clientY);//类似这种值：  x轴：56,y轴：36     注意event.clientX没有单位
+			var scrollLeft = document.body.scrollLeft
+					|| document.documentElement.scrollLeft;
+			var scrollTop = document.body.scrollTop
+					|| document.documentElement.scrollTop;
+
+			console.log(scrollLeft + '======' + scrollTop);
+			div1.style.left = (event.clientX + scrollLeft) + 'px';
+			div1.style.top = (event.clientY + scrollTop) + 'px';
+
+		};
+	};
+</script>
+
+
+</head>
+<body style="height: 200px;">
+	<div id="div1"></div>
+</body>
+</html>

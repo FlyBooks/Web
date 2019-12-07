@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window方法之定时调用</title>
+<script type="text/javascript">
+	/*
+	 * 如果希望一段程序可以每间隔一段时间执行一次，可以使用定时器
+	setInterval():定时调用，可以将一个函数每隔一段时间执行一次
+	函数： 1.回调函数
+	     2. 每次调用间隔的时间，单位是毫秒
+	     
+	-返回值： 返回一个Number类型的数据类型，这个数字用来作为定时器的唯一标识
+	
+	clearInterval()可以用来关闭定时器
+	
+	 */
+
+	window.onload = function() {
+		var num = 1;
+		var count = document.getElementById('count');
+
+		var timer = setInterval(function() {
+			count.innerHTML = num++;
+
+		}, 1000);
+
+		if (num >= 100) {
+			clearInterval(timer);
+		}
+
+	};
+</script>
+</head>
+<body>
+	<h1 id="count"></h1>
+</body>
+</html>

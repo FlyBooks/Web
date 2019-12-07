@@ -21,11 +21,43 @@
 }
 </style>
 <script type="text/javascript">
+	function drag(obj) {
+
+		obj.onmousedown = function(event) {
+
+			event = event || window.event;
+
+			var xLeft = event.clientX - obj.offsetLeft;
+			var yTop = event.clientY - obj.offsetTop;
+
+			obj.setCapture && obj.setCapture();
+
+			document.onmousemove = function(event) {
+				event = event || window.event;
+				obj.style.left = event.clientX - xLeft + 'px';
+				obj.style.top = event.clientY - yTop + 'px';
+
+			};
+
+			document.onmouseup = function() {
+				document.onmousemove = null;
+				document.onmouseip = null;
+
+			};
+
+			obj.releaseCapture && obj.releaseCapture();
+			return false;
+
+		}
+
+	}
+
 	window.onload = function() {
 		/*
 		setCapture()只有IE支持，但是在火狐中调用的时候不会报错，而如果chrome调用会报错
 		 */
 		var box1 = document.getElementById("box1");
+		var box2 = document.getElementById("box2");
 		box1.onmousedown = function(event) {
 			event = event || window.event;
 			var mouseOffsetLeft = event.clientX - box1.offsetLeft;
@@ -36,6 +68,7 @@
 				box1.setCapture();
 
 			}
+			// box1.setCapture && box1.setCapture();
 
 			document.onmousemove = function(event) {
 				console.log(456);
@@ -53,10 +86,12 @@
 
 			if (box1.releaseCapture) {
 				box1.releaseCapture();
-			}
+			} // box1.releaseCapture && box1.releaseCapture();
 
 			return false;
 		};
+
+		drag(box2);
 	};
 </script>
 

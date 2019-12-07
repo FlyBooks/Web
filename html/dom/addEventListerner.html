@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件的绑定</title>
+<script type="text/javascript">
+	/*
+	 * attachEvent(): 在IE8可以使用attachEvent()来绑定事件
+	 参数： 1.事件的字符串，要加on
+	 2.回调函数
+	 这个方法也可以同时为一个事件绑定多个处理函数，不同的是它是后绑定先执行，执行顺序跟addEventListener()相反
+	 
+	 attachEvent()方法在火狐，chrome等浏览器中不可以使用
+	 attachEvent()中的this是window，addEventListener()中的this是绑定的事件对象
+	 
+	 
+	 addEventListener(): 用于向指定元素添加事件句柄;
+	 
+	 */
+	function bind(obj, stringAction, fun) {
+
+		if (window.attachEvent) { //obj.addEventListener
+
+			obj.attachEvent('on' + stringAction, fun);
+		} else {
+			obj.addEventListener(stringAction, fun, false);
+		}
+
+	}
+	window.onload = function() {
+		var bnt01 = document.getElementById("bnt01");
+
+		/*	bnt01.attachEvent("onclick", function() {
+				console.log(1);
+			});
+			bnt01.attachEvent("onclick", function() {
+				console.log(2);
+			});
+			bnt01.attachEvent("onclick", function() {
+				console.log(3);
+			}); */
+
+		/*bnt01.addEventListener("click", function() {
+			alert("123");
+		}, false);
+		bnt01.addEventListener("click", function() {
+			alert("567");
+		}, false);*/
+		bind(bnt01, 'click', function() {
+			alert("me");
+		});
+		bind(bnt01, 'click', function() {
+			alert("you");
+		});
+
+	};
+</script>
+</head>
+<body>
+	<input type="button" id="bnt01" value="click me" />
+</body>
+</html>

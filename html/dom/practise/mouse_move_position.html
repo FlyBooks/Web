@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>实时显示鼠标的位置</title>
+<style>
+#mouse_activity {
+	border: 1px solid #ccc;
+	width: 500px;
+	height: 300px;
+}
+
+#show_position {
+	border: 1px solid #ccc;
+	margin: 50px 0;
+	width: 500px;
+	height: 50px;
+}
+</style>
+<script type="text/javascript">
+	/*
+	 * onmousemove: 该事件会在鼠标移动时被触发
+	
+	Dom Evenet 事件对象： 当事件的响应函数被触发的时候，浏览器每次都会将一个事件对象作为实参传递进响应函数
+	 事件对象中封装了当前事件相关的一切信息，比如： 鼠标的坐标， 键盘那个按键被按下了，鼠标滚轮滚动的方向等等
+	 
+	 
+	 clientX：可以获取鼠标指针的水平坐标
+	 clientY：可以获取鼠标指针的垂直坐标
+	
+	 处理兼容性问题
+	方法一：  if (!event){
+		 
+		 event = window.event; 
+	 }
+	 
+	方法二：   event = event || window.event;
+	 
+	 
+	 */
+
+	window.onload = function() {
+		var mouse_activity = document.getElementById("mouse_activity");
+		var show_position = document.getElementById("show_position");
+
+		mouse_activity.onmousemove = function(event) {
+
+			event = event || window.event;
+
+			show_position.innerHTML = "X轴坐标是： " + event.clientX + ",Y轴坐标是:"
+					+ event.clientY;
+		};
+
+	};
+</script>
+</head>
+<body>
+	<div id="mouse_activity"></div>
+	<div id="show_position"></div>
+</body>
+</html>

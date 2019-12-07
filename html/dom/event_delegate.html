@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件的委派</title>
+<script type="text/javascript">
+	/*
+	事件的委派：指将事件统一绑定给元素的共同祖先元素，这样当后代元素上的事件触发时，会一直冒泡到祖先元素从而通过祖先元素的响应函数来处理事件。
+	
+	-事件委派利用了冒泡，可以减少事件的绑定次数，提高程序的效率
+	
+	
+	event中的target表示的是触发事件对象
+	 */
+
+	//没有使用事件委派的写法：
+	/*window.onload = function() {
+		var btn_add_li = document.getElementById("add_li");
+		var ul = document.getElementById("list");
+		var lis = document.getElementsByTagName("li");
+
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].onclick = function() {
+				alert(this.innerText);
+			};
+		}
+		btn_add_li.onclick = function() {
+			var li = document.createElement("li");
+			li.innerHTML = "<a href='javascript: void(0);'>添加一个链接by button</a>";
+			ul.appendChild(li);
+			li.onclick = function() {
+				alert(this.innerText);
+			};
+		};
+	};*/
+
+	//利用事件委派，只绑定一次事件即可应用到多个元素上，即使元素是后添加的
+	//将其绑定给元素共同的祖先元素
+	window.onload = function() {
+		var btn_add_li = document.getElementById("add_li");
+		var ul = document.getElementById("list");
+		var as = document.getElementsByTagName("a");
+
+		ul.onclick = function(event) {
+			event = event || window.event;
+			//event的target事件可以找到我们期待的事件
+			if (event.target.className === 'a_link') {
+				alert(event.target.innerText);
+			}
+
+		};
+
+		btn_add_li.onclick = function() {
+			var li = document.createElement("li");
+			li.innerHTML = "<a href='javascript: void(0);' class='a_link'>添加一个链接created by button</a>";
+
+			ul.appendChild(li);
+		};
+
+	};
+</script>
+</head>
+<body>
+	<input type="button" id="add_li" value="add one li" />
+	<ul id="list">
+		<li><a href="javascript: void(0);" class="a_link">添加一个链接a</a></li>
+		<li><a href="javascript: void(0);" class="a_link">添加一个链接b</a></li>
+		<li><a href="javascript: void(0);" class="a_link">添加一个链接c</a></li>
+	</ul>
+</body>
+</html>

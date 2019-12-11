@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>定时调用练习2</title>
+<style>
+#box1 {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	position: absolute;
+	left: 0;
+}
+
+#box2 {
+	width: 100px;
+	height: 100px;
+	background-color: yellow;
+	position: absolute;
+	top: 200px;
+	left: 0px;
+}
+</style>
+
+<script type="text/javascript">
+	window.onload = function() {
+		var btn01 = document.getElementById("btn01");
+		var btn02 = document.getElementById("btn02");
+		var btn03 = document.getElementById("btn03");
+		var box1 = document.getElementById("box1");
+		var box2 = document.getElementById("box2");
+
+		//var timer; //所有正在执行的定时器都在这个变量中保存，存在问题： 只能有一个定时器在运行
+		btn01.onclick = function() {
+			move(box1, 800, 10);
+		};
+
+		btn02.onclick = function() {
+			move(box1, 0, 10);
+		};
+
+		btn03.onclick = function() {
+			move(box2, 800, 20);
+		};
+
+	};
+
+	function move(obj, target, speed) {
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function() {
+			var oldLeft = parseInt(getStyle(obj, 'left'));
+
+			if (speed > 0 && oldLeft > target) {
+				speed = -speed;
+			}
+
+			var newLeft = oldLeft + speed;
+
+			if (newLeft < 0) {
+				newLeft = 0;
+			}
+
+			obj.style.left = newLeft + 'px';
+
+			if (newLeft === target) {
+				clearInterval(obj.timer);
+			}
+
+		}, 30);
+
+	}
+
+	function getStyle(obj, name) {
+		if (window.getComputedStyle) {
+			return getComputedStyle(obj, null)[name];
+		} else {
+			return obj.currentStyle[name];
+
+		}
+
+	}
+</script>
+
+</head>
+<body>
+	<input type="button" id="btn01" value="向右移动" />
+	<input type="button" id="btn02" value="向左移动" />
+	<input type="button" id="btn03" value="box向右移动" />
+	<div id="box1"></div>
+	<div id="box2"></div>
+	<div
+		style="width: 0px; height: 1000px; border-left: 1px black solid; left: 800px; top: 0px; position: absolute;"></div>
+</body>
+</html>

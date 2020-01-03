@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>逻辑运算符</title>
+<script>
+	window.onload = function() {
+		/*
+		 * JS中给我们提供了三种运算符：
+		 ！非
+		 如果一个值进行两次取反，它不会变化
+		 !!可以给任意值取两次反，将其变成Boolean类型（隐式转换）
+		 
+		 &&与:可以对符号两侧的值进行与运算并返回结果
+		 js中的"与"是短路与，如果第一个值是false，则不会判断第二值了
+		 
+		 
+		 ||或：也是短路的“或”(如果第一个值为true，则不会检查第二个值了)
+		 
+		 && 跟 ||的非布尔值运算： 会先将其转换成布尔值，然后再运算，并且返回原值
+		 
+		 1 >= true :这里会将true转换成1
+		 1 >= "0" : true
+		 任何值跟NaN比较都是false
+		 
+		 1 < 5 : true
+		 "11" < "5": true
+		 
+		 非数字比较（一个数字，一个非数字类型）：会首先将其转化为数字，然后再比较
+		 如果符号两侧的值都是字符串时，不会将其转化成数字进行比较，而是会分别比较字符串中字符的Unicode编码
+		 
+		 比较两个字符串时，比较的是字符串的字符编码，比较字符编码时是一位一位进行比较的；如果两位一样，则比较下一位;可以用来比较英文
+		 
+		 */
+
+		var b = 10;
+		b = !b;
+
+		console.log(typeof b); //boolean
+		console.log(b); //false
+
+		true && alert("嘻嘻，我会弹出");
+		false && alert("嘻嘻，我不会弹出了");
+
+		true || console.log(123);
+		false || console.log(456);
+
+		var result = 5 && 6;
+		console.log("result: =" + result); //result: =6, 两个值都为true，则返回后面的值
+
+		//如果是false，则返回false(第一个false)
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

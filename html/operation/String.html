@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+	 * c = c + ""; //在一个任意类型后面+‘’就可以把其转化为字符串类型，效果跟String(c)一样;
+	 任何值跟NaN运算都是NaN
+	 - * /运算的时候都会自动转化为Number 
+	 Number(b); 或者：
+	 b = b - 0;
+	 b = b * 1;
+	 b = b / 1;
+	 
+	 
+	 一元运算符： 只需要一个操作数，比如typeof,自增
+	 + 正号 不会对数字产生任何影响
+	 - 负号 可以对数字的正负号取反;
+	
+	 自增分成2中： 后++（a++）,前++（a++）
+	 无论是a++,还是++a都会立即使原变量的值自增1；不同的是a++跟++a的值
+	 a++的值等于原变量的值(自增前的值)
+	 ++a的值等于原变量的新值（自增后的值）
+	 
+	 
+	 自减： 后--（a--）,前--(a--)
+	 无论是a--还是--a 都会立即使原变量的值自减1
+	 不同的是： 
+	 a--的值是原变量的值（自减前的值）
+	 --a的值是原变量的新值（自减后的值）
+	 
+	 */
+	window.onload = function() {
+		console.log(9 % 4);
+		console.log(9 % 5);
+		var a = true;
+
+		a = -a;
+		console.log("a = " + a); //a = -1
+
+		var d = 20;
+		d = d++;
+		/*
+		var e = d++;
+		d =e;
+		 */
+		console.log("d = " + d); //d = 20
+
+		var getCheckbox = document.getElementById("getCheckbox");
+		var what = document.getElementById("what");
+		getCheckbox.onclick = function() {
+
+			var showNt = what.prop
+
+		};
+	};
+</script>
+</head>
+<body>
+	<input type="checkbox" id="what" />
+	<input type="button" id="getCheckbox" />
+</body>
+</html>

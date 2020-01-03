@@ -3,22 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <title>定时器实现图片轮播</title>
-<style>
+<style type="text/css">
 img {
 	width: 200px;
 	height: 200px;
 }
 </style>
-<style type="text/css">
-window.onload = function(){
-	var img1 = document.getElementById("img1");
+<script>
+	/*
+	clearInterval()可以接受任意参数，如果参数是一个有效定时器的标识，则停止相应的定时器，否则什么也不做
+	
+	目前我们每点击一次按钮，就会开启一个定时器。点击多次就会开启多个定时器，导致图片切换速度过快，同时我们最后只能关闭一个定时器。
+	解决方案： 在开启一个新的定时器的时候，需要将上一个定时器给关闭
+	
+	 */
 
-};
+	window.onload = function() {
+		var img1 = document.getElementById("img1");
+		var btn_start = document.getElementById("start");
+		var btn_stop = document.getElementById("stop");
 
-</style>
+		var timer;
 
+		btn_start.onclick = function() {
+
+			//将上一个定时器给关闭(在开启定时器之前，需要将当前元素上的其他定时器给关闭)
+			clearInterval(timer);
+
+			var picsPath = [ '../../../images/1.jpg', '../../../images/2.jpg',
+					'../../../images/3.jpg', '../../../images/haidao.png',
+					'../../../images/media.jpg' ];
+			var index = 0;
+			timer = setInterval(function() {
+				index++;
+
+				index %= picsPath.length;
+
+				img1.src = picsPath[index];
+			}, 1000);
+
+		};
+
+		btn_stop.onclick = function() {
+
+			clearInterval(timer);
+		};
+
+	};
+</script>
 </head>
 <body>
 	<img id="img1" alt="图片不存在" src="../../../images/1.jpg" />
+	<input type="button" id="start" value="start" />
+	<input type="button" id="stop" value="stop" />
 </body>
 </html>

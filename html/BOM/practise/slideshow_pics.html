@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>轮播图片</title>
+
+<style>
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#imgs_contain {
+	width: 520px;
+	height: 300px;
+	margin: 50px auto;
+	overflow: hidden;
+	position: relative;
+	background-color: yellowgreen;
+	padding: 10px 0px;
+}
+
+ul {
+	list-style: none;
+	position: absolute;
+	left: 0;
+}
+
+ul li {
+	float: left;
+	margin: 0px 10px;
+}
+
+ul li img {
+	width: 500px;
+	height: 300px;
+}
+
+#navDiv {
+	position: absolute;
+	bottom: 10px;
+	opacity: 0.5;
+	filter: alpha(opacity = 50); /*兼容IE8*/
+	margin: 0 auto;
+}
+
+#navDiv a {
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	display: inline-block;
+	margin: 0 5px; /*设置左右外边距*/
+}
+
+#navDiv a:hover {
+	background-color: black;
+}
+</style>
+
+<script>
+	window.onload = function() {
+		var ul_contain = document.getElementById("ul_contain");
+		var lis = document.getElementsByTagName("li");
+		var aTags = document.getElementsByTagName("a");
+		var imgs_contain = document.getElementById("imgs_contain");
+		ul_contain.style.width = lis.length * 520 + 'px'; //图片的width是200px,还要加上左右的margin 10px;
+
+		var navDiv = document.getElementById("navDiv");
+
+		//设置导航按钮居中
+		//navDiv.style.left = (520 - navDiv的宽度) / 2 + 'px';
+		navDiv.style.left = (imgs_contain.offsetWidth - navDiv.offsetWidth) / 2
+				+ 'px';
+
+		//设置默认图片的导航背景颜色为黑色
+		var index = 0;
+		aTags[index].style.backgroundColor = 'black';
+
+		for (var i = 0; i < aTags.length; i++) {
+			aTags[i].num = i;
+
+			//为超链接绑定单击响应函数
+			aTags[i].onclick = function() {
+				console.log(this.num);
+				//获取超链接的索引并显示相应的图片
+				//ul_contain.style.left = -this.num * 520 + 'px'; //还要加上margin的距离20px
+				move(ul_contain, -this.num * 520, 20, 'left', function() {
+				});
+
+				setA(this.num);
+			};
+		}
+
+		function setA(index) {
+			for (var i = 0; i < aTags.length; i++) {
+
+				/*这里比较特殊不可以设置backgroundColor为red
+				因为这样会覆盖hover，因为内联样式的优先级高
+				如果把内联样式清空，这样选css里面的样式*/
+				aTags[i].style.backgroundColor = '';
+
+			}
+
+			aTags[index].backgroundColor = 'black';
+
+		}
+
+	};
+
+	function getStyle(obj, attr) {
+		if (window.getComputedStyle) {
+			return getComputedStyle(obj, null)[attr];
+		} else {
+			return obj.currentStyle[attr];
+		}
+	}
+
+	function move(obj, target, speed, attr, callback) {
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function() {
+			var oldAttr = parseInt(getStyle(obj, attr));
+			var newAttr = oldAttr + target;
+			if (oldAttr > newAttr) {
+				speed = -speed;
+			}
+
+			if ((target > 0 && newAttr > target)
+					|| (target < 0 && newAttr < target)) {
+				newAttr = target;
+			}
+
+			obj.style[attr] = newAttr + 'px';
+
+			callback && callback();
+
+			if (newAttr === target) {
+				clearInterval(obj.timer);
+			}
+		}, 30);
+
+	}
+</script>
+</head>
+<body>
+	<div id="imgs_contain">
+		<ul id="ul_contain">
+			<li><img src="../../../images/1.jpg" /></li>
+			<li><img src="../../../images/2.jpg" /></li>
+			<li><img src="../../../images/3.jpg" /></li>
+			<li><img src="../../../images/haidao.png" /></li>
+			<li><img src="../../../images/media.jpg" /></li>
+		</ul>
+		<div id="navDiv">
+			<a href="javascript: void(0);"></a> <a href="javascript: void(0);"></a>
+			<a href="javascript: void(0);"></a> <a href="javascript: void(0);"></a>
+			<a href="javascript: void(0);"></a>
+
+		</div>
+	</div>
+</body>
+</html>

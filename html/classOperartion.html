@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.box1 {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+}
+
+.box2 {
+	width: 200px;
+	background-color: yellow;
+}
+</style>
+<script type="text/javascript">
+	/*
+	 * 通过style属性来修改元素的样式，每修改一个样式，浏览器就需要重新渲染一次页面，执行的性能就比较差，而且这种形式当我们需要修改多个样式时，也不方便
+	 修改box的class属性
+	 box.className = "b2";
+	我们可以通过修改元素的class属性来间接修改样式
+	 */
+
+	window.onload = function() {
+		var btn01 = document.getElementById("btn01");
+		var box1 = document.getElementById("box1");
+		btn01.onclick = function() {
+			//我们可以通过修改元素的class属性来修改其样式
+			//这样的话，我们只需要修改一次，即可同时完成多个样式的修改，浏览器只需要重新渲染一次页面，性能比较高
+			//表现跟行为进一步分离
+			//box1.className += " box2";
+
+			//addClassName(box1, 'box2');
+			//removeClass(box1, "box1");
+			toggleClass(box1, "box2");
+		};
+
+		//fn addClassName: 用来向一个元素中添加指定的class属性值
+		/*
+		参数： 
+		obj: 要添加class属性的元素
+		cn: 要添加的class名称
+		 */
+		function addClassName(obj, cn) {
+			if (!hasClass(obj, cn)) {
+
+				obj.className += " " + cn;
+			}
+		}
+
+		//fn: hasClass判断一个元素是否有指定的class属性值
+		/*参数：
+		obj: 要检查是否含有某class的元素
+		cn： 要检查的class名称
+		 */
+		function hasClass(obj, cn) {
+			//判断obj中有没有class cn
+			//创建一个正则表达式
+			//var reg = /\bbox1\b/; // \b是单词边界
+			var reg = new RegExp("\\b" + cn + "\\b");
+
+			return reg.test(obj.className);
+		}
+
+		function removeClass(obj, cn) {
+			var reg = new RegExp("\\b" + cn + "\\b");
+
+			obj.className = obj.className.replace(reg, "");
+		}
+
+		function toggleClass(obj, cn) {
+			if (hasClass(obj, cn)) {
+				removeClass(obj, cn);
+			} else {
+				addClassName(obj, cn);
+			}
+		}
+
+	};
+</script>
+</head>
+<body>
+	<div id="box1" class="box1"></div>
+	<input type="button" id="btn01" value="ChangeClass" />
+</body>
+</html>

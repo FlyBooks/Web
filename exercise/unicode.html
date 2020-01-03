@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Unicode 编码表</title>
+<script>
+	window.onload = function() {
+		/*
+		在字符串中使用转义字符输入Unicode编码，格式：
+		\u四位编码
+		 */
+		console.log("\u2620"); //☠
+
+		/*
+		使用 == 来做相等运算，使用==来比较两个值时，如果值的类型不同，则会自动进行类型转换，将其转换为相同的类型，然后再比较
+		
+		
+		undefined衍生字null,所以这两个值做判断的时候，会返回true
+		
+		NaN不和任何值相等，包括他自己本身
+		可以通过isNaN来判断是否为NaN
+		
+		不相等 !=
+			
+		===全等:用来判断两个值是否相等，不同的是它不会对两个值的类型进行自动转换；如果两个值的类型不同会直接返回false
+		
+		!==不全等： 用来判断两个值是否不全等，不同的是它不会对两个值的类型进行自动转换；如果两个值的类型不同会直接返回true
+		 */
+
+		console.log(undefined == null); //true
+		console.log(NaN == NaN); //false
+
+		var b = NaN;
+		console.log(isNaN(b)); //true
+
+	};
+</script>
+</head>
+<body>
+	<!-- 在网页中使用Unicode编码 ： &#编码; 这里的编码需要的是十进制的-->
+	<h1>&#9730;</h1>
+</body>
+</html>

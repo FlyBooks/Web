@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>延时调用</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#box1 {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	position: absolute;
+	left: 0;
+}
+
+#btn01 {
+	margin: 200px;
+}
+</style>
+<script type="text/javascript">
+	/*
+	 * 延时调用： 一个函数不马上调用，而是隔一段时间再执行，而且只会执行一次
+	 
+	 延时调用跟定时调用的区别： 定时调用会执行多次，而延时调用只会执行一次
+	 延时调用跟定时调用实际上是可以相互代替的
+	 */
+
+	window.onload = function() {
+		var timer = setTimeout(function() {
+			console.log("3秒后执行，且只执行一次");
+		}, 3000);
+
+		clearTimeout(timer);
+
+		var box1 = document.getElementById("box1");
+		var btn01 = document.getElementById("btn01");
+		console.log(parseInt(getStyle(box1, 'left')));
+		var timer;
+		btn01.onclick = function() {
+			clearInterval(timer);
+			timer = setInterval(function() {
+				var oldLeft = parseInt(getStyle(box1, 'left'));
+				var newLeft = oldLeft + 10;
+
+				if (newLeft > 800) {
+					newLeft = 800;
+				}
+
+				box1.style.left = newLeft + 'px';
+
+				if (newLeft === 800) {
+					clearInterval(timer);
+				}
+
+			}, 30);
+
+		};
+
+	};
+
+	//获取元素的样式
+	function getStyle(obj, name) {
+
+		if (window.getComputedStyle) {
+
+			return getComputedStyle(obj, null)[name];
+		} else {
+
+			return obj.currentStyle[name];
+		}
+	}
+</script>
+</head>
+<body>
+	<div id="box1"></div>
+	<input type="button" id="btn01" value="向右运动" />
+	<div
+		style="width: 0px; height: 1000px; left: 800px; top: 0px; border-left: 1px black solid; position: absolute;"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>运算符的优先级</title>
+<script type="text/javascript">
+	window.onload = function() {
+		/*
+		逗号运算符，
+		可以分割多个语句，一般可以在声明多个变量时使用
+		在JS中有一个运算符优先级的表，在表中越靠上优先级越高，优先级越高越优先计算；如果优先级一样，则从左往右计算。
+		 */
+
+		var result = 1 || 2 && 3;
+
+		console.log("result: " + result); //result: 1
+
+		/*
+		我们的程序是由一条条语句构成的，语句是按照自上而下的顺序一条条执行的
+		在JS中可以使用{}来为语句分组，同一个{}中的语句我们称为一组语句，它们要么都执行，要么都不执行；
+		一个{}中的语句我们也称为一个代码块
+		在代码块的后面不需要加;
+		JS中的代码块只具有分组的作用，没有其他的用途，代码块中的内容在外部是完全可以可见的
+		 */
+
+		{
+			var a = 10;
+			console.log("你好");
+			document.write("语句");
+		}
+
+		console.log("a =" + a); //a =10
+
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -25,7 +25,7 @@ ul {
 	height: 200px;
 	width: 1600px;
 	position: absolute;
-	left: -320px;
+	left: 0px;
 }
 
 ul li {
@@ -66,9 +66,10 @@ ul li img {
 		obj.timer = setInterval(function() {
 			var oldValue = parseInt(getStyle(obj, attr));
 
-			if (oldValue > target) {
+			if (speed > 0 && oldValue > target) {
 				speed = -speed;
 			}
+			console.log("speed: " + speed);
 			var newValue = oldValue + speed;
 
 			if ((target > 0 && newValue >= target)
@@ -99,13 +100,20 @@ ul li img {
 		var ul = document.getElementsByTagName('ul')[0];
 		var outer = document.getElementById('outer');
 		var navigationAs = document.getElementById('navigationAs');
+		var aTags = document.getElementsByTagName('a');
 
 		//使导航方块居中
 		navigationAs.style.left = (outer.offsetWidth - navigationAs.offsetWidth)
 				/ 2 + 'px';
 
-		move(ul, 'left', 0, 10, function() {
-		});
+		for (var i = 0; i < aTags.length; i++) {
+			aTags[i].index = i;
+			aTags[i].onclick = function() {
+				console.log(-320 * this.index);
+				move(ul, 'left', -320 * this.index, 10, function() {
+				});
+			};
+		}
 
 	};
 </script>

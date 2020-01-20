@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据-变量-内存</title>
+<script>
+	/*
+	 * 关于引用变量赋值问题：
+	 *2个引用变量指向同一个对象，通过一个变量修改对象内部数据，另一个变量看到的是修改之后的数据
+	 *2个引用变量指向同一个对象，让其中一个引用变量指向另一个对象，另一个引用变量依然指向前一个对象
+	 */
+
+	window.onload = function() {
+		var a = {
+			age : 12
+		};
+
+		function fun(obj) {
+			obj.age = 20;
+			return obj;
+		}
+
+		fun(a);
+
+		console.log(JSON.stringify(a));
+		
+		//在js调用函数时，传递变量为参数时，是值传递还是引用传递
+		
+		var b = 9;
+		
+		function passValue(b){
+			b += 1;
+			return b;
+		}
+		
+		console.log('b:'+b); //b:9
+		
+		//局部变量只有当函数执行的时候才产生，当函数执行结束的时候自动释放
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

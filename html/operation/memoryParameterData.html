@@ -3,11 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>数据-变量-内存</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+	
+</script>
 <script>
 	/*
 	 * 关于引用变量赋值问题：
 	 *2个引用变量指向同一个对象，通过一个变量修改对象内部数据，另一个变量看到的是修改之后的数据
 	 *2个引用变量指向同一个对象，让其中一个引用变量指向另一个对象，另一个引用变量依然指向前一个对象
+	 
+	 1.attr(): 设置或者获取元素的属性节点值
+	 2.prop(): 设置或者获取元素的属性值
+	 3.css(): 设置获取样式
+	 4.val(): 获取设置value的值
+	 5.hasClass(): 判断元素中是否包含指定类
+	 6.addClass(): 给所有元素添加指定类或者所有类
+	 7.removeClass()： 清空元素指定类或者所有类
+	 8.toggleClass(): 有则删除，无则添加
+	 
+	 对象： 方便统一管理多个数据
+	 
+	 回调函数： dom事件回调函数，定时器回调函数
+	 
+	 IIFE: 匿名函数
+	 隐藏实现，不会污染外部（全局）命名空间
+	 
 	 */
 
 	window.onload = function() {
@@ -23,23 +43,64 @@
 		fun(a);
 
 		console.log(JSON.stringify(a));
-		
+
 		//在js调用函数时，传递变量为参数时，是值传递还是引用传递
-		
+
 		var b = 9;
-		
-		function passValue(b){
+
+		function passValue(b) {
 			b += 1;
 			return b;
 		}
-		
-		console.log('b:'+b); //b:9
-		
+
+		console.log('b:' + b); //b:9
+
 		//局部变量只有当函数执行的时候才产生，当函数执行结束的时候自动释放
+
+		//object 
+
+		$("span").attr({
+			"class" : "123",
+			"name" : "888"
+		});
+		//hasClass： 只要调用者中有一个包含指定类就返回true,否则返回false
+
+		var obj1 = {
+			name : 'xiaoming',
+			age : 19,
+			sayHello : function() {
+				return "hello," + this.name;
+			}
+		};
+
+		console.log(obj1.sayHello());
+
+		var fun233 = function() {
+			console.log(999);
+		};
+		fun233();
+
+		(function() {
+			var a = 4;
+			console.log(a);
+ 
+			function test(){
+				console.log(++a);
+			}
+			
+			window.$ = function(){ //向外暴露一个全局函数
+				return {testMode: test};
+			};
+		})();
+		
+		$().testMode();
+
 	};
 </script>
 </head>
 <body>
-
+	<span class="span1" name="it666"></span>
+	<span class="span2" name="lnj"></span>
+	<div></div>
 </body>
 </html>

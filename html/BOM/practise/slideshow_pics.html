@@ -101,7 +101,7 @@ ul li img {
 
 			}
 
-			aTags[index].backgroundColor = 'black';
+			aTags[index].style.backgroundColor = 'black';
 
 		}
 
@@ -119,13 +119,15 @@ ul li img {
 		clearInterval(obj.timer);
 		obj.timer = setInterval(function() {
 			var oldAttr = parseInt(getStyle(obj, attr));
-			var newAttr = oldAttr + target;
-			if (oldAttr > newAttr) {
+
+			if (oldAttr >= target) {
 				speed = -speed;
 			}
 
-			if ((target > 0 && newAttr > target)
-					|| (target < 0 && newAttr < target)) {
+			var newAttr = oldAttr + speed;
+
+			if ((speed > 0 && newAttr >= target)
+					|| (speed < 0 && newAttr <= target)) {
 				newAttr = target;
 			}
 

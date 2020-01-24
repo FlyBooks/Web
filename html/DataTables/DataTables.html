@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+@import "./demo_page.css";
+
+@import "./demo_table.css";
+</style>
+<script type="text/javascript" language="javascript" src="./jquery.js"></script>
+<script class="jsbin" src="./jquery.dataTables.nightly.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+
+		$(document).ready(function() {
+			$("#example").dataTable({
+				"bJQueryUI" : true,
+				"sPaginationType" : "full_numbers"
+			});
+
+		});
+
+	};
+</script>
+</head>
+<body>
+	<table id="example" class="display">
+		<thead>
+			<tr>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>001</td>
+				<td>shoes</td>
+				<td>2323</td>
+			</tr>
+			<tr>
+				<td>002</td>
+				<td>bags</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>003</td>
+				<td>clothes</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>004</td>
+				<td>computer</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>005</td>
+				<td>keyboard</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>006</td>
+				<td>mouse</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>007</td>
+				<td>name7</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>008</td>
+				<td>name8</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>009</td>
+				<td>name9</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>010</td>
+				<td>name10</td>
+				<td>4612</td>
+			</tr>
+			<tr>
+				<td>011</td>
+				<td>name11</td>
+				<td>4612</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

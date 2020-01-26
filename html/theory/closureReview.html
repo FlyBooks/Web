@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	Person.prototype.testing = function() {
+		console.log('we are here');
+	}
+
+	var person1 = new Person('xiaoming', 35);
+	person1.testing();
+
+	//用完闭包要及时清理掉（fun2 = null）
+
+	function fun() {
+		console.log(this, 'fun()'); //Window "fun()"
+		function fun2() {
+			console.log(this); //Window
+		}
+		fun2();
+	}
+
+	fun();
+
+	function fnc(n, o) {
+		console.log(o);
+		return {
+			fnc : function(m) {
+
+				return fnc(m, n); //这里的return很重要
+			}
+		}
+	}
+
+	var b = fnc(0); //undefined b里面有一个闭包{n:0}
+	b.fnc(1); //0 形成了闭包，保留了o的值
+	b.fnc(2); //0
+	b.fnc(3); // 0
+	console.log(2333);
+	//var c5 = fnc(0).fnc(1).fnc(2).fnc(3); m 2 n1
+	var c5 = fnc(0).fnc(1).fnc(2).fnc(3); // undefined, 0, 1,2
+	console.log(c5); //function
+</script>
+</head>
+<body>
+
+</body>
+</html>

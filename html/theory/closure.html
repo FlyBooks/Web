@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>闭包</title>
+<script>
+	/*
+	 * 伪数组具备数组的一般特性，可以通过下标取值，还有length属性，但是没有数组的一般方法： foreach
+	 
+	 闭包： 是一个闭合的容器，我们可以认为闭包就是一个对象： {key: value}
+	闭包的形成条件： 1. 函数嵌套 2.内部函数引用外部函数的数据（变量/函数）
+	闭包函数的作用： 1.延长外部函数局部变量的生命周期  2.从外部访问函数内部的局部变量
+	闭包的缺点： 1.占内存 2.不及时清除闭包容易导致内存溢出
+	如何避免闭包的缺点：1.能不用就不用 2.及时清除闭包（fun2=null）
+	
+	同步 vs 异步：
+	1. 同步： 同步会阻塞后续代码的执行（alert）；没有回调
+	2. 异步： 异步是非阻塞的；异步对应的一定有回调函数
+	 */
+	window.onload = function() {
+		//回调函数要等主线程执行完毕后执行
+		var btns = document.getElementsByTagName("input");
+
+		//方法一：
+		/*for (var i = 0; i < btns.length; i++) {
+
+			btns[i].index = i;
+			btns[i].onclick = function() {
+				alert(this.index);
+			};
+		}*/
+
+		//方法二：闭包
+		for (var i = 0; i < btns.length; i++) {
+			(function(i) {
+				btns[i].onclick = function() {
+					alert(i);
+				};
+			})(i);
+		}
+
+		var name2 = "The Window";
+		var object = {
+			name2 : 'My Object2',
+			getNameFunc : function() {
+				var that = this; //缓存this
+				return function() {
+					console.log(that.name2);
+				};
+			}
+
+		};
+
+		object.getNameFunc()();
+	};
+</script>
+</head>
+<body>
+	<input type="button" value="testing1">
+	<input type="button" value="testing2">
+	<input type="button" value="testing3">
+</body>
+</html>

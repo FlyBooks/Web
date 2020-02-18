@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>promise对象补充说明</title>
+<script>
+	//开两个定时器，要求第一个执行完，再执行第二个
+	let i = 0;
+	function sync(){
+		let promise = new Promise((resolve,reject)=>{
+			setTimeout(()=>{
+				i++;
+				console.log('执行定时器'+i);
+				resolve(true);
+			},1000);
+		});
+		
+		return promise;
+	}
+	
+	sync().then((success)=>{
+		return sync();
+	},(error)=>{console.log('fail');}).
+	then((success)=>{
+		console.log('two');
+	},(error)=>{console.log(error);});
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

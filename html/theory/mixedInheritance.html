@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//所有动物的构造函数
+	function Animal(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	//cat的构造函数
+
+	function Cat(name, age, gender) {
+		Animal.apply(this, [ name, age ]); //借用构造函数
+		this.gender = gender;
+	}
+	var tom = new Cat('tom', 3, 'boy');
+</script>
+</head>
+<body>
+
+</body>
+</html>

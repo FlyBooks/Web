@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>解构赋值</title>
+<script>
+let obj = {username: 'kobe', age: 42};
+
+let {age} = obj;
+console.log(age);
+//模板字符串 ``
+
+let str2 = `my name is ${obj.username}, age is ${obj.age}`;
+console.log(str2);
+
+/*
+ *
+ 对象的简写形式：
+ let obj = {
+	username: username,
+	age: age
+	setUsername: function(username){
+		this.username = username;
+	}
+}
+
+=>let obj = {
+		username,
+		age,
+		setUsername(username){
+			this.username = username;
+		}
+}
+ */
+ 
+ /*
+ 点点点运算符：
+ ...value 叫rest parameter,用来去掉arguments
+ */
+let arr = [2,3,4];
+let arr1 = [1,5];
+
+console.log(arr.concat(arr1).sort());
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

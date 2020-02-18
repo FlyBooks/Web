@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>web worker</title>
+<script type="text/javascript">
+	/*var worker = new Worker("./work.js");
+	console.log(worker);
+
+	worker.postMessage('how are you');
+	worker.onmessage = function(event) {
+
+		console.log('分线程发过来的数据');
+		console.log(event);
+	};*/
+
+	var a = {
+		n : 1
+	};
+	var b = a;
+
+	//操作对象属性的优先级高于普通的赋值操作
+	a.x = a = {
+		n : 2
+	}; //等价于: a.x = {n:2}; a = {n:2};
+
+	console.log(a.n, b.n); // 2, 1
+	console.log(a.x, b.x); // undefined，{n: 2} 优先级高
+
+	var x = 10;
+
+	function fun() {
+		console.log(x);
+	}
+
+	function show(f) {
+		var x = 20;
+
+		f();
+	}
+
+	show(fun); //10
+
+	var fn = function() {
+		console.log(fn);
+	};
+
+	fn();
+
+	var obj = {
+		fn2 : function() {
+			console.log(this.fn2);
+		}
+	};
+
+	obj.fn2();
+
+	var a = 2;
+	function fn1() {
+		console.log(a);
+		var a = 3;//预处理{a: undefined}
+	}
+
+	fn1(); //undefined
+
+	function fn2() {
+		console.log(a);
+		a = 3;
+	}
+	fn2();//2
+
+	//变量跟函数同名，预解析肯定是函数
+	var c;
+	function c(c) {
+		console.log(c);
+		var c = 3;
+	}
+	c = 1; //这里函数被覆盖
+	console.log(c); // 1
+	//c(2); //报错
+
+	var name = 'World!';
+	(function() {
+		//预解析的时候，把name提前了
+		if (typeof name === 'undefined') {
+			var name = 'Jack';
+			console.log(name);
+		} else {
+			console.log(name);
+		}
+	})();
+
+	var ad = 6;
+	setTimeout(function() {
+		console.log(0);
+		alert(ad); //66
+		ad = 666;
+	}, 0);
+	console.log(1);
+	ad = 66;
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

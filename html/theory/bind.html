@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bind扩展</title>
+<script>
+	/*
+	 * Function.prototype.bind(obj)
+	 作用： 将函数内的this绑定为obj, 并将函数返回
+	
+	
+	 */
+
+	var obj = {
+		name : 'kobe',
+		age : 42
+	};
+
+	function msg(msg) {
+		console.log(this);
+		console.log(msg);
+	}
+
+	msg.apply(obj, [ 'we call it' ]);
+	msg.call(obj, 'we call fun');
+
+	//bind 绑定完this不会立即调用函数，而是将函数返回
+	//bind传参跟call一样
+	var fns = msg.bind(obj, 'bind call it');
+	fns();
+
+	//当要回调函数绑定this， 只可以使用bind
+	setInterval(function() {
+		console.log(this);
+	}.bind(obj), 1000);
+</script>
+</head>
+<body>
+
+</body>
+</html>

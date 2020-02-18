@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Object.create()</title>
+<script>
+	const person = {
+		isHuman : false,
+		printIntroduction : function() {
+			console.log(`my name is ${this.name}. Am i human? ${this.isHuman}`);
+		}
+	};
+
+	const me = Object.create(person);
+	me.name = 'Mattrew';
+	me.isHuman = true;
+	me.printIntroduction();
+</script>
+</head>
+<body>
+
+</body>
+</html>

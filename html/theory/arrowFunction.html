@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>箭头函数</title>
+<script>
+window.onload = function(){
+	//箭头函数
+
+	//形参的位置
+	// 1.没有形参的情况， ()不能省略
+	let fun = () => console.log('2333');
+
+	fun();
+
+	//当只有一个参数的时候，()可以省略
+	//当有多个参数的时候，()不可以省略
+	let fun1 = (a) =>console.log(a);
+	fun1('xxx');
+
+	//箭头右边  ---》函数体
+	//1.当函数体只有一条语句或者表达式的时候，{}可以省略
+	//2.当函数有多条语句的时候，{}不可以省略
+
+	/*
+	 * 箭头函数的特点：
+	 1.简洁
+	 2.箭头函数没有自己的this, 箭头函数的this不是调用的时候决定的，而是在定义的时候处在的对象就是他的this
+	 3.扩展理解： 箭头函数的this看外层是否有函数，
+	   如果有，外层函数的this就是内部箭头函数的this
+	   如果没有，则this是window
+	 */
+	 var btn1 = document.getElementById('btn1');
+	 var btn2 = document.getElementById('btn2');
+	 
+	 btn1.onclick = function (){
+		 console.log(this); //<input type="button" id="btn1" value="button1">
+	 };
+	 
+	 btn2.onclick =()=>{
+		 console.log(this);//window
+	 };
+};
+</script>
+</head>
+<body>
+	<input type="button" id="btn1" value="button1">
+	<input type="button" id="btn2" value="button2">
+</body>
+</html>

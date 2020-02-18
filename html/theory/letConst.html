@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>let & const</title>
+<script type="text/javascript">
+	/*
+	 * 
+	 let
+	 1.作用： 跟var类似， 用于声明一个变量
+	 2.特点： 在块作用域内有效， 不能重复声明，不会预处理，不存在变量提升
+	 3.应用： 循环遍历加监听，使用let取代var是趋势
+	
+	 */
+	let ausername = '123';
+	let age = 990;
+	//let ausername = '153';这里重复声明会报错
+
+	console.log(ausername);
+	window.onload = function() {
+		let btns = document.getElementsByTagName('input');
+
+		for (let i = 0; i < btns.length; i++) {
+			btns[i].onclick = function() {
+				alert(i); //let在块作用域内有效
+			}
+		}
+		
+		//对象的解构赋值  依据：对象的key
+		let {a,b} = {a: 'xxx',b:'yyy'};
+		console.log(a,b);
+		console.log(typeof a);
+		
+		//数组的解构赋值 依据：对应的下标
+		let [c,d,e] = [1,2,3,4];
+		console.log(c,'c');
+	};
+	
+	
+	//const常量
+</script>
+</head>
+<body>
+	<input type="button" value="bnt1">
+	<input type="button" value="bnt2">
+	<input type="button" value="bnt3">
+</body>
+</html>

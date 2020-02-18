@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>进程跟线程</title>
+<script type="text/javascript">
+	/*
+	 * 
+	 进程： 程序的一次执行，它占有一片独有的内存空间
+	 线程： CPU的基本调度单位，是程序执行的一个完整流程
+
+	 进程跟线程： 
+	 *一个进程中一般至少有一个运行的线程： 主线程
+	 *一个进程中也可以同时运行多个线程，我们会说程序是多线程运行的
+	 *一个进程内的数据可以提供多个线程共享
+	 *多个进程之间的数据不能直接共享
+	 
+	 
+	 事件循环机制：
+	 1. js是单线程的
+	 2. 所有的js代码都会在主线程上执行
+	 3. 同步任务加载立即执行
+	 4. 异步任务不会立即执行，而是会交给相应的管理模块
+	 5. 管理模块会一直监视异步任务是否满足条件， 如果满足条件会将对应的回调放到callback queue中
+	 6. 主线程上的同步任务执行完成以后会通过event loop（事件轮询机制）询问call back queue
+	   -查看事件是否有可执行的回调函数， 如果有将回调函数勾到主线程上执行
+	   -如果没有待会再来问
+	 */
+
+	var oldTime = Date.now();
+
+	setTimeout(function() {
+		console.log(Date.now() - oldTime);
+	}, 2000);
+
+	var name1 = 'A';
+	var object2 = {
+		name1 : 'B',
+		getNameFun : function() {
+			return function() {
+				return this.name1; //函数一定要写返回值哦
+			}
+		}
+	};
+	console.log(object2.getNameFun()());
+
+	function A() {
+
+	}
+
+	A.prototype.n = 1;
+	var b = new A();
+	console.log(A);
+	A.prototype = {
+		n : 2,
+		m : 3
+	};
+
+	var c = new A();
+	console.log(A);
+	//一个是指针不变，一个是指针的指向发生了改变
+	console.log(b.n, b.m, c.n, c.m); // 1, undefined, 2, 3
+
+	var F = function() {
+	};
+	Object.prototype.a = function() {
+		console.log('a()');
+	};
+
+	Object.prototype.b = function() {
+		console.log('b()');
+	};
+
+	var f = new F();
+
+	F.a();//a()
+	F.b();//b()
+	f.a();//a()
+	f.b();//b()
+</script>
+</head>
+<body>
+
+</body>
+</html>

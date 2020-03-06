@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iterator接口底层原理</title>
+<script type="text/javascript">
+
+function iteratorUtil(){
+	let index = 0;
+	let that = this;
+
+	if (that instanceof Array){
+		return {
+			next(){
+				return index<that.length?({value:that[index++],done:false}):({value:that[index++],done:true});
+			}
+		};
+	}
+	else {
+		let keys = Object.keys(that);
+		let length = keys.length;
+		return {
+			next(){
+				return index< length?{value:that[keys[index++]], done: false}:{value:that[keys[index++]],done:true};
+			}
+		};
+	}
+	
+}
+
+
+let arr = [1,2,3,4,5];
+Array.prototype[Symbol.iterator] = iteratorUtil;
+
+for(let i of arr){
+	console.log(i);
+}
+
+Object.prototype[Symbol.iterator] = iteratorUtil;
+
+let obj = {name:'kobe',age:42};
+//Object.keys()返回值是一个数组，该数组包含了目标对象所有的key
+console.log(Object.keys(obj));
+
+for(let j of obj){
+console.log(j);	
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax-xml</title>
+<script src="./js/myAjaxOptimize.js"></script>
+<script>
+	window.onload = function() {
+		var oBtn = document.getElementById("button_xml");
+		oBtn.onclick = function() {
+			ajax_get({
+				type : 'GET',
+				url : './php/11_ajax_xml.php',
+				success : function(xhr) {
+					//如果前端返回的是xml文件，我们可以使用responseXML代替responseText
+					var res = xhr.responseXML;
+					console.log(res);
+					console.log(res.all[1].textContent);
+					console.log(res.all[2].textContent);
+					console.log(res.all[1].innerHTML);
+				},
+				data:{},
+				timeout:3000,
+				error : function(xhr) {
+					console.log(xhr.status);
+				}
+			});
+		};
+	};
+</script>
+</head>
+<body>
+	<input type="button" id="button_xml" value="xml">
+</body>
+</html>

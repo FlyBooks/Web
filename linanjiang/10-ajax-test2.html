@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 练习</title>
+<script src="./js/myAjaxOptimize.js"></script>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	width: 300px;
+	height: 300px;
+	border: 1px solid #000;
+	margin: 50px auto;
+	text-align: center;
+	background: #ccc;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin: 10px auto;
+	border: 1px solid #000;
+}
+
+p {
+	text-align: center;
+	background: pink;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		<p id="title">商品标题名称</p>
+		<img src="" alt="" id="img">
+		<p id="des">商品信息描述</p>
+		<input type="button" value="女装" id="nz" name="nz"> <input
+			type="button" value="包包" id="bb" name="bb"> <input
+			type="button" value="鞋子" id="xz" name="xz">
+	</div>
+	<script type="text/javascript">
+	$(function() {
+		var btns = document.querySelectorAll('input');
+		var oDes = document.querySelector("#des");
+		var oTitle = document.querySelector("#title");
+		var oImg = document.querySelector("#img");
+		for (var i = 0; i < btns.length; i++) {
+			$(btns[i]).click(function() {
+				ajax_get({
+					type : 'POST',
+					url : './php/10-ajax-test.php',
+					timeout : 3000,
+					data : {
+						name : this.getAttribute("name")
+					},
+					success : function(xmlhttp) {
+						var res = xmlhttp.responseText.split("|");
+						oTitle.innerHTML = res[1];
+						oDes.innerHTML = res[2];
+						oImg.setAttribute("src", res[3]);
+					},
+					error : function(xmlhttp) {
+						console.log('failed');
+					}
+				});
+			});
+		}
+	});
+	
+</script>
+	
+</body>
+
+</html>

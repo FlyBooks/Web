@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+	
+</script>
+<script src="layer.js"></script>
+
+
+</head>
+<body>
+	<input type="button" value="layer" id="layer">
+	<input type="button" οnclick="performances();" value="分配"
+		style="background: #18a689 none repeat scroll 0 0; border: 1px solid #18a689; color: #FFF; text-shadow: 0px -1px 1px #1c6a9e; height: 30px; width: 60px;"></input>
+</body>
+<script>
+	/*layer.open({
+	 type: 1,
+	 title: false,
+	 closeBtn: 0,
+	 shadeClose: true,
+	 skin: 'yourclass',
+	 content: '<table border="1px"><tr><th>Month</th><th>Savings</th></tr><tr><td>January</td><td>$100</td></tr></table>'
+	 });*/
+
+	    //弹出窗
+	          function performances(){
+	              $.dialog.setting.zIndex = getzIndex(); 
+	            $.dialog({
+	                content: 'url:./php/08-post-ajax.php', 
+	                zIndex: getzIndex(), 
+	                title: '分配列表', 
+	                lock: true, 
+	                width: '600px', 
+	                height: '400px',
+	                opacity: 0.4,
+	                button: [
+	                    {name: '<t:mutiLang langKey="common.confirm"/>', callback: callbackPerformance, focus: true},
+	                       {name: '<t:mutiLang langKey="common.cancel"/>', callback: function (){}}
+	                   ]
+	            }).zindex();
+	          }
+	          
+	            //点击确定回调函数
+	          function callbackPerformance() {
+	              var iframe = this.iframe.contentWindow;
+	              var cno = iframe.$("#cnossss").val();
+	            $('#performance').val(cno);
+	        }
+
+</script>
+</html>

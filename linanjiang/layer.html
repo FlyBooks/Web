@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+	
+</script>
+<script src="layer.js"></script>
+
+
+</head>
+<body>
+	<input type="button" value="layer" id="layer">
+</body>
+<script>
+	/*layer.open({
+	 type: 1,
+	 title: false,
+	 closeBtn: 0,
+	 shadeClose: true,
+	 skin: 'yourclass',
+	 content: '<table border="1px"><tr><th>Month</th><th>Savings</th></tr><tr><td>January</td><td>$100</td></tr></table>'
+	 });*/
+
+	layer.open({
+		content : 'test',
+		btn : [ '按钮一', '按钮二', '按钮三' ],
+		yes : function(index, layero) {
+			//按钮【按钮一】的回调
+			console.log(index,'index');
+		},
+		btn2 : function(index, layero) {
+			//按钮【按钮二】的回调
+
+			//return false 开启该代码可禁止点击该按钮关闭
+		},
+		btn3 : function(index, layero) {
+			//按钮【按钮三】的回调
+
+			//return false 开启该代码可禁止点击该按钮关闭
+		},
+		cancel : function() {
+			//右上角关闭回调
+
+			//return false 开启该代码可禁止点击该按钮关闭
+		}
+	});
+	 
+	 
+	 data2 = [{
+		    title: '早餐'
+		    ,id: 1
+		    ,children: [{
+		      title: '油条'
+		      ,id: 5
+		    },{
+		      title: '包子'
+		      ,id: 6
+		    },{
+		      title: '豆浆'
+		      ,id: 7
+		    }]
+		  },{
+		    title: '午餐'
+		    ,id: 2
+		    ,checked: true
+		    ,children: [{
+		      title: '藜蒿炒腊肉'
+		      ,id: 8
+		    },{
+		      title: '西湖醋鱼'
+		      ,id: 9
+		    },{
+		      title: '小白菜'
+		      ,id: 10
+		    },{
+		      title: '海带排骨汤'
+		      ,id: 11
+		    }]
+		  },{
+		    title: '晚餐'
+		    ,id: 3
+		    ,children: [{
+		      title: '红烧肉'
+		      ,id: 12
+		      ,fixed: true
+		    },{
+		      title: '番茄炒蛋'
+		      ,id: 13
+		    }]
+		  },{
+		    title: '夜宵'
+		    ,id: 4
+		    ,children: [{
+		      title: '小龙虾'
+		      ,id: 14
+		      ,checked: true
+		    },{
+		      title: '香辣蟹'
+		      ,id: 15
+		      ,disabled: true
+		    },{
+		      title: '烤鱿鱼'
+		      ,id: 16
+		    }]
+		  }];
+</script>
+</html>

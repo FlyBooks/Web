@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>for循环中key的使用</title>
+<script src="./lib/vue.js"></script>
+<script>
+	window.onload = function() {
+		new Vue({
+			el : "#addNew",
+			data : {
+				list : [ {
+					id : 1,
+					name : '李斯'
+				}, {
+					id : 2,
+					name : '嬴政'
+				}, {
+					id : 3,
+					name : '赵高'
+				}, {
+					id : 4,
+					name : '韩非子'
+				} ],
+				id:'',
+				name:''
+			},
+			methods : {
+				addQin(){
+					this.list.unshift({id:this.id,name:this.name});
+				}
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="addNew">
+		id: <input type="text" v-model="id"> Name: <input type="text"
+			v-model="name"> <input type="button" value="添加"
+			@click="addQin">
+
+		<!-- 在组件中使用v-for循环的时候，或者在一些特殊情况中，如果v-for有问题，必须在使用v-for同时指定唯一的字符串/数字类型，即：  :key值 -->
+		<div v-for="item in list" :key="item.id">
+			<p>
+				<input type="checkbox"> {{item.id}}-----{{item.name}}
+			</p>
+		</div>
+	</div>
+</body>
+</html>

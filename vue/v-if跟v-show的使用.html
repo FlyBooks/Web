@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	new Vue({
+		el : "#if",
+		data:{flag:true},
+		methods:{
+			toggle(){
+				this.flag = !this.flag;
+			}
+		}
+	});
+};
+</script>
+</head>
+<body>
+	<div id="if">
+		<input type="button" @click="toggle" value="click">
+		<!-- v-if: 每次重新删除或创建元素 -->
+		<!-- v-show: 不会重新创建或删除元素，只是切换元素的display属性 -->
+		<p v-if="flag">v-if if</p>
+		<p v-show="flag">v-show show</p>
+	</div>
+</body>
+</html>

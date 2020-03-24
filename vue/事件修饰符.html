@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>事件修饰符</title>
+<script src="./lib/vue.js"></script>
+<style>
+div {
+	width: 500px;
+	height: 200px;
+	background-color: yellow;
+}
+</style>
+<script>
+	//.stop可以阻止事件冒泡
+	//.prevent阻止默认行为
+	//.capture实现捕获触发事件的机制
+	//.self只有点击当前元素，才会触发事件处理函数
+	//v-mode:可以实现数据表单元素和Model中数据的双向数据绑定
+	
+	window.onload = function() {
+		new Vue({
+			el: "#app",
+			data:{
+				
+			},
+			methods:{
+				alert(){
+					alert(123);
+				},
+				divHandler(){
+					console.log(999);
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<!-- 	<div id="app" @click="divHandler">
+		<input type="button" value="clickMe" v-on:click="alert" id="run">
+	</div>
+	 -->
+
+	<div id="app" @click.self="divHandler">
+		<input type="button" value="clickMe" v-on:click="alert" id="run">
+	</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+1. 插值表达式： v-cloak v-text v-html v-bind(:) v-on(@) v-model v-for v-id v-show
+
+2. 事件修饰符： .stop .prevent .capture .self .once
+
+3. el指定要控制的区域    data数据对象  methods自定义方法对象
+
+4. 在VM实例中， 如果要访问data上的数据，或者要访问methods中的方法，必须带上this
+
+5. 在v-for要会使用key属性（只接受string/number）
+
+6. v-model只应用于表单元素
+
+7.在vue中绑定样式的两种方式： v-bind:class v-bind:style
+
+8.生命周期钩子 = 生命周期函数 = 生命周期事件
+     生命周期钩子的 this 上下文指向调用它的 Vue 实例
+     
+9.vue-resource实现get, post, jsonp请求，除了vue-resource之外， 还可以使用‘axios’第三方包实现数据交互

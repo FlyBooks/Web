@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>生命周期</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		var vm = new Vue({
+			el : "#lifecycle",
+			data : {
+				msg : 'ok'
+			},
+			methods : {
+				show : function() {
+					console.log('show something~~');
+				},
+				screen : function() {
+					this.msg = 'no';
+				}
+			},
+			beforeCreate : function() { //表示实例在完全被创建出来之前会执行它
+				//注意: 在beforeCreate生命周期函数执行的时候， data跟methods中的数据还没有初始化
+				console.log(this.msg);//undefined
+				//this.show();//this.show is not a function
+			},
+			created : function() {
+				//在created中，methods跟data已经初始化好了
+				console.log(this.msg); //ok
+				this.show(); //show something~~
+			},
+			beforeMount : function() {//表示模板已经在内存中编译完成了，但是尚未把模板渲染到页面中
+
+				console.log(document.getElementById('h3').innerHTML); //{{msg}}
+				//在beforeMount执行的时候，页面中的内容还没有被正在替换过来，只是之前写的一些模板字符串
+			},
+			mounted : function() {//表示内存中的模板已经挂载到页面中了，用户已经可以看到已经渲染好的页面了
+				//mounted是实例创建好的最后一个生命周期，当执行完mounted就表示实例已经完成被创建好了；如果这个时候不进行其他任何操作，实例vm将被保存在内存中
+				//如果要操作页面上的DOM节点，最早是在mounted上进行的
+
+			},
+			//接下来的是运行中的两个事件
+			beforeUpdate : function() {
+				/*
+				这个时候表示我们的界面还没有更新，但是数据肯定更新了
+				 */
+				console.log('界面上的内容', document.getElementById('h3').innerHTML);
+				console.log('msg', this.msg);
+			},
+			updated : function() {
+				//update 事件执行的时候，页面跟data数据已经保存同步了， 都是最新的
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="lifecycle">
+		<h3 id="h3">{{msg}}</h3>
+		<input type="button" @click="msg='no'" value="clickMe">
+	</div>
+</body>
+</html>

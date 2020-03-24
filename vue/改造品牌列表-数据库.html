@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./lib/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+<script type="text/javascript">
+//可以设置根域名：  Vue.http.options.root = 'blabla';
+//Vue.http.options.emulateJSON = true; 全局配置emulateJSON
+	window.onload = function() {
+		new Vue({
+			el : "#brandSQL",
+			data : {
+				list : [],
+				name: ''
+			},
+			methods : {
+				getList(){
+					this.$http.post('./jsonb.txt',{},{emulateJSON:true}).then(result=>{
+						console.log(result.body.message,'result');
+						/*使用result.body就不需要转换了
+						var json = result.bodyText;
+						var obj = JSON.parse(json);
+						*/
+						
+						this.list = result.body.message;
+						console.log(this.list,'list');
+					});
+					
+				},
+				add(){
+					/*
+					this.$http.post()需要接受三个参数
+						第一个参数： 要请求的url地址
+						第二个参数： 要提交给服务器的数据，要以对象的形式提交给服务器 {name: this.name}
+						第三个参数： 是一个配置对象，要以哪一种表单数据类型提交过去， {emulateJSON}
+					然后使用.then方法来设置成功请求后的回调函数，如果成功拿到数据（result.body）
+					*/
+					
+					this.$http.post('./database.php',{name:this.name},{emulateJSON:true}).then(result => {
+						
+						console.log(result.body);
+					});
+				}
+			},
+			created: function(){
+				this.getList();
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="brandSQL">
+		<input type="text" v-model="name">
+		<input type="button" value="添加到数据库" @click="add()">
+		<br><br>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Ctime</th>
+					<th>Operation</th>
+				<tr>
+			</thead>
+			<tbody>
+				<tr v-for="(item,index) in list" :key="index">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.ctime}}</td>
+					<td><a href="javascript:void(0)">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

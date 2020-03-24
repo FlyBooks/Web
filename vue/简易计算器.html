@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>计算器</title>
+<script src="./lib/vue.js"></script>
+<script>
+	window.onload = function() {
+		new Vue({
+			el : "#calculate",
+			data : {
+				opt : '+',
+				parameter1 : '0',
+				parameter2 : '0',
+				result : '0'
+
+			},
+			methods : {
+				calculate(){
+					var val1 = parseInt(this.parameter1);
+					var val2 = parseInt(this.parameter2);
+					
+					switch(this.opt){
+					case '+': this.result = val1+val2;break;
+					case '-': this.result = val1-val2;break;
+					case '*': this.result = val1*val2;break;
+					case '/': this.result = val1/val2;break;
+					}
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="calculate">
+		<input type="text" v-model="parameter1"> <select v-model="opt">
+			<option>+</option>
+			<option>-</option>
+			<option>*</option>
+			<option>/</option>
+		</select> <input type="text" v-model="parameter2"> <input type="button"
+			value="=" @click="calculate"> <input type="text"
+			v-model="result">
+	</div>
+</body>
+</html>

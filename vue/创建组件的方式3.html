@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建组件的方式一</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('mycom3', Vue.extend({
+		template : '#tmp1'
+	}));
+
+	window.onload = function() {
+		let vm = new Vue({
+			el : "#component",
+			data : {},
+			methods : {}
+		});
+		
+		
+		//定义一个私有的template
+		let vm2 = new Vue({
+			el: "#component2",
+			data:{},
+			methods:{},
+			components:{ //定义实例内部私有组件
+				login:{
+					template: '#tmp12'
+				}
+			}
+		});
+		
+	};
+</script>
+</head>
+<body>
+	<!-- 在被控制的#component外面使用template元素定义组件的HTML模板结构 -->
+	<template id="tmp1">
+	<div>
+		<p>Vue的全局template</p>
+	</div>
+	</template>
+	
+	<template id="tmp12">
+	<h1>这是vm2的私有组件</h1>
+	</template>
+	
+	<div id="component">
+		<mycom3></mycom3>
+	</div>
+
+	<div id="component2">
+		<mycom3></mycom3>
+		<login></login>
+	</div>
+
+</body>
+</html>

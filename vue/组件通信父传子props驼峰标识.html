@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+Vue.component('cmp1',{
+	template:"#tmp1",
+	props:{
+		cinfo:{
+			type:Object,
+			default(){
+				return {};
+			}
+		}
+	}
+});
+
+/*
+ * 	1. props用于父组件向子组件传递数据，还有一种比较常见的是子组件传递数据或事件到父组件中
+ 	2. 什么时候需要自定义事件？
+ 		-当子组件需要向父组件传递数据的时候，就需要用到自定义事件了
+		 -v-on(@)不仅仅可以用于监听DOM事件，也可以用于组件间的自定义事件
+ 	3.自定义事件的流程:
+		 -在子组件中，通过$emit()来触发事件
+	 	-在 父组件中，通过v-on(@)来监听子组件事件
+ */
+	window.onload = function() {
+
+		const vm = new Vue({
+			el : "#app",
+			data : {
+				pinfo : {
+					name : 'music',
+					age : 3,
+					height : 1.88
+				}
+			},
+			methods : {
+
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="tmp1">
+	<div>
+		<p>{{cinfo}}</p>
+	</div>
+	</template>
+	
+	<div id="app">
+		<cmp1 :cinfo="pinfo"></cmp1>
+	</div>
+</body>
+</html>

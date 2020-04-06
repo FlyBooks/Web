@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-bind指令</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+img{
+width: 100px;
+height:100px;
+}
+.active{
+color: red;
+}
+</style>
+<script type="text/javascript">
+
+	window.onload = function() {
+		new Vue({
+			el : '#app',
+			data:{
+				books:[
+					{id:100, name:'悲惨世界', price: 120},
+					{id:100, name:'局外人', price: 130},
+					{id:100, name:'掌欢', price: 199},
+					{id:100, name:'飘', price: 220},
+				]
+			},
+			computed:{//计算属性，有缓存，效率更高些
+				//计算属性一般没有set方法
+				totalPrice: function(){
+					let sum = 0;
+					for(book of this.books){
+						
+						sum += book.price;
+						
+					}
+					return sum;
+				}
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id='app'>
+	<!-- 计算属性是当做一个属性来使用的，所以不需要叫小括号 -->
+	<p>总价是： {{totalPrice}}</p>
+	</div>
+</body>
+</html>

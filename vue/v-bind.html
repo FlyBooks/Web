@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-bind指令</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+img{
+width: 100px;
+height:100px;
+}
+.active{
+color: red;
+}
+</style>
+<script type="text/javascript">
+	/*
+	 * 除了元素内容需要动态邦迪之外， 某些属性我们也需要动态绑定：比如动态绑定a元素的href属性，动态绑定img元素的src属性；
+	 这个时候我们就可以使用v-bind指令。
+	 */
+	 
+	 
+	 /*
+	 v-bind: class="{类名1：true,类名2: false}"
+	 当类名对应的key值为true的时候，该class将被加载；false的话，该class将不会被加载
+	 */
+	window.onload = function() {
+		new Vue({
+			el : '#app',
+			data:{
+				urlImg: './../images/1.jpg'
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id='app'>
+	<!-- src属性必须绑定才可以显示 -->
+	<img alt="no pic" v-bind:src="urlImg">
+	<p :class="['active','title']">what</p>
+	<p :class="{acitve:true, title:false}">hahh</p>
+	</div>
+</body>
+</html>

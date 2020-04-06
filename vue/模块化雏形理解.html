@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slot的基本使用</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+let moduleObj = (function(){
+	const obj = {name: 'Eva'};
+	
+	return obj;
+})();
+
+console.log(moduleObj.name);
+
+//模块化的核心： 导入和导出
+//CommonJS的导出：
+/*
+ * module.exports = {
+		flag: true,
+		test(a,b){return a+b;},
+		demo(a,b){return a+b;}
+}
+ */
+ 
+ //CommonJS的导入：
+ /*
+ 1.
+ let obj = require('./xxx/xxx.js');
+ let flag = obj.flag;
+ let sum = obj.sum;
+ 
+ 2.
+ let {flag, sum} = require('./xxx/xxx.js'); //这里使用了ES6的解构
+ 
+ */
+
+</script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+</html>

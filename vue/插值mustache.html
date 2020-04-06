@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>mustache</title>
+<script src="./lib/vue.js">
+	
+</script>
+<script>
+	window.onload = function() {
+		setTimeout(function() {
+			new Vue({
+				el : '#loop',
+				data : {
+					msg : 'hello, ',
+					firstName : 'Justin',
+					lastName : 'Bieber',
+					count : 100,
+					url : '<a href="http://www.baidu.com">百度一下</a>'
+				}
+			});
+		}, 1000);
+
+	};
+</script>
+</head>
+<body>
+	<div id="loop" v-cloak>
+      <h2>{{msg}}music</h2>
+      <p>{{firstName+lastName}}</p>
+      <p>{{firstName+' '+lastName}}</p>
+      <p>{{firstName}} {{lastName}}</p>
+      <p>{{count * 2}}</p>
+      <p v-html="url"></p>
+      <!-- v-pre不进行任何解析  -->
+      <!-- v-cloak:在Vue解析之前，div有一个v-cloak属性；在Vue解析之后， v-cloak就没有了 -->
+      <p>time-------------</p>
+      <div >{{msg}}</div>
+	</div>
+</body>
+</html>

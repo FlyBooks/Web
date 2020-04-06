@@ -16,3 +16,94 @@
      生命周期钩子的 this 上下文指向调用它的 Vue 实例
      
 9.vue-resource实现get, post, jsonp请求，除了vue-resource之外， 还可以使用‘axios’第三方包实现数据交互
+
+
+10.添加版权Plugin:
+const path = require('webpack');
+
+module.exports = {
+...
+plugins: [new webpack.BannerPlugin("最终版权归blabla所有")]
+};
+
+11. loader是webpack中一个非常核心的概念
+在开发中我们不仅仅有基本的js代码处理，也需要加载css,图片，也包括一些高级的将ES6转化成ES5代码等等，对于webpack本身来说是不足以处理这些转化的。这时候我们就需要loader来处理。
+	
+loader使用过程：
+	 步骤一： 通过npm 安装需要使用的loader
+	 步骤二： 在webpack.config.js中的modules关键字下进行配置
+	
+12. js压缩的plugin
+在项目发布之前，我们必须需要对js等文件进行压缩处理， 使用一个第三方插件uglifyjs-webpack-plugin, 并且指定版本号1.1.1,和CLI2保持一致
+npm install uglifyjs-webpack-plugin@1.1.1 --save-dev
+
+13. 修改webpack.config.js文件，使用插件： 
+const uglifyJsPlugin = require('uglifyjs-webpack-plugin');
+module.exports = {
+...
+plugins: [new uglifyJsPlugin()]
+}
+
+14. 搭建本地服务器
+npm install --save-dev webpack-dev-server@2.9.3
+webpack.config.js文件配置如下： devServer: {contentBase: './dist', inline: true}
+'dev': 'webpack-dev-server --open' --open参数表示直接打开浏览器
+
+配置成功之后，运行：
+C5268836@PVGN34099561A MINGW64 /c/Software/wamp64/www/Projects/JS/vue/webpack_vue (advance)
+$ ./node_modules/.bin/webpack-dev-server
+
+15.webpack配置文件分离
+npm install webpack-merge --save-dev
+
+16. Vue CLI使用前提： Node
+npm install -g @vue@cli
+在安装了CLI3后可以通过命令再拉一下CLI2的模板，这样CLI3跟CLI2都可以使用： npm install @vue/cli-init -g
+
+Vue CLI2初始化项目： vue init webpack my-project
+
+17. 创建CLI2项目： vue init webpack 项目名称
+
+18. vue-cli3创建项目
+vue create 项目名称
+
+19. 启动Vue项目管理器： vue ui 
+
+20. 路由器提供了两种机制： 路由和转送
+
+location.hash = 'foo'是不会刷新页面整个网页的
+history.pushState({},'','new');也不会刷新整个页面
+history.replaceState();
+history.go(-1)等价于history.back()
+history.forward()等价于history.go(1)
+
+21. 安装路由： npm install vue-router --save
+
+22. 使用vue-router的步骤： 
+第一步： 创建路由组件
+第二步： 配置路由映射： 组件跟路径映射关系
+第三步： 使用路由：通过<router-link>和<router-view>
+
+22. router-link默认渲染出来的a标签,可以通过tag属性修改默认渲染的标签
+<router-liner to="/home" replace></router-linker> replace属性就不可以按返回了
+
+23. keep-alive: 是Vue内置的一个组件, 可以使包含的组件保留状态， 或避免重新渲染
+keep-alive有两个属性： include跟exclude
+activated(){}和deactivate(){}只有在使用了keep-alive才有效果，否则不会被调用的
+首页中使用path属性记录离开时的路径，在beforeRouteLeave中记录
+
+24. 起别名，要配置webpack.base.conf.js：
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': resolve('src'),
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components'),
+      'views': resolve('src/views')
+    }
+  }
+  注意在引用的时候要加~: src="~assets/img/all.png"
+
+25. Vuex
+安装vuex的命令: npm install vuex --save
+

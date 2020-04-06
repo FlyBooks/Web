@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-model</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	v-model其实是一个语法糖，他的本质上包含两个操作
+	1. v-bind绑定一个value属性
+	2. v-on指令给当前元素绑定input事件
+	 */
+
+	window.onload = function() {
+		const app = new Vue({
+			el : '#app',
+			data : {
+				message1 : 'msg',
+				message2 : 'msg',
+				gender: '女',
+				isAgree: false,
+				hobbies:[],
+				dynamicHobbies:['乒乓球','足球','篮球','铅球'],
+				selectedHobbies:[],
+				fruit: '杏子',
+				fruits:[]
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id='app'>
+		<input type="text" v-model="message1">
+		<!-- 等价于 -->
+		<input type="text" v-bind:value="message2" v-on:input="message2= $event.target.value">
+		<br>
+		<!-- 单选框 -->
+		<label for="male">
+		男：	
+		<input type='radio' name="gender" id="male" v-model="gender" value='男'>
+		</label>
+		
+		<label for="female">
+		女：
+		<input type='radio' name="gender" id="female" v-model="gender" value='女'>
+		<h1>您选择的性别是： {{gender}}</h1>
+		</label>
+		
+		<!-- 复选框 -->
+		<label for="license">
+		<input type="checkbox" id='license' v-model='isAgree'>同意
+		</label>
+		<input type="button" :disabled="!isAgree" value="下一步">
+		
+		<br>
+		<input type="checkbox" value="篮球" v-model="hobbies">篮球
+		<input type="checkbox" value="足球" v-model="hobbies">足球
+		<input type="checkbox" value="排球" v-model="hobbies">排球
+		<input type="checkbox" value="台球" v-model="hobbies">台球
+		<h1>您的爱好是：{{hobbies}}</h1>
+		
+		
+		<label v-for="item in dynamicHobbies" :key="item" >
+		<!-- 这里的id，value都需要动态绑定，否则就写死了 -->
+		<input type="checkbox" :id="item" :value="item" v-model="selectedHobbies">{{item}}
+		</label>
+		<h1>您的其他爱好是：{{selectedHobbies}}</h1>
+		
+		<!-- select -->
+		<select v-model="fruit">
+		<option value="苹果">苹果</option>
+		<option value="香蕉">香蕉</option>
+		<option value="梨子">梨子</option>
+		<option value="杏子">杏子</option>
+		</select>
+		<h1>你喜欢的水果是： {{fruit}}</h1>
+		
+		<select v-model="fruits" multiple="multiple">
+		<option value="苹果">苹果</option>
+		<option value="香蕉">香蕉</option>
+		<option value="梨子">梨子</option>
+		<option value="杏子">杏子</option>
+		</select>
+		<h1>你喜欢的水果是： {{fruits}}</h1>
+	</div>
+</body>
+</html>

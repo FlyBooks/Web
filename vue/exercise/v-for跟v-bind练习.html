@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>组件</title>
+<script src="../lib/vue.js"></script>
+<style>
+.active {
+	color: red;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+
+		const vm = new Vue({
+			el : "#app",
+			data : {
+				movies:['海王','唐人街探案','大侦探福尔摩斯','加勒比海盗','海贼王'],
+				currentId: -1
+			},
+			methods : {
+			   setClass(id){
+				   console.log(id);
+				   this.currentId = id;
+			   }
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="(item,index) in movies" :class="{active:currentId===index}" @click="setClass(index)">{{item}}</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>for循环中key的使用</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+
+</style>
+<script>
+	window.onload = function() {
+		new Vue({
+			el : "#addNew",
+			data : {
+		
+			},
+			methods : {
+				
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="addNew">
+	<!-- :style="{key(css属性名)： value(属性值)}" -->
+	<!-- 50px必须加上一个单引号，否则Vue会当成一个变量来解析 -->
+	<p :style="{fontSize:'100px',color:'red'}">haier</p>
+	</div>
+</body>
+</html>

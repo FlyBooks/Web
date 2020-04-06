@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建组件的方式一</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	 1.组件可以有自己的data数据
+	 2.组件的data跟实例的data有点不一样，组件的data必须是一个函数，实例的data是一个对象
+	 3.组件中的data除了必须是一个function以外，还必须返回一个对象。
+	 4.组件中的data数据使用方式跟实例中的data使用方式一样
+	
+	 */
+	Vue.component('mycom2', {
+		template : '<div><p>哈哈哈...</p><span>{{msg}}</span></div>', //注意： 无论用那种方式创建出来的组件，组件的template属性必须有且只有一个根元素
+		data : function() {
+			return {
+				msg: '这是组件的data方法'
+			};//必须返回一个对象
+		}
+	});
+
+	window.onload = function() {
+		let vm = new Vue({
+			el : "#component",
+			data : {},
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="component">
+		<mycom2></mycom2>
+	</div>
+</body>
+</html>

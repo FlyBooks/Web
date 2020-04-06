@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-model</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	v-model的修饰符:
+		lazy： 不是实时绑定，当失去焦点（或者回车）的时候进行变量更新: v-model.lazy
+		number:v-model.number 类型是number
+		trim: v-model.trim去掉首尾的空值
+	 */
+
+	window.onload = function() {
+		const app = new Vue({
+			el : '#app',
+			data : {
+				notRealTime:'',
+				age:0,
+				name:'Eva'
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id='app'>
+		<input type="text" v-model.lazy="notRealTime">
+		{{notRealTime}}
+		
+		<br>
+        <input type="number" v-model.number="age">
+        {{typeof age}}
+        
+        <br>
+        <input type='name' v-model.trim='name'>
+        {{name}}
+
+	</div>
+</body>
+</html>

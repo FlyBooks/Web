@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slot的基本使用</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	 Webpack:
+	 从本质上来说，webpack 是一个现代的Javascript应用的静态模块打包工具
+	 
+	 webpack -> node -> npm
+	 package.json:通过npm init生成的
+	 
+	 npm run build： 执行的是package.json里面的build: 'webpack'
+	 */
+
+	window.onload = function() {
+		new Vue({
+			el : '#app'
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>

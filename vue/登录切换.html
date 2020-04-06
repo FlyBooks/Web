@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ES6</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		const vm = new Vue({
+			el : '#app',
+			data : {
+				score : 90
+			},
+			methods : {
+
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="app">
+		<!-- 不建议这样写，建议搞一个computed计算属性 -->
+		<p v-if="score>90">优秀</p>
+		<p v-else-if="score>80">良好</p>
+		<p v-else-if="score>700">及格</p>
+		<p v-else="score<60">差</p>
+	</div>
+</body>
+</html>

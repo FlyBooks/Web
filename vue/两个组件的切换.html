@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>component</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('login', {
+		template : '#logon'
+	});
+	
+	Vue.component('register',{
+		template: '#register'
+	});
+	
+	window.onload = function() {
+		let vm = new Vue({
+			el : "#component",
+			data : {flag:true},
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="logon">
+	<h3>登录组件</h3>
+	</template>
+	<template id="register">
+	<h3>注册组件</h3>
+	</template>
+	<div id="component">
+		<!-- v-else要紧跟在v-if后面，表示v-if条件不成立时执行 -->
+		<a href='javascript:void(0)' @click="flag=true">登录</a> <a href='javascript:void(0)' @click="flag=false">注册</a>
+		<login v-if="flag"></login>
+		<register v-else="flag"></register>
+	</div>
+</body>
+</html>

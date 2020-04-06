@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
    <h1>我是hello world{{counterhello}}</h1>
+   <h1>{{$store.state.counter}}</h1>
   </div>
 </template>
 

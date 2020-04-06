@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax post</title>
+<script src="./js/myAjax2.js"></script>
+<script>
+	window.onload = function() {
+		//"fname=Bill&lname=Gates"
+		ajax_get('POST', './php/08-post-ajax.php', {
+			name : 'Bill',
+			age : 33
+		}, 3000, function(xmlhttp) {
+			console.log(xmlhttp.responseText);
+		}, function() {
+			console.log('failed');
+		});
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

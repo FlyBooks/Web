@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>父子组件的访问方式</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	父组件访问子组件： 使用$children或者$refs
+	子组件访问父组件：使用$parent
+	 */
+
+	window.onload = function() {
+		new Vue({
+			el : "#app",
+			components : {
+				cmp1 : {
+					template : "#cmp",
+					components:{
+					  cmp2: {
+						  template:'#sectmp',
+						  methods:{
+								showMessage(){
+									console.log(this.$parent);
+									//访问根组件
+									console.log(this.$root);
+								}
+						   }  
+					  },
+					
+					}
+				}
+				
+			}
+	
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="cmp">
+	<div>
+	我是组件1
+	<cmp2></cmp2>
+	</div>
+	</template>
+	
+	<template id="sectmp">	
+	<div>
+	<h1>我是子组件2</h1>
+	<input type="button" value="展示父组件" @click="showMessage()">
+	</div>
+	</template>
+	 
+	<div id="app">
+		<cmp1></cmp1>
+		
+	</div>
+</body>
+</html>

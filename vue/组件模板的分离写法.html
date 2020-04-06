@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>component</title>
+<script src="./lib/vue.js"></script>
+
+<script type="text/javascript">
+	//组件是一个单独功能模块，这个模块有属于自己的HTML模板， 也应该有属于自己的数据data
+
+	window.onload = function() {
+		//1.使用script标签分离写法
+		Vue.component('cmp1', {
+			template : "#cmp1"
+		});
+
+		//2.使用template来组件模板分离
+		Vue.component('cmp2', {
+			template : '#cmp2'
+		});
+		const vm = new Vue({
+			el : '#component1'
+		});
+	};
+</script>
+</head>
+<body>
+	<script type="text/x-template" id="cmp1">
+<div>
+<h1>使用script来分离组件模板写法</h1>
+</div>
+</script>
+
+	<template id="cmp2">
+	<div>
+		<h1>我是使用template分离写法的！</h1>
+	</div>
+	</template>
+	<div id="component1">
+		<cmp1></cmp1>
+		<cmp2></cmp2>
+	</div>
+</body>
+</html>

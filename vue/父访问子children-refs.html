@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>父子组件的访问方式</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	父组件访问子组件： 使用$children或者$refs
+	子组件访问父组件：使用$parent
+	 */
+
+	window.onload = function() {
+		new Vue({
+			el : "#app",
+			methods : {
+				showTemplate(){
+					//children一般使用的很少
+					/*for(let cmp of this.$children){
+						cmp.showMessage();
+						console.log(cmp.name);
+					}*/
+					
+					//$refs是一个对象类型， 默认是空的
+					this.$refs.aaa.showMessage();
+				}
+			},
+			components : {
+				cmp1 : {
+					template : "#cmp",
+					data(){
+						return{
+							name:'我是子组件的name'
+						}
+					},
+					methods:{
+							showMessage(){
+								console.log('子组件的showMessage方法');
+							}
+					}
+				}
+				
+			}
+	
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="cmp">
+	<div>我是子组件</div>
+	</template>
+	<div id="app">
+		<cmp1 ref='aaa'></cmp1>
+		<cmp1></cmp1>
+		<cmp1></cmp1>
+		<input type="button" value="展示子组件" @click="showTemplate()">
+	</div>
+</body>
+</html>

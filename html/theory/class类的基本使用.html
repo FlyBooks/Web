@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class的基本使用</title>
+<script type="text/javascript">
+	/*
+	 * 1.通过class 定义类/实现类的继承
+	 2.在类中通过constructor定义构造方法
+	 3.通过new来创建类的实例
+	 4.通过extends来实现类的继承
+	 5.通过super调用父类的构造方法
+	 6.重写从父类中继承的一般方法
+	 */
+	 
+	 //以前
+	 function Person2(){
+		
+	}
+	 
+	Person2.prototype.showMsg = function(){};
+	 
+	 
+	//now
+	 //1. 定义类
+	 class Person {
+		//类的静态方法
+		//语法： static methodName() { ... }
+		//类（class）通过 static 关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能。
+		static test(){
+			return "类的静态方法";
+		}
+		
+		//constructor叫类的构造方法
+		constructor(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		
+		//类的一般方法,定义在实例对象的原型对象上
+		showMsg(){
+			console.log(this.name, this.age);
+		}
+	}
+	console.log( Person.test());//类的静态方法
+	let person = new Person('kobe',42);
+	console.log(person); //Object { name: "kobe", age: 42 }
+	person.showMsg();
+	
+	class ChildPerson extends Person{
+		constructor(name,age,sex){
+			super(name,age); //调用父类的构造方法
+			this.sex = sex;
+		} 
+		showMsg(){ //父类的方法重写
+			console.log(this.name, this.age,this.sex);
+		}
+		
+	}
+	let child1 = new ChildPerson('zhangsan',12,'male');
+	console.log(child1,'child1');
+	child1.showMsg(); //zhangsan 12 male
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-for循环普通数组</title>
+<script src="./lib/vue.js">
+	
+</script>
+<script>
+	window.onload = function() {
+		//v-for可以循环对象
+		new Vue({
+			el : "#loop",
+			data : {
+				list : [ 1, 2, 3, 4, 5 ],
+				obj : [ {
+					name : '回忆',
+					id : 0
+				}, {
+					name : 'we',
+					id : 1
+				}, {
+					name : 'speachless',
+					id : 2
+				} ],
+				obj2 : {
+					name : 'Jack',
+					age : 23,
+					gender : 'man'
+				}
+			},
+			methods : {}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="loop">
+		<p v-for="(item,i) in list">索引值{{i}}===值{{item}}</p>
+		<p v-for="item in obj">{{item.name}}</p>
+		<p v-for="(value,key,i) in obj2">{{value}}===>key:
+			{{key}}===>index: {{i}}</p>
+		<!-- v-for中如果使用迭代数字，从1开始 -->
+		<p v-for="count in 10">{{count}}次循环</p>
+
+	</div>
+</body>
+</html>

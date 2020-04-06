@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建组件的方式一</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('mycount', {
+		template : "#countAdd", //注意： 无论用那种方式创建出来的组件，组件的template属性必须有且只有一个根元素
+		data : function() {		
+			return {count:0};//必须返回一个对象
+		}
+	});
+
+	window.onload = function() {
+		let vm = new Vue({
+			el : "#component",
+			data : {},
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="countAdd">
+	<input type="button" v-model="count" value="count" @click="count++">
+	</template>
+	<div id="component">
+		<mycount></mycount>
+		<mycount></mycount>
+		<mycount></mycount>
+	</div>
+</body>
+</html>

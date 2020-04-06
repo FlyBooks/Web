@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>组件</title>
+<script src="../lib/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('cmp1', {
+		template : '#button',
+		data(){
+			return {
+				count:0,
+				childtotal: 0
+			};
+		},
+		props:{
+			sum:{
+				type:Number,
+				default(){
+					return 0;
+				}
+			}
+			
+		},
+		methods:{
+			Add(){
+				this.count++;this.childtotal++;
+				this.$emit("sendtoparent",'hahah...');
+			}
+		}
+	});
+
+	/*
+	 * 	1. props用于父组件向子组件传递数据，还有一种比较常见的是子组件传递数据或事件到父组件中
+	 2. 什么时候需要自定义事件？
+	 -当子组件需要向父组件传递数据的时候，就需要用到自定义事件了
+	 -v-on(@)不仅仅可以用于监听DOM事件，也可以用于组件间的自定义事件
+	 3.自定义事件的流程:
+	 -在子组件中，通过$emit()来触发事件
+	 -在 父组件中，通过v-on(@)来监听子组件事件
+	 */
+	window.onload = function() {
+
+		const vm = new Vue({
+			el : "#app",
+			data : {
+				total: 0
+			},
+			methods : {
+				justShowTotal(el){
+					this.total++;
+					console.log(el,this.total);
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="button">
+	<div>
+	<input type="button" value="+1" @click="Add()">
+	<input type="button" value="-1" @click="count--;childtotal++;">
+	<p>点击了 {{count}}次</p>
+	<p>一共点击了{{childtotal}}次</p>
+	<p >向父元素传递了{{sum}}</p>
+	</div>
+	</template>
+
+	<div id="app">
+	<cmp1 @sendtoparent="justShowTotal" v-bind:sum="total"></cmp1>
+	</div>
+</body>
+</html>

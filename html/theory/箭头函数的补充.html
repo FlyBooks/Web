@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		let obj = {
+			username : 'kobe'
+		};
+
+		function fun() {
+
+			console.log(this);
+
+		}
+
+		fun.call(obj);
+		
+		let obj2 = {
+				username: 'dream',
+				age: 18
+		};
+		
+		let fun1 =()=>{
+			console.log(this);
+		};
+		
+		fun1.call(obj2); //Window,在箭头函数中call, apply，bind都失效，因为箭头函数一开始就指定好了this
+		
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

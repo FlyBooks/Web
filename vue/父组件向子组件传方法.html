@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>父组件向子组件传值</title>
+<script src="./lib/vue.js"></script>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	list-style: none;
+	margin: 10px;
+}
+
+span {
+	float: right;
+	background-color: grep;
+}
+</style>
+<script type="text/javascript">
+
+	Vue.component("comm1", {
+		template : "#tmp1",
+		data : function() {
+			return {
+				person : '',
+				comment : ''
+			}
+		},
+		methods : function() {
+			postComm()
+			{
+
+			}
+		}
+	});
+
+	window.onload = function() {
+		new Vue({
+			el : "#app",
+			data : {
+				list : [ {
+					id : new Date().getTime(),
+					name : '李白',
+					comments : "天生我材必有用"
+				}, {
+					id : new Date().getTime(),
+					name : '杜甫',
+					comments : "安得广厦千万间"
+				}, {
+					id : new Date().getTime(),
+					name : '无语',
+					comments : "blabla..."
+				} ]
+
+			},
+			methods : {
+
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="tmp1">
+	<div>
+		<div class="form-group">
+			<label>评论人：</label> <input type="text" class="form-control" v-model="person">
+		</div>
+		
+		<div class="form-group">
+			<label>评论内容：</label> <textarea class="form-control" v-model="comment"></textarea>
+		</div>
+
+		<div class="form-group">
+			<input type="button" value="发表评论" class="btn btn-primary" @click="postComm()">
+		</div>
+	</div>
+	</template>
+	<div id="app">
+	<comm1></comm1>
+		<ul>
+			<li v-for="(item,index) in list" :key="index">
+			 {{item.name}} 
+			<span>评论人: {{item.comments}}</span>
+			<hr>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>深度克隆</title>
+<script>
+	/*
+	 * 赋值语句a=b;一定是将b里面保存的值赋值给a, 但是要严格区分b里面到底保存的是什么类型的数据：
+	 1.基本数据类型
+	 2.引用地址
+	 
+	 复制数据:
+		 1. 基本数据类型存放的就是实际的数据，可直接复制
+	 克隆数据： 对象/数组
+	 1. 区别： 浅拷贝/深度拷贝
+	 判断： 拷贝是否产生了新的数据还是拷贝的是的数据的引用
+	 知识点： 对象数据存放的是对象在栈内存的引用， 直接复制的是对象的引用
+	 let obj = {username: 'kobe'};
+	 let obj1 = obj; //obj1复制了obj在栈内存中的引用
+	 2.常用的拷贝技术:
+		 1). arr.concat(): 数组的浅拷贝
+		 2）. arr.slice(): 数组浅拷贝
+		 3）. JSON.parse(JSON.stringify(arr/obj))： 数组或对象深拷贝， 但不能处理函数数据
+		 4）. 浅拷贝包含函数数据的对象/数组
+		 5）. 深拷贝包含函数数据的对象/数组
+	 */
+
+	let fun = function() {
+
+	};
+
+	let fun2 = fun;
+	fun2.xxx = 123;
+
+	console.log(fun.xxx); //123
+
+	console.log('---浅拷贝说明---');
+	let arr = [ 1, 2, 3, 4, 5 ];
+	let arr3 = arr.concat([]);
+	arr3[1] = true;
+	console.log(arr3, arr);
+
+	console.log('---实现深拷贝---'); //克隆的数据不能有引用数据，如果有继续挖掘直到每次拷贝的数据都是基本数据类型
+
+	let yes = function() {
+
+	}
+	let arr9 = [ 1, 2, 3 ];
+	let obj = {
+		name : 'xxx',
+		sex : {
+			option1 : {
+				age : 18
+			},
+			option2 : 'female',
+			option3 : 'secret'
+		}
+	};
+	console.log(obj.toString(), arr9.toString()); //[object Object] 1,2,3
+
+	function getType(target) {
+		return Object.prototype.toString.call(target).slice(8, -1); //Object、Array
+	}
+
+	console.log(getType(arr9));//Array
+	console.log(getType(obj));//Object
+
+	function cloneUtil(target) {
+		let result;
+		if (getType(target) === 'Object') {
+			result = {};
+		} else if (getType(target) === 'Array') {
+			result = [];
+		} else {
+			return target;
+		}
+
+		for ( let key in target) {
+			if (getType(target[key]) === 'Object'
+					|| getType(target[key]) === 'Array') {
+				result[key] = cloneUtil(target[key]);
+			} else {
+				result[key] = target[key];
+			}
+
+		}
+		return result;
+	}
+
+	let obj2 = cloneUtil(obj);
+	obj2.age = 42;
+	obj.sex.option1.age = '99';
+	console.log(obj2, obj);
+</script>
+</head>
+<body>
+
+</body>
+</html>

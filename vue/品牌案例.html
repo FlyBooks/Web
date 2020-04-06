@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>品牌案例</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		new Vue({
+			el : "#brand",
+			data : {
+				list : [ {
+					id : 1,
+					name : '宝马',
+					time : new Date(),
+				}, {
+					id : 2,
+					name : '奔驰',
+					time : new Date(),
+				}, ],
+				id : '',
+				name : '',
+				keyword: ''
+			},
+			methods : {
+				addNewBrand(){
+					this.list.push({id:this.id,name:this.name,time:new Date()});
+					this.id = this.name = '';
+				},
+				del(itemIndex){
+					console.log(itemIndex);
+					this.list.splice(itemIndex,1);
+				},
+				search(keyword){
+					//var newList = [];
+					/*this.list.forEach((item)=>{
+						if(item.name.indexOf(keyword) != -1){
+							newList.push(item);
+						}
+					});*/
+					
+					/*
+					ES6中为字符串提供了一个新的方法叫includes: string.prototype.includes("要包含的字符串")
+					如果包含，返回true, 否则返回false
+					*/
+			       
+					return this.list.filter(item=>{
+						if(item.name.includes(keyword)){
+							return item;
+						}
+						
+					});
+					
+				}
+			}
+		});
+	};
+</script>
+
+</head>
+<body>
+	<div id="brand">
+
+		<div>
+			id: <input type="text" v-model="id"> Name: <input type="text"
+				v-model="name">
+
+			<!-- 在Vue中，使用事件绑定机制可以加括号也可以不加括号，加了括号可以传递参数 
+			@click="addNewBrand" 跟@click="addNewBrand()"在不传递的参数的情况下是一样的
+			-->
+			<input type="button" @click="addNewBrand" value="添加"> <label>
+				搜索： <input type="text" @click="search(keyword)" v-model="keyword">
+			</label>
+		</div>
+
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Ctime</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(item,index) in search(keyword)" :key="index">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.time}}</td>
+					<td><a href="javascript:void(0)" @click="del(index)">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>

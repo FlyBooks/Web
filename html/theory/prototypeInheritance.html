@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>原型继承</title>
+<script>
+	function Animal(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	Animal.prototype.eat = function() {
+
+		console.log('eating', this.name);
+	};
+
+	function Cat(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+
+	Cat.prototype = new Animal(); //子类的原型等于父类的实例
+	Cat.prototype.constructor = Cat; //当使用原型继承的时候，注意校正子类的构造器属性
+	var tom = new Cat('Tom', 3);
+	tom.eat();
+</script>
+</head>
+<body>
+
+</body>
+</html>

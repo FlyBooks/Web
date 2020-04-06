@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>v-resource</title>
+<script src="./lib/vue.js"></script>
+<!--注意： vue-resource依赖于vue.js，所以我们要先导入vue,然后再导入vue-resource  -->
+<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+
+<script type="text/javascript">
+	window.onload = function() {
+		var vm = new Vue({
+			el : "#request",
+			data : {},
+			methods : {
+				getInfo(){
+					this.$http.get("./vue-day01小结.txt").then(function(result){
+						//通过result.body拿到服务器成功后返回的数据
+						console.log('get:',result.body);
+					});
+				},
+				postInfo(){
+					//post 发送数据到后端，需要第三个参数 {emulateJSON:true}
+					this.$http.post('./vue-day01小结.txt',{},{emulateJSON:true}).then((result)=>{
+						console.log('post:',result.body);
+					});
+				},
+				jsonpInfo(){
+					this.$http.jsonp('http://vue.studyit.io/api/jsop').then((result)=>{
+						
+						console.log('jsonp:',result);
+					});
+				}
+			}
+		});
+
+	};
+</script>
+</head>
+<body>
+	<div id="request">
+		<input type="button" @click="getInfo()" value="getRequest"> <input
+			type="button" @click="postInfo()" value="postRequest"> <input
+			type="button" @click="jsonpInfo()" value="jsonpRequest">
+	</div>
+</body>
+</html>

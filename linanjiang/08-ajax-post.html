@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax post</title>
+<script>
+window.onload = function(){
+	var xmlhttp;
+	
+	if (window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.open('POST','./php/08-post-ajax.php',true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send("fname=Bill&lname=Gates");
+	
+	xmlhttp.onreadystatechange = function(){
+		if (xmlhttp.readyState === 4){
+			if (xmlhttp.status>=200 && xmlhttp.status<300 || xmlhttp.status === 304){
+				console.log(xmlhttp.responseText);
+			}
+			else{
+				console.log('error~');
+			}
+		}
+	};
+};
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

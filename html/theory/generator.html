@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>generator</title>
+<script type="text/javascript">
+/*
+ * generator 函数： function* xxx(){}
+ * generator函数遇到yield就停止执行，当调用next之后就会再次执行下面的语句;
+ yield默认的返回值是undefined,可以通过GU.next('xxx')传递返回值
+	 
+ */
+ 
+ function asyncUtil(){
+	 setTimeout(()=>{
+		 console.log('异步认为执行');
+		 GU.next();
+	 },1000);
+	 
+ }
+
+ function* generatorUtil(){
+	 
+	 console.log('函数开始执行');
+	 yield 1; //遇到yield就停止执行了
+	 console.log('函数结束执行');
+ }
+ 
+ let GU = generatorUtil();
+ console.log(GU);
+ GU.next();
+ GU.next();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>promise</title>
+<script>
+let num = 0;
+function util(){
+	let promise = new Promise((resolve,reject)=>{	
+		setTimeout(()=>{
+			num++;
+			console.log(2333);
+			resolve(num);
+		},1000);
+		
+	});
+	
+	return promise;
+}
+	
+	util().
+	then((result)=>{
+		console.log(`执行了${result}次`);
+	if (result){
+		return util(); //这里一定要写return 返回promise实例对象
+	}
+	},(error)=>{console.log(error);})
+	.then((result)=>{console.log(`执行了${result}次`);},
+		  (error)=>{console.log(error);});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

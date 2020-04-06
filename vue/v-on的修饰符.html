@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ES6</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		const vm = new Vue({
+			el:'#app',
+			methods:{
+				buttonClick(){
+					console.log('button clicking');
+				},
+				divClick(){
+					console.log('div clicking');
+				},
+				submit(){
+					console.log('阻止了默认提交行为');
+				},
+				keyUp(){
+					console.log('keyu')
+				}
+			}
+		});
+	};	
+</script>
+</head>
+<body>
+	<div id="app">
+		<div @click="divClick()">
+			aaaaaaaaaa 
+			<input type="button" value='click me' @click.stop="buttonClick()">
+			<input type="text" @keyup.enter="keyUp()">
+			<form action="">
+				<input type="submit" @click.prevent='submit'>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

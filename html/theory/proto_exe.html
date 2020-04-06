@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>prototype练习</title>
+<script>
+	window.onload = function() {
+		function A() {
+
+		}
+		A.prototype.n = 1;
+
+		var b = new A();
+
+		A.prototype = {
+			n : 2,
+			m : 3
+		};
+		var c = new A();
+
+		console.log(b.n + '===' + b.m);
+		console.log(c.n + '===' + c.m);
+
+		var arr = [ 1, 2, 3 ];
+		var arr1 = arr;
+
+		arr1[1] = 566;
+		console.log(arr); //数组是地址传递
+		console.log(arr1);
+
+		var a = {};
+		var obj1 = {
+			n : 2
+		};
+		var obj2 = {
+			m : 3
+		};
+		a[obj1] = 4; //对象中的key一定是字符串
+		a[obj2] = 5;
+		console.log(a[obj1]); // 5
+		console.log(a[obj2]); //5
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

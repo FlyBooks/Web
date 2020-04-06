@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建组件的方式一</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	//1.1使用Vue.extend来创建全局的Vue组件
+	let com1 = Vue.extend({
+		template : '<h3>这是使用Vue.extend创建的组件</h3>'
+	});
+
+	//1.2使用Vue.component('组件的名称'，创建出来的最近模板对象)
+	//使用Vue.component定义全局组件的时候，如果名称使用了驼峰命名法，则在引用组件的时候，需要把大写字母改成'-'加上小写字母
+	/*
+	也可以:
+	Vue.component('myCom1',Vue.extend({
+		template: "<h1>blabla...</h1>"
+	}))
+	 */
+
+	/*
+	1. 创建组件构造器对象, Vue2.0以后就看不到这种写法了，使用语法糖
+	const cpnC = Vue.extend({
+	 template: `<div>
+					<h1>我是标题</h1>
+					<p>我是内容，哈哈哈</p>
+					<p>我是内容，呵呵呵</p>
+				</div>`	 
+	});
+	
+	2. 注册组件
+	Vue.component('组件名称', cpnC);
+	 */
+	Vue.component('myCom1', com1);
+
+	window.onload = function() {
+		let vm = new Vue({
+			el : "#component",
+			data : {},
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="component">
+		<my-com1></my-com1>
+	</div>
+</body>
+</html>

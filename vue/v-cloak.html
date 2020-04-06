@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./lib/vue.js"></script>
+<style>
+[v-cloak] {
+	display: none;
+}
+</style>
+</head>
+<body>
+	<div id="app">
+		<p v-cloak>{{ message }}</p>
+		<p>{{ msg }}</p>
+		<p v-text="message"></p>
+		<div v-html="html"></div>
+		<!-- 默认v-test没有加载闪烁问题 -->
+		<!-- v-test 会覆盖元素中原本的内容，但是插值表达式，只会替换自己的占位符，不会把整个元素的内容清空  -->
+
+		<!-- v-bind是用来提供绑定属性的指令，:(冒号)等同于v-bind: -->
+		<!-- v-on: 事件绑定机制,缩写是@ -->
+		<input type="button" value="按钮" v-bind:title="title" v-on:click="show">
+
+	</div>
+	<script type="text/javascript">
+		var vue = new Vue({
+			el : '#app',
+			data : {
+				message : 'Hello Vue.js!',
+				msg : 'haha',
+				html : '<h1>我是h1</h1>', //v-html可以把html标签语言给解析出来
+				title : 'blabla'
+			},
+			methods : { //定义当前Vue实例所有可用的方法
+				show : function() {
+					alert('hello world');
+				}
+
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>品牌案例</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+
+//document.getElementById('search').focus(); Vue不推荐使用
+//使用 Vue.directive()定义全局的指令： 参数一是指令的名称， 注意在定义指令名称的时候不需要加v-前缀，但是在调用指令的时候必须加上v-前缀
+//参数二： 对象，有一些指令相关的函数
+//跟JS行为相关的放到inserted中，跟样式有关的一般都是放到bind中
+
+Vue.directive('focus',{
+	bind: function(el){//每当指令绑定到元素上的时候，会立即执行这个bind函数，只执行一次
+		//注意： 在每个函数中，第一个参数永远是el,表示被绑定了指令的那个元素，是一个原生的JS对象
+		//el.focus(); //在元素刚绑定了指令的时候，还没有插入到DOM中去，这时候调用focus方法没有作用，因为一个元素只有插入dom之后，才能获取焦点
+	},
+	inserted: function(el){
+		el.focus();
+	},//inserted表示元素插入到DOM中的时候，会执行inserted函数
+	updated: function(){} //当VNode更新的时候，会执行updated,可能会执行多次
+});
+
+Vue.directive('color',{
+	//样式，只要通过指令绑定给了元素，不管这个元素有没有被插入到页面中去，这个元素肯定有了一个内联的样式
+	//将来元素肯定会显示到页面中，这时候浏览器的渲染引擎必然会解析样式，应用给这个元素
+	bind:function(el,binding){
+		//el.style.color = 'red';
+		el.style.color = binding.value;
+		console.log(binding.expression); //'blue'
+		console.log(binding.value); //blue
+	}
+	
+});
+	window.onload = function() {
+
+		
+		Vue.filter('dateFormat',function(date,pattern){
+			var newDate = new Date(date);			
+			var year = newDate.getFullYear();
+			var month = newDate.getMonth()+1;
+			var day = newDate.getDate();
+			if (pattern && pattern.toLowerCase() === 'yyyy-mm-dd'){
+				return `${year}-${month}-${day}`; //return year+'-'+month+'-'+day;
+			}
+			else {
+				var hours = newDate.getHours();
+				var min= newDate.getMinutes();
+				var ss = newDate.getSeconds();
+				return `${year}-${month}-${day}-${hours}-${min}-${ss}`;
+			}
+		});
+		
+		Vue.config.keyCodes.f2 = 113; //自定义全局按键修饰符
+		
+		var vm1=new Vue({
+			el : "#brand",
+			data : {
+				list : [ {
+					id : 1,
+					name : '宝马',
+					time : new Date(),
+				}, {
+					id : 2,
+					name : '奔驰',
+					time : new Date(),
+				}, ],
+				id : '',
+				name : '',
+				keyword: ''
+			},
+			methods : {
+				addNewBrand(){
+					this.list.push({id:this.id,name:this.name,time:new Date()});
+					this.id = this.name = '';
+				},
+				del(itemIndex){
+					console.log(itemIndex);
+					this.list.splice(itemIndex,1);
+				},
+				search(keyword){
+					//var newList = [];
+					/*this.list.forEach((item)=>{
+						if(item.name.indexOf(keyword) != -1){
+							newList.push(item);
+						}
+					});*/
+					
+					/*
+					ES6中为字符串提供了一个新的方法叫includes: string.prototype.includes("要包含的字符串")
+					如果包含，返回true, 否则返回false
+					*/
+			       
+					return this.list.filter(item=>{
+						if(item.name.includes(keyword)){
+							return item;
+						}
+						
+					});
+					
+				}
+			}
+		});
+		
+		var vm2 = new Vue({
+			el: "#app2",
+			data:{
+				date: new Date()
+			},
+			methods:{},
+			filters:{ 
+				//定义私有过滤器，过滤器有两个条件：过滤器名称跟处理函数
+				//过滤器调用的时候，采用的就是就近原则，如果私有过滤器跟全局过滤器名称一致，此时优先调用私有 
+				dateFormat:function(dateStr,pattern=''){
+					var dt = new Date(dateStr);
+					
+					var year = dt.getFullYear();
+					var month = (dt.getMonth()+1).toString().padStart(2,'0');
+					var day = (dt.getDate()).toString().padStart(2,'0');
+					
+					if(pattern.toLowerCase() === 'yyyy-mm-dd'){
+					  return `${year}-${month}-${day}`;
+					}
+					else{
+						var hours = (dt.getHours()).toString().padStart(2,'0');
+						var mins = (dt.getMinutes()).toString().padStart(2,'0');
+						var seconds = (dt.getSeconds()).toString().padStart(2,'0');
+						
+						return `${year}-${month}-${day}-${hours}-${mins}-${seconds}~~~`;
+					}
+					
+				}
+			},
+			directives:{ //定义私有指令
+				'fontweight':{
+					bind: function(el,binding){
+						el.style.fontWeight = binding.value;
+					}
+				}
+			}
+		});
+		
+
+		
+	};
+</script>
+
+</head>
+<body>
+	<div id="brand">
+
+		<div>
+			id: <input type="text" v-model="id"> Name: <input type="text"
+				v-model="name" @keyup.f2="addNewBrand()">
+
+			<!-- 在Vue中，使用事件绑定机制可以加括号也可以不加括号，加了括号可以传递参数 
+			@click="addNewBrand" 跟@click="addNewBrand()"在不传递的参数的情况下是一样的
+			-->
+			<input type="button" @click="addNewBrand" value="添加"> <label>
+				搜索： <input type="text" @click="search(keyword)" v-model="keyword"
+				id="search" v-focus v-color="'blue'">
+			</label>
+		</div>
+
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Ctime</th>
+					<th>Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(item,index) in search(keyword)" :key="index">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.time | dateFormat()}}</td>
+					<td><a href="javascript:void(0)" @click="del(index)">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="app2">
+		<p v-fontweight="900">{{date | dateFormat() }}</p>
+	</div>
+</body>
+</html>

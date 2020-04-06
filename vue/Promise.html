@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slot的基本使用</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+/*
+ * Promise:
+	是异步编程的一种解决方案 
+ 
+	1.什么情况下使用到Promise? 一般情况下是有异步操作的时候
+	2.Promise的三种状态： 
+	  pending: 等待状态
+	  fulfill: 满足状态
+	  reject:  拒绝状态
+ */
+
+
+window.onload = function(){
+
+	//参数是一个函数
+	new Promise((resolve, reject)=>{
+		//第一次网络请求的代码
+		setTimeout(() => {		
+			resolve('helloworld____yes');
+		},1000);
+		
+	}).then( (data)=> {
+		//第一次请求处理的结果
+		for (let i = 0; i< 5; i++){
+			console.log(data+i);	
+		}
+		return new Promise((resolve, reject)=>{
+			//第二次网络请求的代码
+			setTimeout(() => {
+			console.log('step 222222~~');
+				resolve();
+			}, 1000);
+		})
+	}).then( () =>{
+		//第二次请求处理的结果
+		for (let i = 0; i< 5; i++){
+			console.log('step 222222~~  helloworld'+i);	
+			return new Promise((resolve, reject)=>{
+				reject('error here333333');				
+			});
+		}
+	}).then(()=>{
+		console.log('success!!!');
+	}).catch((error)=>{
+		console.log(error);
+	});
+	
+	
+	/*new Promise((resolve, reject) => {
+		setTimeout(()=>{
+			reject('failed, error message!!!');
+		},1000);
+	}).then(()=>{
+		
+	}).catch((err)=>{
+		console.log(err);
+	})*/
+	
+	new Promise((resolve, reject) => {
+		resolve('success6666');
+		reject('2333366666')
+	}).then(data=>{
+		console.log(data);
+	}, err =>{
+		console.log(err);
+	});
+};
+</script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>

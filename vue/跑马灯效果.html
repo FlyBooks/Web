@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>跑马灯效果</title>
+<script src="./lib/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="button" id="run" value="跑马灯" v-on:click="run"> <input
+			type="button" id="stop" value="低调" v-on:click="stop">
+		<h1>{{msg}}</h1>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el : '#app',
+			data : {
+				msg : '跑马灯，浪起来~~~',
+				timer: null
+			},
+			methods : {
+				run(){
+					var _this = this;
+					console.log(this.timer);
+					if (this.timer){
+						return;
+					}
+					this.timer =setInterval(function(){
+						var start = _this.msg.substring(0,1);
+						var end = _this.msg.substring(1);
+						_this.msg = end+start;
+					},300);
+				},
+				stop(){
+					clearInterval(this.timer);
+					this.timer = null;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>function</title>
+<script>
+	/*
+	 * 函数的自调用 === window.函数调用
+	 fun(20); //等价于window.fun(20);
+	 
+	 回调函数： 事件的回调函数， 定时器的回调函数
+	 
+	 构造函数：
+	 function Person(name,age){
+		 this.name = name;
+		 this.age = age;
+	 }
+	 
+	 var person1 = new Person('nobody',22);
+	 
+	 call, apply改变函数中的this指向
+	 */
+
+	var obj = {
+		'item' : 'music'
+	};
+	function show() {
+
+		console.log(this);
+	}
+	show.call(obj);
+	show.apply(obj);
+
+	/*
+	函数自调用  立即执行函数 IIFE
+	
+	特点：
+	1. 只执行一次
+	2. 什么时候执行： 代码执行到函数位置
+	3. 内部的数据是私有的
+
+	this的理解：
+	1.是一个关键字，所以不能指定定义变量
+	2.this本身是一个内置的变量，该变量用于指向一个对象
+	3.this有两种情况： 全局this --> window; 局部（函数）this--> 调用其的对象
+	4.特殊的this: call, apply强制修改this
+	
+	全局变量不要定义name, 因为window对象上本身就有name属性
+	 */
+
+	var A = function() {
+	};
+	A.prototype.n = 1;
+	console.log(A);
+	var b = new A();
+	A.prototype = { //操作对象本身不一样，它会移动对象的指针
+		m : 3,
+		n : 5
+	};
+	var c = new A();
+	console.log(A);
+	console.log(b.n, b.m, c.n, c.m); //1 undefined 5 3
+
+	var F = function() {
+	};
+	Object.prototype.a = function() {
+		console.log('a()');
+	};
+
+	Function.prototype.b = function() {
+		console.log('b()');
+	};
+
+	var f = new F();
+	f.a();
+	//f.b(); F.prototype == 普通对象 == new Object()
+	F.a();//所有的函数都是new Function出来的
+	F.b();
+
+	var i = 1;
+	foo(1);
+	function foo(i) {
+		if (i === 4) {
+			return;
+		}
+		console.log("foo() begin: " + i);
+		foo(i + 1);
+		console.log("foo() end: " + i);
+	}
+	console.log("global end: " + i);
+
+	var c = 1;
+	function c(yes) {
+		console.log(yes);
+	}
+	c(2); //TypeError: c is not a function 原因： 虽然在预解析的时候，会把c给赋值成函数，但是在执行代码的时候var c =1;此时c变成了一个整数，整数是没法调用的
+</script>
+</head>
+<body>
+
+</body>
+</html>

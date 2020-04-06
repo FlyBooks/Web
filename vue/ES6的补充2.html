@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ES6</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	/*
+	 * 编程范式：命令式编程/声明式编程
+	 面向对象编程（第一公民： 对象）/函数式编程（第一公民：函数）
+	 */
+
+	//filter/map/reduce
+	//filter中的回调函数有一个要求就是：必须返回一个boolean值；true的时候函数内部会自动将回调的元素加入到新的数组中；false会过滤掉这次的n
+	const num = [ 10, 20, 111, 222, 444, 40, 50 ];
+
+	let newNums = num.filter(function(num) {
+		return num < 100;
+	});
+	console.log(newNums, 'newNums');
+
+	let newNums2 = num.map(function(n) {
+		return n * 2;
+	});
+	console.log(newNums2, 'newNums2');
+	
+	//reduce对数组所有的内容进行汇总
+	let total = num.reduce(function(preValue, currentValue) {
+		return preValue + currentValue;
+	}, 0);
+
+	console.log(total,'total');
+	
+	window.onload = function() {
+		const vm = new Vue({
+			el : '#app',
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>

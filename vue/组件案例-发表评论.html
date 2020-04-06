@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>父组件向子组件传值</title>
+<script src="./lib/vue.js"></script>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<script type="text/javascript">
+	window.onload = function() {
+		new Vue({
+			el : "#app",
+			data : {
+				msg : '哈哈，hiahia~~~'
+				
+			},
+			methods : {
+				show(data){
+					console.log('我是父组件的show方法=====>'+data.name);
+				}	
+			},
+			components : {
+				subcom1 : {
+					template : '#clickParent',
+					props : [ 'parentmsg' ], //通过v-bind:定义了parentmsg，还要在props中定义一下这样才可以使用， props中的数据都是只读的
+					data(){
+						return {
+							person:{name:'components data function'}
+						};
+					},
+					methods:{
+						myclick(){
+							this.$emit('func',this.person);
+							console.log('we have done~~~');
+						}
+					}
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="clickParent">
+	<div>
+		<input type="button" value="调用父类方法" @click="myclick()">
+	</div>
+	</template>
+	<div id="app">
+		<!-- 可以通过v-bind:(属性绑定的形式)，把父组件的值传递到子组件内部 -->
+		<subcom1 v-bind:parentmsg="msg" @func="show"></subcom1>
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue的样式class</title>
+<script src="./lib/vue.js"></script>
+<style>
+.red {
+	background-color: red;
+}
+
+.thin {
+	font-weight: 100;
+}
+
+.active {
+	letter-spacing: 0.5em;
+}
+</style>
+<script>
+	window.onload = function() {
+		new Vue({
+			el : "#getClass",
+			data : {
+				flag : true
+			},
+			methods : {}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="getClass">
+		<!-- 可以在数组中使用三元表达式 -->
+		<h1 :class="['red','thin',flag?'active':'']">what???</h1>
+		<!-- 也可以使用对象代替三元表达式 -->
+		<p :class="['red',{active:flag}]">carry on and go on</p>
+	</div>
+</body>
+</html>

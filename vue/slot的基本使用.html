@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slot的基本使用</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	new Vue({
+		el:'#app',
+		components:{
+			cmp:{
+				template:"#cmp"
+			}
+		}
+	});
+	
+};
+</script>
+</head>
+<body>
+
+<template id="cmp">
+<div>
+<h1>slot如何使用</h1>
+<p>so easy!</p>
+<slot></slot>
+</div>
+</template>
+
+<div id="app">
+<cmp><p>slot变成了p标签</p><input type="button" value="slot"></cmp>
+<cmp><input type="button" value="slot"></cmp>
+<cmp><span>slot 变成了span</span></cmp>
+</div>
+</body>
+</html>

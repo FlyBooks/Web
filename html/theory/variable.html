@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>变量提升</title>
+<script>
+	window.onload = function() {
+		/*
+		js引擎在JS代码执行之前，会做一些预处理工作
+		1. 找var跟function关键字
+		2. 找到var以后将var后边的变量提前声明但是不赋值
+		3. 找到function以后定义该函数
+		
+		上下文：
+		1.在全局代码执行之前，js引擎会创建一个栈来存储管理所有的执行上下文对象
+		2.在全局执行上下文（window）确定后， 将其添加到栈中（压栈）
+		3.在函数执行上下文创建后，将其添加到栈中（压栈）
+		4.在当前函数执行完成后，将栈顶的对象移除（出栈）
+		5.当所有的代码执行完后，栈中只剩下window
+		
+		打断点：
+		F12->Sources->
+		
+		对象：
+		1.用于保存多个数据
+		2.function, array, object
+		3.对象指的是普通对象（实例对象--》 实例化出来的）
+		
+		
+		函数：
+		1.函数也是对象
+		2.函数可以调用（特殊之处）
+		
+		
+		
+		 */
+		var a = 10;
+		var bar = function(x) {
+			var b = 5;
+			foo(x + b);
+		};
+
+		var foo = function(y) {
+			var c = 5;
+			console.log(a + c + y);
+		};
+		bar(10);
+
+		var num = 1;
+		function fun() {
+			var num = 2;
+			fun2();
+		}
+
+		function fun2() {
+			console.log(num);
+		}
+
+		/*
+		作用域：
+		-全局作用域
+		-局部作用域
+		
+		局部销毁：函数执行完毕
+		全局销毁：关闭浏览器
+		 */
+		fun();//1
+
+		var fn = function() {
+			console.log(fn);
+		};
+
+		fn(); //function
+
+		var obj = {
+			fn2 : function() {
+				console.log(fn2); //改： console.log(obj.fn2);或者 console.log(this.fn2);
+			}
+
+		};
+
+		obj.fn2();//报错
+
+	};
+</script>
+</head>
+<body>
+
+</body>
+</html>

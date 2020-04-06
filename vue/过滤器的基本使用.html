@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>品牌案例</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	//过滤器调用格式： {{name | 过滤器的名称}}
+	//Vue.filter('过滤器的名称'， function(data){ })
+
+	window.onload = function() {
+		//定义了一个全局过滤器mgsFilter
+		Vue.filter('mgsFilter', function(msg1, arg) {
+			console.log(msg1);
+
+			//字符串的replace方法，第一个参数除了可写一个字符串之外，还可以定义一个正则表达式
+			return msg1.replace(/saying/g, arg);
+
+		});
+
+		new Vue({
+			el : "#filterBlock",
+			data : {
+				msg : 'what are you saying? emm, i am saying what i should do.'
+			},
+			methods : {
+
+			}
+		});
+
+	};
+</script>
+
+</head>
+<body>
+	<div id="filterBlock">
+		<p>{{msg | mgsFilter("crazy")}}</p>
+	</div>
+</body>
+</html>

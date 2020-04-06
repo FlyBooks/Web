@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>父组件向子组件传值</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	Vue.component('cmp1', {
+		template : '#tmp',
+		props:{
+			number1: Number, //props是只读，不建议跟v-model直接绑定,所以在进行双向绑定的时候，我们还要通过data处理一下
+			number2: Number
+		},
+		data(){
+			return {
+				dnum1: this.number1,
+				dnum2: this.number2
+			}
+		},
+		watch:{
+			dnum1(newValue){
+				this.dnum2 = newValue*100;
+				this.$emit('getnum1',newValue);
+			},
+			dnum2(newValue){			
+				this.dnum1 = newValue /100;
+				this.$emit('getnum2', newValue);
+			}
+		}
+		});
+
+	window.onload = function() {
+		new Vue({
+			el : "#app",
+			data : {
+				num1 : 0,
+				num2 : 1
+			},
+			methods : {
+				setNum1(number1){
+					this.num1 = parseInt(number1);
+				},
+				setNum2(number2){
+					this.num2 = parseInt(number2);
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="tmp">
+	<div>
+		<p>{{number1}}</p>
+		<input type="text" v-model="dnum1">
+		
+		<p>{{number2}}</p>
+		<input type="text" v-model="dnum2">
+	</div>
+	</template>
+	<div id="app">
+		<cmp1 :number1="num1" :number2="num2" @getnum1="setNum1" @getnum2="setNum2"></cmp1>
+		<p>num1: {{num1}}</p>
+		<p>num2: {{num2}}</p>
+	</div>
+</body>
+</html>

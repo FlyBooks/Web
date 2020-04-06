@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+const cpn = {
+		template : "#tmp1",
+		//props:['marvel','msg']
+		//props也可以写成对象的形式
+		props: {
+			marvel: Array,
+			msg: String
+		}
+};
+
+/*
+ * 	1. props用于父组件向子组件传递数据，还有一种比较常见的是子组件传递数据或事件到父组件中
+ 	2. 什么时候需要自定义事件？
+ 		-当子组件需要向父组件传递数据的时候，就需要用到自定义事件了
+		 -v-on(@)不仅仅可以用于监听DOM事件，也可以用于组件间的自定义事件
+ 	3.自定义事件的流程:
+		 -在子组件中，通过$emit()来触发事件
+	 	-在 父组件中，通过v-on(@)来监听子组件事件
+ */
+	window.onload = function() {
+		const vm = new Vue({
+			el : "#app",
+			data : {
+				msg: 'Movies',
+				movies: ['海贼王','复仇者联盟','蜘蛛侠','钢铁侠']
+				
+			},
+			methods : {
+			
+			},
+			components:{
+				cmp1 :cpn
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<template id="tmp1">
+	<div> <!-- 注意：这里只可以有一个根节点 -->
+		<h1 >{{msg}}</h1>
+		<span v-for="item in marvel"><input type="checkbox">{{item}}</span>
+	</div>
+	</template>
+	
+	<div id="app">
+	  <cmp1 v-bind:marvel="movies" v-bind:msg='msg'></cmp1>
+	</div>
+</body>
+</html>

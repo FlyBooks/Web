@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slot的基本使用</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+/*
+ * Promise:
+	是异步编程的一种解决方案 
+ 
+	1.什么情况下使用到Promise? 一般情况下是有异步操作的时候
+	2.Promise的三种状态： 
+	  pending: 等待状态
+	  fulfill: 满足状态
+	  reject:  拒绝状态
+ */
+
+
+window.onload = function(){
+  new Promise((resolve, reject) => {
+	  setTimeout(() => {
+		  resolve('aaa');
+	  },1000);  
+  }). then(res => {
+	  console.log(res, '第一层的10行代码处理结束！');
+	  return new Promise((resolve, reject) => {
+		  resolve(res+'111');
+	  }); //可以简写成 Promise.resolve(xxx);
+  }).then((res) => {
+	  console.log(res,'第二层的10行代码处理结束！');
+	  return Promise.resolve(res + '222'); //还可以简写成return res+'222';
+  }).then((res) =>{
+	  console.log(res, '第三层的10行代码处理~~~');
+  });
+};
+</script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>

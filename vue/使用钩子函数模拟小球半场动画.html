@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>小球半场运动</title>
+<script src="./lib/vue.js"></script>
+<style type="text/css">
+.box {
+	width: 15px;
+	height: 15px;
+	border-radius: 100%;
+	background-color: red;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		new Vue({
+			el : "#ball",
+			data : { flag: false},
+			methods : {
+				beforeEnter(el){
+					el.style.transform = "translate(0,0)";
+				},
+				enter(el,done){
+					console.log(el.offsetWidth);
+					el.offsetWidth; //magic, 如果不写这句话就会没有动画效果
+					el.style.transform ="translate(150px, 450px)";
+					el.style.transition = 'all 1s ease';
+					done(); //done函数就是afterEnter
+				},
+				afterEnter(el){
+					this.flag = false;
+				}
+			}
+		});
+	};
+</script>
+</head>
+<body>
+	<div id="ball">
+	<input type="button" @click="flag=!flag" value="ball">
+		<transition @before-enter="beforeEnter" @enter="enter"
+			@after-enter="afterEnter" >
+		<div class="box" v-if="flag"></div>
+		</transition>
+	</div>
+</body>
+</html>

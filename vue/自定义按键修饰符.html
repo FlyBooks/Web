@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>自定义按键修饰符</title>
+<script src="./lib/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		var vm = new Vue({
+			el : "#selfModified",
+			data : {},
+			methods : {}
+		});
+
+		function key() {
+			alert(event.keyCode);
+		}
+		document.onkeydown = function() {
+
+			key();
+		};
+
+	};
+</script>
+</head>
+<body>
+	<div id="selfModified"></div>
+</body>
+</html>

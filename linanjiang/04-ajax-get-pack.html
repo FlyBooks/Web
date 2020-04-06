@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax-get</title>
+<script src="./js/myAjax.js"></script>
+<script type="text/javascript">
+	/*
+	 *   什么是Ajax:
+	 在 不重新加载整个页面的情况下，Ajax是与服务器交换数据并更新部分网友的艺术
+	
+	 */
+
+	window.onload = function(ev) {
+		var inputs = document.querySelectorAll("input");
+
+		inputs[2].onclick = function(ev1) {
+
+			ajax_get("./php/04-ajax-get.php", {
+				userName : inputs[0].value,
+				userAge : inputs[1].value
+			}, 3000, function(data) {
+				console.log(data.responseText);
+			}, function() {
+				console.log('failed');
+			});
+		}
+
+	};
+</script>
+</head>
+<body>
+
+	<input type="text" name="userName">
+	<br>
+	<input type="text" name="userAge">
+	<br>
+	<input type="button" value="ajax-get">
+</body>
+</html>

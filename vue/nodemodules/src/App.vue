@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>我是App组件</h1>
-    <p>{{counter}}</p>
+    <p>{{$store.state.counter}}</p>
     <button @click="counter++">+</button>
     <button @click="counter--">-</button>
     

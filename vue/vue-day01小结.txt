@@ -107,3 +107,40 @@ activated(){}和deactivate(){}只有在使用了keep-alive才有效果，否则�
 25. Vuex
 安装vuex的命令: npm install vuex --save
 
+26. Vuex的store状态的唯一更新方式： Mutations
+
+27. Mutations的提交风格： 、
+   特殊风格： this.$store.commit({
+     type: 'increment',
+     count: count
+   });
+
+28. axios请求方式：
+axios(config)
+axios.request(config)
+axios.get(url[,config])
+axios.delete(url[, config]);
+axious.head(url[, config]);
+axious.post(url[, config])
+
+29. axios的安装：
+npm install axios --save
+
+30. axios: get方法参数对应的是params:{xxx: xxx}
+		   post方法参数对应的是data: {xxx: xxx}
+
+31. 新项目
+1. 划分目录结构
+2. 
+
+
+32. vuetify
+vue add vuetify
+
+33. 如何安装NutxJs
+npx create-nuxt-app test-nuxt
+
+
+
+
+

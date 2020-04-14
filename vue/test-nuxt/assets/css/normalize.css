@@ -1,0 +1,11 @@
+html {
+	color: red !important;
+}
+
+.page-enter-active, .page-leave-active {
+	transition: opcity 2s;
+}
+
+.page-enter, .page-leave-active {
+	opacity: 0;
+}

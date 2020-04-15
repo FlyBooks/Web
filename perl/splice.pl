@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use 5.010;
+use feature 'say';
 
 #splice 2个参数 对目标数组进行截取,并返回删除元素
 #param1 数组本身

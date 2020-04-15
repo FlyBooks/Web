@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <title>BScroll</title>
+    <script src="./lib/bscroll.js"></script>
+    <style>
+        .wrapper {
+            height: 150px;
+            background-color: pink;
+            overflow: hidden;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            //默认情况下，BScroll是不可以实时监听滚动的位置
+            //probeTybe的值为0或者1都是不侦测的
+            //2: 在手指滚动的过程侦测， 手指离开后的惯性过程不侦测
+            //3: 只要是滚动都侦测
+            const bscroll = new BScroll(document.querySelector('.wrapper'), {
+                probeType: 2,
+                //click: true,
+                pullUpLoad: true
+            });
+            bscroll.on('scroll', (position) => {
+                //console.log(position);
+            });
+
+            bscroll.on('pullingUp', () => {
+                console.log('上拉加载更多');
+                setTimeout(() => {
+                    bscroll.finishPullUp(); //必须调用finishPullUp函数，才可以进行下一次的上拉加载
+                }, 1000);
+            });
+
+        };
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+        </ul>
+    </div>
+</body>
+
+</html>

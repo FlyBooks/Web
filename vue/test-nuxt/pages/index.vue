@@ -5,7 +5,7 @@
       <li><nuxt-link :to="{name: 'about'}">ABOUT</nuxt-link></li>
       <li><nuxt-link :to="{name: 'news', params:{newsId: 999}}">NEWS</nuxt-link></li>
       <li><nuxt-link :to="{name: 'asyncData'}">asyncDate</nuxt-link></li>
-      <li><nuxt-link :to="{name: 'bread'}">bread</nuxt-link></li>
+      <li><nuxt-link :to="{name: 'vcard'}">vcard</nuxt-link></li>
     </ul>
    </div>
 </template>

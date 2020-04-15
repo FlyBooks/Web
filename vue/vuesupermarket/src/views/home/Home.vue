@@ -3,11 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="middle">购物街</div>
     </nav-bar>
-    <home-swiper :lists="lists"></home-swiper>
-    <recommend-view :recommendedviews="recommends"></recommend-view>
-    <feature-view></feature-view>
-    <tab-control class="tab-control" :titles="['流行','新款','精选']" @gettype="sendType"></tab-control>
-    <goods-list :goods="showTypeData"></goods-list>
+    <scroll class="scroll" ref="backToTop" :probe-num="3" @scroll="backTopToggle" :pull-up-load="true" @pullingup="pullMoreData()">
+      <home-swiper :lists="lists"></home-swiper>
+      <recommend-view :recommendedviews="recommends"></recommend-view>
+      <feature-view></feature-view>
+      <tab-control class="tab-control" :titles="['流行','新款','精选']" @gettype="sendType"></tab-control>
+      <goods-list :goods="showTypeData"></goods-list>
+    </scroll>
+    <back-top @click.native="backClick()" v-show="isShow"></back-top>
   </div>
 </template>
 
@@ -15,8 +18,10 @@
 import { getHomeMultidata, getHomeGoods } from "../../network/home.js";
 
 import NavBar from "../../components/common/navbar/NavBar.vue";
+import Scroll from "../../components/common/scroll/Scroll.vue";
 import TabControl from "../../components/content/tabControl/TabControl.vue";
 import GoodsList from "../../components/content/goods/GoodsList.vue";
+import BackTop from "../../components/content/backTop/BackTop.vue";
 
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import RecommendView from "./childComps/RecommendView.vue";
@@ -30,7 +35,9 @@ export default {
     RecommendView,
     FeatureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -41,7 +48,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      type: "pop"
+      type: "pop",
+      isShow: false
     };
   },
   created() {
@@ -82,6 +90,18 @@ export default {
           this.type = "sell";
           break;
       }
+    },
+    backClick() {
+      //this.$refs.backToTop.bscroll拿到bscroll对象
+      //this.$refs.backToTop.bscroll.scrollTo(0,0,500);
+      this.$refs.backToTop.toScroll(0, 0);
+    },
+    backTopToggle(position) {
+      //console.log(position);
+      this.isShow = position.y < -500;
+    },
+    pullMoreData(){
+      this.getHomeGoods(this.type);
     }
   },
   computed: {
@@ -94,7 +114,9 @@ export default {
 
 <style scoped>
 #home {
-  padding-top: 44px;
+  /*padding-top: 44px;*/
+  height: 100vh;
+  position: relative;
 }
 .home-nav {
   background-color: var(--color-tint);
@@ -107,7 +129,16 @@ export default {
 }
 
 .tab-control {
-  position: sticky;
+  /*position: sticky;*/
   top: 44px;
+}
+
+.scroll {
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
 }
 </style>

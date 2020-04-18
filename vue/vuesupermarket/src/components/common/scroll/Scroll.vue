@@ -39,18 +39,25 @@ export default {
       pullUpLoad: this.pullUpLoad
     });
 
-    this.bscroll.on("scroll", position => {
-      this.$emit("scroll", position);
-    });
+    if (this.probeNum === 2 || this.probeNum === 3) {
+      this.bscroll.on("scroll", position => {
+        this.$emit("scroll", position);
+      });
+    }
 
-    this.bscroll.on("pullingUp", () => {
-      this.$emit("pullingup");
-      this.bscroll.finishPullUp();
-    });
+    if (this.pullUpLoad) {
+      this.bscroll.on("pullingUp", () => {
+        this.$emit("pullingup");
+        this.bscroll.finishPullUp();
+      });
+    }
   },
   methods: {
     toScroll(x, y, time = 500) {
-      this.bscroll.scrollTo(x, y, time);
+      this.bscroll && this.bscroll.scrollTo(x, y, time);
+    },
+    imgLoadFresh() {
+      this.bscroll && this.bscroll.refresh();
     }
   }
 };

@@ -140,6 +140,17 @@ vue add vuetify
 33. 如何安装NutxJs
 npx create-nuxt-app test-nuxt
 
+34. Better-Scroll是根据scrollHeight属性来决定有多少区域是可以滚动的
+如何监听图片加载完成： 
+   1. 原生的js监听图片是否加载完成：img.onload = function() {}
+   Image onload 方法在图片加载完毕之后立即执行
+   
+   2. Vue中监听图片是否加载完成： @load = "方法", 然后调用scroll.refresh()方法
+
+   3.refresh调用非常频繁，需要防抖、节流
+
+
+
 
 
 

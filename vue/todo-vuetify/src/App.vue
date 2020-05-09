@@ -36,7 +36,9 @@
        <v-btn color="purple">
         <v-icon>mdi-favorite</v-icon>
       </v-btn>
+      <v-btn class="hidden-md-and-down">click me</v-btn>
     </v-app-bar>
+    <v-btn class="hidden-md-and-up">small page</v-btn>
   </v-app>
 </template>
 

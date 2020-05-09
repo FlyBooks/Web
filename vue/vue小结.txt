@@ -109,7 +109,7 @@ activated(){}和deactivate(){}只有在使用了keep-alive才有效果，否则�
 
 26. Vuex的store状态的唯一更新方式： Mutations
 
-27. Mutations的提交风格： 、
+27. Mutations的提交风格：
    特殊风格： this.$store.commit({
      type: 'increment',
      count: count

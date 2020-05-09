@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>slot的基本使用</title>
-<script src="./lib/vue.js"></script>
-<script type="text/javascript">
-	window.onload = function() {
-		new Vue({
-			el : '#app',
-			components : {
-				cmp1 : {
-					template : "#tmp"
-				}
-			}
-		});
 
-	};
-</script>
+<head>
+	<meta charset="UTF-8">
+	<title>slot的基本使用</title>
+	<script src="./lib/vue.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			new Vue({
+				el: '#app',
+				components: {
+					cmp1: {
+						template: "#tmp"
+					}
+				}
+			});
+		};
+	</script>
 </head>
+
 <body>
 	<template id="tmp">
-	<div>
-		<slot name="left">
-		<span>left</span></slot>
-		<slot name="middle">
-		<span>middle</span></slot>
-		<slot name="right">
-		<span>right</span></slot>
-	</div>
+		<div>
+			<slot name="left">
+				<span>left</span></slot>
+			<slot name="middle">
+				<span>middle</span></slot>
+			<slot name="right">
+				<span>right</span></slot>
+		</div>
 	</template>
 	<div id="app">
 		<cmp1>
-		<div slot="left">we are here</div>
+			<div slot="left">we are here</div>
 		</cmp1>
 		<cmp1></cmp1>
 		<cmp1></cmp1>
 		<cmp1></cmp1>
 	</div>
 </body>
+
 </html>

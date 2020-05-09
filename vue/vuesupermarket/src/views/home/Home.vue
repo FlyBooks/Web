@@ -66,7 +66,8 @@ export default {
       type: "pop",
       isShow: false,
       tabOffsetTop: 0,
-      isTabControlFixed: false
+      isTabControlFixed: false,
+      itemImgListener: null
     };
   },
   created() {
@@ -80,10 +81,11 @@ export default {
   },
   mounted() {
     //监听图片加载完成
-    this.$bus.$on("imgloadfinished", () => {
+    this.itemImgListener = () => {
       //this.$refs.backToTop.imgLoadFresh();
       debounce(this.$refs.backToTop.imgLoadFresh, 500)();
-    });
+    };
+    this.$bus.$on("imgloadfinished", this.itemImgListener);
   },
   methods: {
     //网络请求方法
@@ -147,6 +149,12 @@ export default {
   },
   destroyed() {
     console.log("home destroyed");
+  },
+  //keep-alive启动的时候，activated()跟deactivated()函数才可以生效
+  activated() {},
+  deactivated() {
+    //const y = this.$refs.backToTop.bscroll.y;
+    this.$bus.$off("imgloadfinished", this.itemImgListener);
   }
 };
 </script>

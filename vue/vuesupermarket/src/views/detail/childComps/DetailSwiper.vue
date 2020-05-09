@@ -1,13 +1,15 @@
 <template>
-    <swiper class="detail-swiper">
-      <swiper-item v-for="(item, index) in topimages" :key="index">
+  <div >
+    <swiper class="detail-swiper" v-if="topimages.length">
+      <swiper-item v-for="(item, index) in topimages" :key="index" class="item">
         <img :src="item" alt />
       </swiper-item>
     </swiper>
+  </div>
 </template>
 
 <script>
-import { Swiper, SwiperItem } from "../../../components/common/swiper/index.js";
+import { Swiper, SwiperItem } from "../../../components/common/swiper";
 export default {
   name: "DetailSwiper",
   props: {
@@ -26,8 +28,24 @@ export default {
 </script>
 
 <style scoped>
+/* .detail-swiper {
+  height: 300px;
+  overflow: hidden;
+} */
+
+/* .item {
+  text-align: center;
+  height: 300px;
+  width: 100%;
+} */
+
 .detail-swiper{
-    height: 300px;
-    overflow: hidden;
+  height: 300px;
+  overflow: hidden;
 }
+
+
+/* .item img {
+  overflow: hidden;
+} */
 </style>

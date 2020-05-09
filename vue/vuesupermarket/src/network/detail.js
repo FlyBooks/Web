@@ -9,6 +9,12 @@ export function getDetail(iid) {
     });
 }
 
+export function getRecommend(){
+    return request({
+        url: '/recommend'
+    });
+}
+
 export class GoodsInfo {
     constructor(itemInfo, columns, service) {
         this.title = itemInfo.title;
@@ -36,6 +42,13 @@ export class Shop {
 
 }
 
+export class GoodParam {
+    constructor(info, rule){
+      this.image = info.images ? info.images[0] : "";
+      this.infos = info.set;
+      this.sizes = rule.tables;
+    }
+}
 // class Person {
 //     constructor(name, age) {
 //         this.name = name;

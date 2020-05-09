@@ -2,17 +2,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Profile = () => import ('../views/profile/Profile.vue');
-const Category = () => import ('../views/category/Category.vue');
-const Cart = () => import ('../views/cart/Cart.vue');
-const Home = () => import ('../views/home/Home.vue');
+const Profile = () => import('../views/profile/Profile.vue');
+const Category = () => import('../views/category/Category.vue');
+const Cart = () => import('../views/cart/Cart.vue');
+const Home = () => import('../views/home/Home.vue');
+const Detail = () => import('../views/detail/Detail.vue');
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
-  	path: '',
-  	redirect: "/home"
+    path: '',
+    redirect: "/home"
   },
   {
     path: '/home',
@@ -28,14 +29,19 @@ Vue.use(VueRouter)
     component: Cart
   },
   {
-  	path: "/category",
-  	name: "Category",
-  	component: Category
+    path: "/category",
+    name: "Category",
+    component: Category
   },
   {
-  	path: "/profile",
-  	name: "Profile",
-  	component: Profile
+    path: "/profile",
+    name: "Profile",
+    component: Profile
+  },
+  {
+    path: '/detail/:id', //动态路由
+    name: 'Detail',
+    component: Detail
   }
 ]
 

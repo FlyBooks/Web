@@ -109,7 +109,7 @@ activated(){}和deactivate(){}只有在使用了keep-alive才有效果，否则�
 
 26. Vuex的store状态的唯一更新方式： Mutations
 
-27. Mutations的提交风格： 、
+27. Mutations的提交风格：
    特殊风格： this.$store.commit({
      type: 'increment',
      count: count
@@ -139,6 +139,17 @@ vue add vuetify
 
 33. 如何安装NutxJs
 npx create-nuxt-app test-nuxt
+
+34. Better-Scroll是根据scrollHeight属性来决定有多少区域是可以滚动的
+如何监听图片加载完成： 
+   1. 原生的js监听图片是否加载完成：img.onload = function() {}
+   Image onload 方法在图片加载完毕之后立即执行
+   
+   2. Vue中监听图片是否加载完成： @load = "方法", 然后调用scroll.refresh()方法
+
+   3.refresh调用非常频繁，需要防抖、节流
+
+
 
 
 

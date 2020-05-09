@@ -1,0 +1,47 @@
+1.  a 标签
+
+a标签中有一个叫做target的属性，这个属性的作用就是专门用来控制如何跳转的：
+_self: 用于在当前选项卡中跳转， 也就是不新建界面跳转，默认值是_self
+_blank: 用于在新的选项卡中跳转，也就是新建界面跳转
+
+a标签中的title属性：
+用来控制鼠标悬停时显示的提示文字
+
+
+2. base标签
+<base target="_blank"> 
+专门用来统一指定当前网页中所有的超链接（a标签）的打开方式，必须写在head里面
+
+如果既在base中指定了打开方式，又在a标签中指定了打开方式，浏览器会按照a标签中指定的执行
+
+3. 假链接
+点击之后不会跳转的链接就是假链接
+
+加链接格式： 1: #(会自动回到网页的顶部) 2: javascript：（不会返回到顶部）
+<a href="#"></a>
+<a href="javascript:"></a>
+
+
+4.锚点
+<a href="#id">跳转到id标签处</a>
+通过a标签跳转到指定位置，是没有动画过程的，是直接一下子就跳转到指定位置的
+可以跳转到新的界面的指定位置
+<a href="newPage.html#bottom">跳转到新界面的指定位置</a>
+
+5.列表
+分类： 无序列表(unordered list)， 有序列表(ordered list)， 定义列表（definition list）
+<ul>
+  <li></li>
+</ul>
+
+li: 是list item的缩写
+
+定义表格：
+<dl>
+  <dt></dt><dd></dd>
+  <dt></dt><dd></dd>
+</dl>
+dt: definition title的缩写，表示定义列表中的标题
+dd: definition description的缩写，表示标题对应的描述
+dl跟dt/dd是一个整体，他们一般是不会单独出现
+

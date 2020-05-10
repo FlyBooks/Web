@@ -12,7 +12,7 @@
     ></tab-control>
     <scroll
       class="scroll"
-      ref="backToTop"
+      ref="scroll"
       :probe-num="3"
       @scroll="backTopToggle"
       :pull-up-load="true"
@@ -30,7 +30,6 @@
 
 <script>
 import { getHomeMultidata, getHomeGoods } from "../../network/home.js";
-import { debounce } from "../../common/utils.js";
 
 import NavBar from "../../components/common/navbar/NavBar.vue";
 import Scroll from "../../components/common/scroll/Scroll.vue";
@@ -41,6 +40,8 @@ import BackTop from "../../components/content/backTop/BackTop.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import RecommendView from "./childComps/RecommendView.vue";
 import FeatureView from "./childComps/FeatureView.vue";
+
+import { itemListListener } from "../../common/mixin.js";
 
 export default {
   name: "Home",
@@ -66,8 +67,7 @@ export default {
       type: "pop",
       isShow: false,
       tabOffsetTop: 0,
-      isTabControlFixed: false,
-      itemImgListener: null
+      isTabControlFixed: false
     };
   },
   created() {
@@ -79,14 +79,7 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
-  mounted() {
-    //监听图片加载完成
-    this.itemImgListener = () => {
-      //this.$refs.backToTop.imgLoadFresh();
-      debounce(this.$refs.backToTop.imgLoadFresh, 500)();
-    };
-    this.$bus.$on("imgloadfinished", this.itemImgListener);
-  },
+  mixins: [itemListListener],
   methods: {
     //网络请求方法
     getHomeMultidata() {
@@ -124,7 +117,7 @@ export default {
     backClick() {
       //this.$refs.backToTop.bscroll拿到bscroll对象
       //this.$refs.backToTop.bscroll.scrollTo(0,0,500);
-      this.$refs.backToTop.toScroll(0, 0);
+      this.$refs.scroll.toScroll(0, 0);
     },
     backTopToggle(position) {
       //console.log(position);

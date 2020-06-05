@@ -1,21 +1,22 @@
 <template>
   <div id="detail">
-    <detail-nav-bar></detail-nav-bar>
-    <scroll class="scroll" ref="scroll2">
+    <detail-nav-bar @titleclick="titleClick" ref="detailNavBar"></detail-nav-bar>
+    <scroll class="scroll" ref="scroll" :probe-num="3" @scroll="contentScroll">
       <div>
         <detail-swiper :topimages="topImages"></detail-swiper>
         <detail-base-info :goodsinfo="goodsInfo"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
-        <!-- <detail-goods-info :detailinfo="detailInfo" @imgload="freshPic"></detail-goods-info> -->
-        <detail-param-info :paramsinfo="paramInfo"></detail-param-info>
-        <detail-comments :comments="comments"></detail-comments>
+        <detail-goods-info :detailinfo="detailInfo" @imgload="freshPic"></detail-goods-info>
+        <detail-param-info ref="param" :paramsinfo="paramInfo"></detail-param-info>
+        <detail-comments ref="comments" :comments="comments"></detail-comments>
 
-        <!-- <back-top class="back-top" v-show="true" @click.native="backToTop()">
-          <img src="../../assets/img/common/top.png" />
-        </back-top> -->
-        <recommend-view :goods="recommends"></recommend-view>
+        <recommend-view :goods="recommends" ref="recommends"></recommend-view>
       </div>
     </scroll>
+    <back-top class="back-top" v-show="isShow" @click.native="backToTop()">
+      <img src="../../assets/img/common/top.png" />
+    </back-top>
+    <detail-bottom-bar @addCart="addToCart()"></detail-bottom-bar>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import DetailShopInfo from "./childComps/DetailShopInfo.vue";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue";
 import DetailParamInfo from "./childComps/DetailParamInfo.vue";
 import DetailComments from "./childComps/DetailComments.vue";
+import DetailBottomBar from "./childComps/DetailBottomBar.vue";
 
 import {
   getDetail,
@@ -35,6 +37,8 @@ import {
   Shop,
   GoodParam
 } from "../../network/detail.js";
+
+import { itemListListener, listenBackToTop } from "../../common/mixin.js";
 
 import Scroll from "../../components/common/scroll/Scroll.vue";
 import BackTop from "../../components/content/backTop/BackTop.vue";
@@ -51,6 +55,7 @@ export default {
     DetailGoodsInfo,
     DetailParamInfo,
     DetailComments,
+    DetailBottomBar,
     RecommendView,
     Scroll,
     BackTop
@@ -83,6 +88,24 @@ export default {
       if (res.result.rate.cRate) {
         this.comments = res.result.rate.list[0];
       }
+
+      //这个也可以在updated()函数里面写，获取每个主题的高度
+      //这里的dom是已经渲染出来了，但是图片没有完全渲染出来
+      // this.$nextTick(() => {
+      //   this.themeTopYs = [];
+      //   this.themeTopYs.push(0);
+      //   this.themeTopYs.push(-this.$refs.param.$el.offsetTop);
+      //   this.themeTopYs.push(-this.$refs.comments.$el.offsetTop);
+      //   this.themeTopYs.push(-this.$refs.recommends.$el.offsetTop);
+      // });
+      //对getThemeTopYs进行防抖操作
+      this.getThemeTopYs = debounce(() => {
+        this.themeTopYs = [];
+        this.themeTopYs.push(0);
+        this.themeTopYs.push(-this.$refs.param.$el.offsetTop);
+        this.themeTopYs.push(-this.$refs.comments.$el.offsetTop);
+        this.themeTopYs.push(-this.$refs.recommends.$el.offsetTop);
+      }, 100);
     });
 
     //获取推荐的数据
@@ -100,27 +123,75 @@ export default {
       paramInfo: {},
       comments: {},
       recommends: [],
-      detailImgFresh: null
+      themeTopYs: [],
+      getThemeTopYs: null
     };
   },
   methods: {
     freshPic() {
-      this.$refs.scroll2.bscroll.refresh();
+      this.$refs.scroll.bscroll.refresh();
+      this.getThemeTopYs();
     },
-    backToTop() {
-      this.$refs.scroll2.toScroll(0, 0);
+    titleClick(index) {
+      this.$refs.scroll.bscroll.scrollTo(0, this.themeTopYs[index], 100);
+    },
+    contentScroll(position) {
+      if (
+        this.$refs.detailNavBar.currentIndex !== 0 &&
+        position.y > this.themeTopYs[1]
+      ) {
+        this.$refs.detailNavBar.currentIndex = 0;
+      } else if (
+        this.$refs.detailNavBar.currentIndex !== 1 &&
+        position.y < this.themeTopYs[1] &&
+        position.y > this.themeTopYs[2]
+      ) {
+        this.$refs.detailNavBar.currentIndex = 1;
+      } else if (
+        this.$refs.detailNavBar.currentIndex !== 2 &&
+        position.y < this.themeTopYs[2] &&
+        position.y > this.themeTopYs[3]
+      ) {
+        this.$refs.detailNavBar.currentIndex = 2;
+      } else if (
+        this.$refs.detailNavBar.currentIndex !== 3 &&
+        position.y < this.themeTopYs[3]
+      ) {
+        this.$refs.detailNavBar.currentIndex = 3;
+      }
+
+      if (!this.isShow && position.y < -500) {
+        this.isShow = true;
+      }
+
+      if (this.isShow && position.y > -500) {
+        this.isShow = false;
+      }
+    },
+    addToCart() {
+      const productInfo = {};
+      productInfo.image = this.topImages[0];
+      productInfo.title = this.goodsInfo.title;
+      productInfo.desc = this.goodsInfo.desc;
+      productInfo.price = this.goodsInfo.nowPrice;
+      productInfo.id = this.id;
+      productInfo.num = 1;
+      productInfo.checked = true;
+
+      this.$store.dispatch('addCartInfo',productInfo)
     }
   },
-  mounted() {
-    let newFresh = debounce(this.$refs.scroll2.imgLoadFresh, 100);
-    this.detailImgFresh = () => {
-      newFresh();
-    };
-    this.$bus.$on("imgloadfinished", this.detailImgFresh);
-  },
+  mixins: [itemListListener, listenBackToTop],
   destroyed() {
-    this.$bus.$off("imgloadfinished", this.detailImgFresh);
+    this.$bus.$off("imgloadfinished", this.itemImgListener);
   }
+  // updated(){
+  //   this.themeTopYs = [];
+  //   this.themeTopYs.push(0);
+  //   this.themeTopYs.push(-this.$refs.param.$el.offsetTop);
+  //   this.themeTopYs.push(-this.$refs.comments.$el.offsetTop);
+  //   this.themeTopYs.push(-this.$refs.recommends.$el.offsetTop);
+  // }
 };
 </script>
 
@@ -132,21 +203,22 @@ export default {
   background-color: #fff;
 }
 
-.scroll2 {
-  height: calc(100% - 44px);
-  position: absolute;
+.scroll {
+  height: calc(100% - 44px - 49px);
+  position: relative;
   background-color: #fff;
   overflow: hidden;
 }
 
-.scroll {
-  position: absolute;
+.scroll2 {
+  position: relative;
   top: 44px;
   /* bottom: 49px; */
   left: 0;
   right: 0;
   overflow: hidden;
   background-color: #fff;
+  bottom: 49px;
 }
 
 .back-top {

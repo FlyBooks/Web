@@ -1,34 +1,42 @@
 <template>
-<div>
-<nav-bar><div slot="left">YES</div></nav-bar>
-<h1>我是购物车</h1>
-<p>store: {{$store.state.counter}}</p>
-<p>counter power: {{$store.getters.powerCounter}}</p>
-<p>{{more20Stu}}</p>
-<p>getter: {{$store.getters.stuMore20}}</p>
-<p>len: {{$store.getters.stuMore20Len}}</p>
-<p>DIY AGE: {{$store.getters.stuFilterByUser(16)}}</p>
-<p>store: {{$store.state.a.www}}</p>
-</div>
+  <div class="cart">
+    <!-- 导航 -->
+    <nav-bar class="nav-bar">
+      <div slot="middle">购物车({{cartLength}})</div>
+    </nav-bar>
+    <!-- 商品列表 -->
+    <cart-list></cart-list>
+    <!-- 底部的汇总 -->
+    <cart-bottom-bar></cart-bottom-bar>
+  </div>
 </template>
 
 <script>
-import NavBar from '../../components/common/navbar/NavBar.vue';
+import NavBar from "../../components/common/navbar/NavBar.vue";
+import CartList from "./childComps/CartList.vue";
+import CartBottomBar from "./childComps/CartBottomBar.vue";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Cart",
   components: {
-  NavBar
+    NavBar,
+    CartList,
+    CartBottomBar
   },
-  computed:{
-    more20Stu(){
-      let stus = this.$store.state.students;
-      return stus.filter((stu)=>{
-        return stu.age > 19;
-      });
-    }
+  computed: {
+    ...mapGetters(["cartLength", "cartLength"])
   }
-}
+};
 </script>
 
 <style scoped>
+.nav-bar {
+  background-color: var(--color-tint);
+  color: white;
+}
+.cart {
+  /* 这里必须有高度，然后子组件CartList才可以使用Scroll */
+  height: 100vh;
+}
 </style>

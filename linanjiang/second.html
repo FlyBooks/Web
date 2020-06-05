@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* p:first-child {
+            color: red;
+        } */
+        /* p:first-of-type{
+            color: pink;
+        } */
+        /* p:last-child{
+            color:green;
+        } */
+        /* p:last-of-type{
+            color:greenyellow;
+        } */
+        /* p:nth-child(3){
+            color:red;
+        } */
+        /* p:nth-last-child(2) {
+            color: yellowgreen;
+        } */
+        /* p:nth-last-of-type(2) {
+            color: red;
+        } */
+
+        /* p:only-child {
+            color: purple;
+        } */
+        /* p:only-of-type{
+            color: orange;
+        } */
+        /* p:nth-child(odd) {
+            color: blueviolet;
+        } */
+        /* p:nth-of-type(2n+1){
+            color: burlywood;
+        } */
+        p[id] {
+            color: blueviolet;
+            text-decoration: underline;
+        }
+
+        p[class] {
+            color: red;
+        }
+
+        img[alt^=abc] {
+            color: green;
+        }
+
+        img[alt*=aaa] {
+            color: brown;
+        }
+
+        .col2 {
+            color: purple;
+        }
+
+        /* #col1 {
+            color: cyan;
+        } */
+        .dark1 {
+            accent: #FF8888;
+            error: #FF5555;
+            info: #91C8F6;
+            primary: #7FC6C6;
+            secondary: #D3D7D9;
+            success: #ABE2AB;
+            warning: #FABD64;
+        }
+
+        .light1 {
+            accent: #82B1FF;
+            error: #FF5252;
+            info: #2196F3;
+            primary: #1976D2;
+            secondary: #424242;
+            success: #4CAF50;
+            warning: #FB8C00;
+        }
+    </style>
+</head>
+
+<body>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p id="ww">我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <h3>我是标题</h3>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p class="red">我是项目</p>
+    <p>我是项目</p>
+    <p id="ww2">我是项目</p>
+    <h3>我是标题</h3>
+    <p class="red">我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <p>我是项目</p>
+    <img src="" alt="abc-www">
+    <img src="" alt="abc www">
+    <img src="" alt="abcwwww">
+    <img src="" alt="wwwaa">
+    <img src="" alt="wwwbb">
+    <img src="" alt="aaa">
+    <img src="" alt="aaaggg">
+    <img src="" alt="nnnnaaa">
+    <img src="" alt="cccaaa">
+    <img src="" alt="ddddaaa">
+    <img src="" alt="fffaaa">
+    <img src="" alt="bbb">
+    <img src="" alt="ccc">
+
+    <p class="col2" id="col1">层叠性</p>
+</body>
+
+</html>

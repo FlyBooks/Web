@@ -12,6 +12,31 @@
         <span>Sign Out</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
+
+      <div class="text-center">
+    <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Dropdown
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+         
+          router
+          :to="item.path"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  </div>
     </v-toolbar>
 
     <v-navigation-drawer v-model="drawer" app class="success">
@@ -56,8 +81,19 @@ export default {
         { icon: "mdi-brush", text: "Projects", route: "/projects" },
         { icon: "mdi-headset", text: "Team", route: "/team" },
         { icon: "mdi-mouse", text: "Pagination", route: "/pagination" }
+      ],
+      items:[
+        {title:'Dashboard', path:'/dashboard'},
+        {title:'Projects', path:'/projects'},
+        {title:'Team', path:'/team'},
+        {title:'Pagination', path:'/pagination'}
       ]
     };
+  },
+  methods:{
+    jumpPage(item){
+      this.$router.push(item.path);
+    }
   }
 };
 </script>

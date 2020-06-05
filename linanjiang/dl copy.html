@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* .p1 {
+            color: red;
+            font-size: 50px;
+        }
+
+        .p2 {
+            font-size: 50px;
+            text-decoration: underline;
+        }
+
+        .p3{
+            color: red;
+            text-decoration: underline;
+        } */
+        .mask::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .editor {
+            overflow: hidden;
+            height: 640px;
+            padding: 0 45px;
+            border: 0 none;
+            outline: none;
+        }
+
+        .editor::-webkit-scrollbar {
+            width: 6px;
+            height: 100%;
+        }
+
+        .editor::-webkit-scrollbar-thumb {
+            width: 4px;
+            height: 60px;
+            background-color: #ccc;
+            border-radius: 3px;
+        }
+
+        .editor::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, .5);
+        }
+
+        .colorRed {
+            color: red;
+        }
+
+        .text50 {
+            font-size: 50px;
+        }
+
+        .textStyle {
+            text-decoration: underline;
+        }
+
+        div p {
+            text-decoration: line-through;
+            font-weight: bold;
+        }
+
+        div>p {
+            font-style: italic;
+            color: blueviolet;
+            text-decoration: overline;
+        }
+
+        p.param {
+            color: #ccc;
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        .include1,
+        .include2 {
+            color: indigo;
+            text-decoration: underline;
+            font-size: 30px;
+
+        }
+
+        h1+p {
+            color: green;
+            font-size: 25px;
+        }
+
+        h2~p {
+            color: hotpink;
+            font-size: 25px;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let btn = document.getElementById('sessionAdd');
+            let btn1 = document.getElementById('sessionRemove');
+            btn.onclick = function () {
+                sessionStorage.setItem('token', '123');
+                sessionStorage.setItem('age', 18); //key存在就是修改，不存在就是创建
+                localStorage.setItem('local', 999);
+            };
+
+            btn1.onclick = function () {
+                sessionStorage.removeItem('token');
+            };
+            console.log(sessionStorage.getItem("age"));//getItem就是获取
+        };
+
+    </script>
+
+</head>
+
+<body>
+    <input type="button" id="sessionAdd" value="sessionStorageAdd">
+    <input type="button" id="sessionRemove" value="sessionStorageRemove">
+    <p class="colorRed text50">第一行</p>
+    <p class="text50 textStyle">第二行</p>
+    <p class="colorRed textStyle">第三行</p>
+    <p>我是段落</p>
+    <div>
+        <p>我是段落</p>
+        <p>我是段落</p>
+        <ul>
+            <li>
+                <p>blabla</p>
+                <p>blabla</p>
+                <p>blabla</p>
+            </li>
+            <li>haha</li>
+            <li>haha</li>
+            <li>haha</li>
+            <li>haha</li>
+        </ul>
+    </div>
+    <p>我是段落</p>
+
+    <div>
+        <p>子元素选择器</p>
+        <p>子元素选择器</p>
+        <p>子元素选择器</p>
+        <ul>
+            <li>
+                <p>子元素选择器</p>
+            </li>
+            <li>
+                <p>子元素选择器</p>
+            </li>
+        </ul>
+    </div>
+    <p>子元素选择器</p>
+
+    <p class="param">交集选择器</p>
+    <p class="param">交集选择器</p>
+    <p class="param">交集选择器</p>
+
+    <div class="include1">并集选择器</div>
+    <h1 class="include2">必须用逗号隔开</h1>
+
+    <h1>相邻兄弟选择器</h1>
+    <p>相邻</p>
+    <p>相邻</p>
+    <p>相邻</p>
+    <p>相邻</p>
+
+    <h1>相邻兄弟选择器</h1>
+    <p>相邻</p>
+    <p>相邻</p>
+    <p>相邻</p>
+    <p>相邻</p>
+
+    <h2>通用兄弟选择器</h2>
+    <a href="javascript:">障碍1</a>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+    <p>通用</p>
+</body>
+
+</html>

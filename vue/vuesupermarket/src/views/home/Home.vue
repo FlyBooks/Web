@@ -24,7 +24,7 @@
       <tab-control :titles="['流行','新款','精选']" @gettype="sendType" ref="tabControl2"></tab-control>
       <goods-list :goods="showTypeData"></goods-list>
     </scroll>
-    <back-top @click.native="backClick()" v-show="isShow"></back-top>
+    <back-top @click.native="backToTop()" v-show="isShow"></back-top>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ import HomeSwiper from "./childComps/HomeSwiper.vue";
 import RecommendView from "./childComps/RecommendView.vue";
 import FeatureView from "./childComps/FeatureView.vue";
 
-import { itemListListener } from "../../common/mixin.js";
+import { itemListListener,listenBackToTop } from "../../common/mixin.js";
 
 export default {
   name: "Home",
@@ -114,7 +114,7 @@ export default {
       this.$refs.tabControl1.currentIndex = index;
       this.$refs.tabControl2.currentIndex = index;
     },
-    backClick() {
+    backToTop() {
       //this.$refs.backToTop.bscroll拿到bscroll对象
       //this.$refs.backToTop.bscroll.scrollTo(0,0,500);
       this.$refs.scroll.toScroll(0, 0);

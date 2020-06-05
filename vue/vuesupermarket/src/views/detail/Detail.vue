@@ -13,10 +13,10 @@
         <recommend-view :goods="recommends" ref="recommends"></recommend-view>
       </div>
     </scroll>
-    <back-top class="back-top" v-show="backShow" @click.native="backToTop()">
+    <back-top class="back-top" v-show="isShow" @click.native="backToTop()">
       <img src="../../assets/img/common/top.png" />
     </back-top>
-    <detail-bottom-bar></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addToCart()"></detail-bottom-bar>
   </div>
 </template>
 
@@ -38,7 +38,7 @@ import {
   GoodParam
 } from "../../network/detail.js";
 
-import { itemListListener } from "../../common/mixin.js";
+import { itemListListener, listenBackToTop } from "../../common/mixin.js";
 
 import Scroll from "../../components/common/scroll/Scroll.vue";
 import BackTop from "../../components/content/backTop/BackTop.vue";
@@ -105,7 +105,6 @@ export default {
         this.themeTopYs.push(-this.$refs.param.$el.offsetTop);
         this.themeTopYs.push(-this.$refs.comments.$el.offsetTop);
         this.themeTopYs.push(-this.$refs.recommends.$el.offsetTop);
-        console.log(this.themeTopYs);
       }, 100);
     });
 
@@ -125,8 +124,7 @@ export default {
       comments: {},
       recommends: [],
       themeTopYs: [],
-      getThemeTopYs: null,
-      backShow: false
+      getThemeTopYs: null
     };
   },
   methods: {
@@ -134,13 +132,7 @@ export default {
       this.$refs.scroll.bscroll.refresh();
       this.getThemeTopYs();
     },
-    backToTop() {
-      //console.log(this.$refs.scroll);
-      // this.$refs.scroll.bscroll.scrollTo(0, 0);
-      this.$refs.scroll.toScroll(0, 0);
-    },
     titleClick(index) {
-      console.log(index, "index");
       this.$refs.scroll.bscroll.scrollTo(0, this.themeTopYs[index], 100);
     },
     contentScroll(position) {
@@ -168,16 +160,28 @@ export default {
         this.$refs.detailNavBar.currentIndex = 3;
       }
 
-      if (!this.backShow && position.y < -500) {
-        this.backShow = true;
+      if (!this.isShow && position.y < -500) {
+        this.isShow = true;
       }
 
-      if (this.backShow && position.y > -500) {
-        this.backShow = false;
+      if (this.isShow && position.y > -500) {
+        this.isShow = false;
       }
+    },
+    addToCart() {
+      const productInfo = {};
+      productInfo.image = this.topImages[0];
+      productInfo.title = this.goodsInfo.title;
+      productInfo.desc = this.goodsInfo.desc;
+      productInfo.price = this.goodsInfo.nowPrice;
+      productInfo.id = this.id;
+      productInfo.num = 1;
+      productInfo.checked = true;
+
+      this.$store.dispatch('addCartInfo',productInfo)
     }
   },
-  mixins: [itemListListener],
+  mixins: [itemListListener, listenBackToTop],
   destroyed() {
     this.$bus.$off("imgloadfinished", this.itemImgListener);
   }

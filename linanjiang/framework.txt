@@ -1,0 +1,8 @@
+promise对象不是异步的，只要创建promise对象就会立即执行存放的代码
+
+Promise有以下几种状态：
+pending:初始状态，既不成功也不是失败状态；
+fulfilled(resolved)；意味着操作成功完成
+rejected:意味着操作失败；
+注意点:状态一旦改变就不可以改变了；
+

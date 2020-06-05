@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .bigBox {
+            width: 500px;
+            height: 500px;
+            background-color: red;
+            border: 1px solid black;
+        }
+
+        .smallBox {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin-top: 201px;
+            margin-left: 201px;
+        }
+    </style>
+    <script>
+        function request() {
+          return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                resolve('拿到的数据');
+            },1000);
+          });
+        }
+
+        request().then((res)=>{
+            console.log(res,'1');
+            return request();
+        }).then((res)=>{
+            console.log(res,'2');
+            return request();
+        }).then((res)=>{
+            console.log(res,'3');
+        });
+
+        let promise = new Promise(function(resolve,reject){
+            console.log(2);
+            resolve();
+        });
+
+        promise.then(function(){
+            console.log('成功！');
+        });
+
+        promise.then(function(){
+            console.log('成功2！');
+        });
+        promise.catch(function(){
+            console.log("catch");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="bigBox">
+        <div class="smallBox"></div>
+    </div>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+//安装Vuex插件
 Vue.use(Vuex)
 
 const moduleA = {
@@ -9,47 +10,21 @@ const moduleA = {
   }
 };
 
-export default new Vuex.Store({
-  state: {
-    counter: 11,
-    students: [
-      { id: 110, name: 'Eva', age: 18 },
-      { id: 111, name: 'Selena', age: 19 },
-      { id: 112, name: 'Taylor', age: 17 },
-      { id: 113, name: 'Lauv', age: 20 },
-      { id: 114, name: 'Tim', age: 25 },
-    ]
-  },
-  mutations: {
-    decrement(state) {
+import mutations from './mutations.js';
+import actions from './actions.js';
+import getters from './getters.js';
 
-    }
-  },
-  actions: {
-    aUpdateInfo(context) {
-      setTimeout(() => {
-        context.commit('decrement');
-      }, 1000);
-    }
-  },
-  getters: {
-    powerCounter(state) {
-      return state.counter * state.counter;
-    },
-    stuMore20(state) {
-      return state.students.filter((stu) => {
-        return stu.age > 18;
-      });
-    },
-    stuMore20Len(state, getters) {
-      return getters.stuMore20.length;
-    },
-    stuFilterByUser(state) {
-      return function (age) {
-        return state.students.filter((stu) => stu.age > age);
-      }
-    }
-  },
+const state = {
+  cartList: []
+};
+
+
+//创建Store对象并导出
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters,
   modules: {
     a: moduleA
   }

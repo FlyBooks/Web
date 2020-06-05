@@ -15,3 +15,18 @@ export const itemListListener = {
         this.$bus.$on("imgloadfinished", this.itemImgListener);
     }
 }
+
+export const listenBackToTop = {
+    data() {
+        return {
+            isShow: false
+        }
+    },
+    methods: {
+        backToTop() {
+            //console.log(this.$refs.scroll);
+            // this.$refs.scroll.bscroll.scrollTo(0, 0);
+            this.$refs.scroll.toScroll(0, 0);
+        },
+    }
+}

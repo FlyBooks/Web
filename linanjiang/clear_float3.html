@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            background-color: red;
+            /* margin-bottom: 10px;在外墙法中，这个属性设置了也没有作用 */
+
+        }
+
+        .box2 {
+            background-color: blue;
+            /* margin-top: 10px; */
+        }
+
+        p {
+            float: left;
+        }
+
+        .wall {
+            clear: both;
+            height: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <p>我是文字1</p>
+        <p>我是文字1</p>
+        <p>我是文字1</p>
+    </div>
+    <div class="wall"></div>
+    <div class="box2">
+        <p>我是文字2</p>
+        <p>我是文字2</p>
+        <p>我是文字2</p>
+    </div>
+</body>
+
+</html>

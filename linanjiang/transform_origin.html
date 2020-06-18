@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div.father {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+            position: absolute;
+            transform-origin: 0px 0px;
+            transform: rotate(45deg);
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: cadetblue;
+            position: absolute;
+            transform-origin: 0px 0px;
+            transform: rotate(90deg);
+        }
+
+        .box3 {
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            position: absolute;
+            transform-origin: 0px 0px;
+            transform: rotate(135deg);
+        }
+
+        ul {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+
+        }
+
+        ul li {
+            list-style: none;
+            border: 1px solid black;
+            /* perspective: 500px; */
+        }
+
+        ul li img {
+            width: 200px;
+            height: 200px;
+        }
+
+        li:nth-child(1) img {
+            transform: rotateX(45deg);
+        }
+
+        li:nth-child(2) img {
+            transform: rotateY(45deg);
+        }
+
+        ul li:nth-child(3) img {
+            transform: rotateZ(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
+
+    <ul>
+        <li><img src="../../JS/images/rotateX.jpg" alt=""></li>
+        <li><img src="../../JS/images/rotateY.jpg" alt=""></li>
+        <li><img src="../../JS/images/rotateZ.jpg" alt=""></li>
+    </ul>
+</body>
+
+</html>

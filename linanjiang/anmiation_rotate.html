@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: darkcyan;
+            animation-name: circleRotate;
+            animation-duration: 3s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes circleRotate {
+            0% {
+                transform: rotate(10deg);
+            }
+
+            20% {
+                transform: rotate(30deg);
+            }
+
+            50%{
+                transform: rotate(60deg);
+            }
+            100%{
+                transform: rotate(80deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>我是div</div>
+</body>
+
+</html>

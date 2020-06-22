@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .box1 {
+            background-color: burlywood;
+            width: 100px;
+            height: 100px;
+            animation-name: squared;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            animation-duration: 5s;
+        }
+
+        @keyframes squared {
+            25% {
+                left: 300px;
+                top: 0px;
+            }
+
+            50% {
+                left: 300px;
+                top: 300px;
+            }
+
+            75% {
+                left: 0px;
+                top: 300px;
+            }
+
+            100% {
+                left: 0px;
+                top: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">我是div</div>
+</body>
+
+</html>

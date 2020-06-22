@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            height: 500px;
+            margin-top: 100px;
+            background-color: skyblue;
+            animation: change 5s linear 0s infinite alternate;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            /* background-color: hotpink; */
+        }
+
+        ul li {
+            height: 500px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            list-style: none;
+            width: 300%;
+            /* background-color: indigo; */
+        }
+
+        ul li:nth-child(1) {
+            background: url("../../JS/images/cloud_one.png");
+            animation: move1 30s linear 0s infinite alternate;
+        }
+
+        ul li:nth-child(2) {
+            background: url("../../JS/images/cloud_two.png");
+            animation: move2 30s linear 10s infinite alternate;
+        }
+
+        ul li:nth-child(3) {
+            background: url("../../JS/images/cloud_three.png");
+            animation: move3 30s linear 20s infinite alternate;
+        }
+
+        @keyframes move1 {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -100%;
+            }
+        }
+
+        @keyframes move2 {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -200%
+            }
+        }
+
+        @keyframes move3 {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -300%;
+            }
+        }
+
+        @keyframes change {
+            from {
+                background-color: skyblue;
+            }
+
+            to {
+                background-color: grey;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+
+</html>

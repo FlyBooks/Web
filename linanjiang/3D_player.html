@@ -11,6 +11,7 @@
     body {
       background: url("../../JS/images/jacky/bg.jpg") no-repeat;
       background-size: cover;
+      overflow: hidden;
     }
 
     ul {
@@ -81,6 +82,49 @@
       border: 1px solid lightblue;
       box-sizing: border-box;
     }
+
+    .spread_heart {
+      position: absolute;
+      left: 100px;
+      bottom: 50px;
+      animation: sport1 8s linear 0s infinite;
+    }
+
+    @keyframes sport1 {
+      0% {
+        left: 100;
+        bottom: 50px;
+        opacity: 1;
+      }
+
+      20% {
+        left: 200px;
+        bottom: 150px;
+        opacity: 0.5;
+      }
+      
+      40%{
+        left: 500px;
+        bottom: 350px;
+        opacity: 1;
+      }
+      
+      60%{
+        left: 900px;
+        bottom: 560px;
+        opacity: 0;
+      }
+      80%{
+        left: 1200px;
+        bottom: 300px;
+        opacity: 1;
+      }
+      100%{
+        left: 750px;
+        bottom: 200px;
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -93,6 +137,7 @@
     <li><img src="../images/jacky/5.jpg" alt=""></li>
     <li><img src="../images/jacky/6.jpg" alt=""></li>
   </ul>
+  <img src="../images/jacky/xin.png" alt="" class="spread_heart">
 </body>
 
 </html>

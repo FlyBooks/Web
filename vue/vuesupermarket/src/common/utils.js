@@ -34,4 +34,4 @@ export function format(date, fmt) {
 
 function padLeftZero(str) {
     return ('00' + str).substring(str.length);
-};
+}

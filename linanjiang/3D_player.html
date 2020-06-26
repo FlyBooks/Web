@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: url("../../JS/images/jacky/bg.jpg") no-repeat;
+      background-size: cover;
+    }
+
+    ul {
+      width: 200px;
+      height: 200px;
+      /* background-color: cadetblue; */
+      transform: rotateX(10deg);
+      transform-style: preserve-3d;
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      margin-left: -100px;
+      animation: sport 6s linear 0s infinite;
+    }
+
+    @keyframes sport {
+      from {
+        transform: rotateX(-10deg) rotateY(0deg);
+      }
+
+      to {
+        transform: rotateX(-10deg) rotateY(360deg);
+      }
+    }
+
+    ul li {
+      list-style: none;
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    ul li:nth-child(1) {
+      background-color: cornflowerblue;
+      transform: rotateY(60deg) translateZ(200px);
+    }
+
+    ul li:nth-child(2) {
+      background-color: tomato;
+      transform: rotateY(120deg) translateZ(200px);
+    }
+
+    ul li:nth-child(3) {
+      background-color: yellowgreen;
+      transform: rotateY(180deg) translateZ(200px);
+    }
+
+    ul li:nth-child(4) {
+      background-color: lavender;
+      transform: rotateY(240deg) translateZ(200px);
+    }
+
+    ul li:nth-child(5) {
+      background-color: cornsilk;
+      transform: rotateY(300deg) translateZ(200px);
+    }
+
+    ul li:nth-child(6) {
+      background-color: hotpink;
+      transform: rotateY(360deg) translateZ(200px);
+    }
+
+    ul li img {
+      width: 200px;
+      height: 200px;
+      border: 1px solid lightblue;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><img src="../images/jacky/1.png" alt=""></li>
+    <li><img src="../images/jacky/2.jpg" alt=""></li>
+    <li><img src="../images/jacky/3.jpg" alt=""></li>
+    <li><img src="../images/jacky/4.gif" alt=""></li>
+    <li><img src="../images/jacky/5.jpg" alt=""></li>
+    <li><img src="../images/jacky/6.jpg" alt=""></li>
+  </ul>
+</body>
+
+</html>

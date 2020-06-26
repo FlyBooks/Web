@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    ul {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      animation: sport 5s linear 0s infinite;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    @keyframes sport {
+      from {
+        transform: rotateX(0deg);
+      }
+
+      to {
+        transform: rotateX(360deg);
+      }
+    }
+
+    ul li {
+      width: 200px;
+      height: 200px;
+      list-style: none;
+      position: absolute;
+      left: 0;
+      top: 0;
+      line-height: 200px;
+      text-align: center;
+    }
+
+    ul li img {
+      width: 200px;
+      height: 200px;
+    }
+
+    ul li:nth-child(1) {
+      transform: rotateX(90deg) translateZ(100px) scale(1.5, 1);
+      background-color: palevioletred;
+    }
+
+    ul li:nth-child(2) {
+      transform: rotateX(180deg) translateZ(100px) scale(1.5, 1);
+      background-color: yellowgreen;
+    }
+
+    ul li:nth-child(3) {
+      transform: rotateX(270deg) translateZ(100px) scale(1.5, 1);
+      background-color: burlywood;
+    }
+
+    ul li:nth-child(4) {
+      transform: rotateX(360deg) translateZ(100px) scale(1.5, 1);
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><img src="../../JS/images/banner1.png" alt=""></li>
+    <li><img src="../../JS/images/banner2.jpg" alt=""></li>
+    <li><img src="../../JS/images/banner3.jpg" alt=""></li>
+    <li><img src="../../JS/images/banner4.jpg" alt=""></li>
+  </ul>
+</body>
+
+</html>

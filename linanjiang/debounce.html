@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+
+    </style>
+    <script>
+        window.onload = function () {
+            function debounce(fn, delay = 1000) {
+                let timeout = null;
+                
+                return function () {
+                    let self = this;
+                    let args = arguments;
+                    timeout && clearTimeout(timeout);
+                    timeout = setTimeout(function () {
+                        fn.apply(self,args);
+                    }, delay);
+                };
+            }
+            function fn(event) {
+                console.log(this,event);
+            }
+            // let timeout = null;
+            let oInput = document.querySelector("input");
+            // oInput.oninput = function () {
+            //     timeout && clearTimeout(timeout);
+            //     timeout = setTimeout(function () {
+            //         console.log(oInput.value);
+            //     }, 1000);
+            // }
+            oInput.oninput = debounce(fn, 3000);
+            // console.log(oInput.value);
+        };
+
+    </script>
+</head>
+
+<body>
+    <input type="text">
+</body>
+
+</html>

@@ -1022,6 +1022,21 @@ animation: name duration timing-function delay iteration-count direction fill-mo
 动画模块连写的简写模式：
 animation: 动画名称 动画时长；
 
+55.3D转换模块
+1.什么是2D和3D?
+2D就是一个平面，只有宽度和高度，没有厚度；3D是一个立体，有宽度和高度，还有厚度；默认情况下所有元素都是用2D呈现的
+
+2.如何让某个元素呈3D展现
+和透视一样，想看到某个元素的3D效果，只需要给他的父元素添加一个transform-style属性，然后设置为preserve-3d即可；
+
+transform: scale(1.5,1);只要父元素被拉伸了，那么子元素也会被拉伸；
+
+background-size:cover; 会将背景图片扩展至足够大，以使背景图片完全覆盖背景区域；
+注意点：
+1.动画中如果有和默认样式中同名的属性则会覆盖默认样式中同名的属性；
+2.在编写动画的时候，固定不变的值写在前面，不要变化的值写在后面；
+
+
 
 
 

@@ -1,27 +1,25 @@
 <template>
   <div class="cart-bottom-bar">
     <div class="check-content">
-  <check-button class="check-buttom"></check-button>
-  <span>全选</span>
+      <check-button class="check-buttom"></check-button>
+      <span>全选</span>
     </div>
-    <div>
-      合计：
-    </div>
+    <div>合计：</div>
   </div>
 </template>
 
 <script>
 import CheckButton from "../../../components/content/checkButton/CheckButton.vue";
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "CartBottomBar",
-  components:{
+  components: {
     CheckButton
   },
-  computed(){
-    ...mapGetters(['cartList']),
-    totalPrice(){
+  computed: {
+    ...mapGetters(["cartList"]),
+    totalPrice() {
       return this.cartList;
     }
   }
@@ -29,18 +27,18 @@ export default {
 </script>
 
 <style scoped>
-.cart-bottom-bar{
-    background-color: #eeeeee;
-    height: 40px;
-    line-height: 40px;
+.cart-bottom-bar {
+  background-color: #eeeeee;
+  height: 40px;
+  line-height: 40px;
 }
 
-.check-content{
+.check-content {
   display: flex;
   align-items: center;
 }
 
-.check-buttom{
+.check-buttom {
   margin-left: 5px;
   width: 20px;
   height: 20px;

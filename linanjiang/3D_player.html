@@ -27,6 +27,10 @@
       animation: sport 6s linear 0s infinite;
     }
 
+    ul:hover {
+      animation-play-state: paused;
+    }
+
     @keyframes sport {
       from {
         transform: rotateX(-10deg) rotateY(0deg);
@@ -42,37 +46,40 @@
       width: 200px;
       height: 200px;
       position: absolute;
+      background-color: black;
       left: 0;
       top: 0;
     }
 
+    ul:hover li img{
+      opacity: 0.3;
+    }
+
+    ul li:hover img{
+      opacity: 1;
+    }
+
     ul li:nth-child(1) {
-      background-color: cornflowerblue;
       transform: rotateY(60deg) translateZ(200px);
     }
 
     ul li:nth-child(2) {
-      background-color: tomato;
       transform: rotateY(120deg) translateZ(200px);
     }
 
     ul li:nth-child(3) {
-      background-color: yellowgreen;
       transform: rotateY(180deg) translateZ(200px);
     }
 
     ul li:nth-child(4) {
-      background-color: lavender;
       transform: rotateY(240deg) translateZ(200px);
     }
 
     ul li:nth-child(5) {
-      background-color: cornsilk;
       transform: rotateY(300deg) translateZ(200px);
     }
 
     ul li:nth-child(6) {
-      background-color: hotpink;
       transform: rotateY(360deg) translateZ(200px);
     }
 
@@ -102,24 +109,26 @@
         bottom: 150px;
         opacity: 0.5;
       }
-      
-      40%{
+
+      40% {
         left: 500px;
         bottom: 350px;
         opacity: 1;
       }
-      
-      60%{
+
+      60% {
         left: 900px;
         bottom: 560px;
         opacity: 0;
       }
-      80%{
+
+      80% {
         left: 1200px;
         bottom: 300px;
         opacity: 1;
       }
-      100%{
+
+      100% {
         left: 750px;
         bottom: 200px;
         opacity: 0;

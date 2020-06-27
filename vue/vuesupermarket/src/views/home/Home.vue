@@ -29,7 +29,11 @@
 </template>
 
 <script>
-import { getHomeMultidata, getHomeGoods } from "../../network/home.js";
+import {
+  getHomeMultidata,
+  getHomeGoods,
+  testPost
+} from "../../network/home.js";
 
 import NavBar from "../../components/common/navbar/NavBar.vue";
 import Scroll from "../../components/common/scroll/Scroll.vue";
@@ -41,7 +45,7 @@ import HomeSwiper from "./childComps/HomeSwiper.vue";
 import RecommendView from "./childComps/RecommendView.vue";
 import FeatureView from "./childComps/FeatureView.vue";
 
-import { itemListListener,listenBackToTop } from "../../common/mixin.js";
+import { itemListListener, listenBackToTop } from "../../common/mixin.js";
 
 export default {
   name: "Home",
@@ -78,6 +82,9 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+    // testPost().then(res => {
+    //   console.log(res, "post");
+    // });
   },
   mixins: [itemListListener],
   methods: {

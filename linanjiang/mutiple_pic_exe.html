@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      margin: 0 auto;
+      height: 300px;
+      width: 500px;
+      border: 1px solid black;
+      background-image: url("../images/bg-plane.png"), url("../images/bg-sun.png"),url("../images/bg-clouds.png");
+      background-repeat: no-repeat, no-repeat,no-repeat;
+      background-size: 50px 50px, 50px 50px,cover;
+      background-position: 10px 230px, 350px 130px,0px 0px;
+      animation: move 5s linear 0s infinite;
+    }
+    @keyframes move{
+      from{
+        background-position: 10px 230px, 350px 130px,0px 0px;
+      }
+      to{
+        background-position: 450px -50px, 350px 130px,-600px 0px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

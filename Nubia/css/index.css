@@ -1,0 +1,365 @@
+.top {
+  width: 100%;
+  height: 60px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.top .top_in {
+  width: 1200px;
+  height: 100%;
+  /* background-color: teal; */
+  margin: 0 auto;
+}
+
+.top .top_in .top_in_left {
+  width: 190px;
+  height: 100%;
+  /* background-color: tomato; */
+  float: left;
+}
+
+.top .top_in .top_in_left>h1 {
+  width: 100%;
+  height: 100%;
+}
+
+.top .top_in .top_in_left>h1>a {
+  width: 100%;
+  height: 100%;
+  background: url("../images/nubia-logo.png");
+  display: inline-block;
+}
+
+.top .top_in .top_in_right {
+  float: right;
+  height: 100%;
+  width: 740px;
+  float: right;
+  /* background-color: tomato; */
+}
+
+.top .nav {
+  width: 550px;
+  height: 100%;
+  /* background-color: skyblue; */
+  float: left;
+}
+
+.top .nav>ul {
+  list-style: none;
+}
+
+.top .nav>ul>li {
+  margin-left: 40px;
+  height: 100%;
+  line-height: 60px;
+  font-size: 16px;
+  float: left;
+  color: #fff;
+  font-weight: bold;
+}
+
+.top .login {
+  width: 150px;
+  height: 100%;
+  /* background-color: skyblue; */
+  float: right;
+}
+
+.top .login>ul {
+  list-style: none;
+}
+
+.top .login>ul>li {
+  float: right;
+  margin-left: 10px;
+  color: #cccccc;
+  line-height: 60px;
+}
+
+.top .login>ul>li:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  background: url("../images/nubia-syb-all.png") 0 0;
+  margin-top: 15px;
+}
+
+.top_in_right ul>li:hover {
+  /* background-color: skyblue; */
+  color: red;
+}
+
+.banner {
+  height: 860px;
+  width: 100%;
+  /* background-color: coral; */
+}
+
+.banner .navigation {
+  width: 1200px;
+  height: 121px;
+  position: absolute;
+  left: 50%;
+  margin-left: -600px;
+  z-index: 998;
+  padding-top: 50px;
+  /* box-sizing: border-box; */
+}
+
+.banner .navigation>ul {
+  width: 100%;
+  height: 100%;
+  padding-left: 75px;
+  padding-right: 75px;
+  box-sizing: border-box;
+}
+
+.banner .navigation>ul>li {
+  width: 150px;
+  height: 121px;
+  float: left;
+  text-align: center;
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+
+.banner .navigation>ul>li:hover {
+  border-bottom: 2px solid red;
+}
+
+.banner .navigation>ul>li>a {
+  color: #666666;
+}
+
+.banner .navigation>ul>li img {
+  width: 150px;
+  height: 80px;
+}
+
+.banner .figure {
+  height: 600px;
+  width: 100%;
+  background-color: lavender;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+}
+
+.banner .figure>img {
+  height: 100%;
+  margin: 0 -100%;
+}
+
+.banner .figure>ol {
+  position: absolute;
+  width: 150px;
+  height: 20px;
+  bottom: 30px;
+  left: 50%;
+  /* background-color: lightgreen; */
+}
+
+.banner .figure>ol>li {
+  height: 8px;
+  width: 8px;
+  background-color: lightpink;
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 1s;
+}
+
+.banner .figure>ol>li:hover {
+  border: 1px solid red;
+  background-color: transparent;
+  transform: scale(1.2, 1.2);
+}
+
+.banner .intro {
+  width: 1200px;
+  height: 250px;
+  margin-top: 10px;
+  /* background-color: lightcoral; */
+  margin: 0 auto;
+}
+
+.banner .intro>ul {
+  width: 100%;
+  height: 100%;
+  /* background-color: wheat; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner .intro>ul>li {
+  width: 396px;
+  height: 250px;
+  /* background-color: honeydew; */
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  float: left;
+}
+
+.banner .intro>ul>li>img {
+  height: 100%;
+  margin: 0 -100%;
+}
+
+.banner .intro .video {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -20px;
+  opacity: 0;
+}
+
+.banner .intro .video:hover {
+  opacity: 1;
+}
+
+.banner .intro .video:hover>img {
+  animation: sport 2s linear 0.1s infinite;
+}
+
+@keyframes sport {
+  20% {
+    transform: scale(0.8);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.content {
+  height: 1883px;
+  width: 100%;
+  /* background-color: cornflowerblue; */
+}
+
+.content>dl {
+  width: 1200px;
+  height: 100%;
+  /* background-color: lavenderblush; */
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.content>dl>dt>h1 {
+  margin-top: 40px;
+  font-size: 35px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.content>dl>dt>p {
+  color: #e8340e;
+}
+
+.content>dl .product {
+  width: 1200px;
+  height: 1200px;
+  /* background-color: lightgoldenrodyellow; */
+}
+
+.content>dl .product>ul>li {
+  float: left;
+  overflow: hidden;
+}
+
+.content>dl .product>ul>li:nth-child(1) {
+  width: 1200px;
+  height: 395px;
+  /* background-color: lightgray; */
+  margin-bottom: 10px;
+}
+
+.content>dl .product>ul>li:nth-child(2) {
+  width: 395px;
+  height: 795px;
+  /* background-color: purple; */
+  margin-right: 10px;
+}
+
+.content>dl .product>ul>li:nth-child(3) {
+  width: 795px;
+  height: 390px;
+  /* background-color: darkcyan; */
+}
+
+.content>dl .product>ul>li:nth-child(4) {
+  width: 390px;
+  height: 395px;
+  background-color: goldenrod;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.content>dl .product>ul>li:nth-child(5) {
+  width: 395px;
+  height: 395px;
+  background-color: hotpink;
+  margin-top: 10px;
+}
+
+.content .product>ul>li>img {
+  height: 100%;
+}
+
+.content .product>ul>li>img:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.content .product>ul>li:nth-child(3):hover img {
+  transform: translate(-200px);
+}
+
+.content .accessories>ul {
+  width: 1200px;
+  height: 300px;
+  /* background-color: hotpink; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .accessories>ul>li {
+  width: 295px;
+  height: 300px;
+  /* background-color: lightgreen; */
+  overflow: hidden;
+}
+
+.content .accessories>ul>li>img {
+  width: 100%;
+  transition: all 1s;
+}
+
+.content .accessories>ul>li>img:hover {
+  transform: scale(1.2, 1.2);
+}
+
+.content .accessories>ul>li>p {
+  margin-top: 10px;
+}
+
+.footer {
+  height: 396px;
+  width: 100%;
+  background-color: yellowgreen;
+}

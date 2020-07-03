@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2 class="title"></h2>
+  <button class="btn">change text</button>
+  <!-- 命令式编程：每做一个操作，都是给计算机*(浏览器)一步步指令；-->
+  <script>
+    let message = "hello world";
+    const titleEl = document.getElementsByClassName("title")[0];
+    titleEl.innerHTML = message;
+
+    const btn = document.getElementsByClassName("btn")[0];
+
+    btn.addEventListener("click", e => {
+      message = "hello react";
+      titleEl.innerHTML = message;
+    });
+  </script>
+</body>
+
+</html>

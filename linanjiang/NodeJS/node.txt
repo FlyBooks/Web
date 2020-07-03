@@ -1,0 +1,41 @@
+1.什么是Node.js?
+Node.js是一个基于“Chrome V8引擎"的javascript运行环境
+
+2.什么是V8引擎？
+V8引擎是一款专门解释和执行JS代码的虚拟机，任何程序只要继承了V8引擎都可以执行JS代码
+比如：
+-将V8引擎嵌入浏览器中，那么我们写的js代码就会被浏览器执行
+-将V8引擎嵌入到NodeJS中，那么我们写的js代码就会被NodeJS所执行。
+
+3.什么是运行环境？
+运行环境就是生产环境；
+浏览器是网页的生存环境
+windows是.exe应用程序的生存环境
+Android是.apk应用程序的生存环境
+也就是说运行环境就是特定事物的生存环境
+
+4.总结
+NodeJS不是一门编程语言，NodeJS是一个运行环境；
+
+1.buffer
+1B(Byte字节) = 8 bit(位)
+00000000就是一个字节
+11111111就是一个字节
+10101010也是一个字节
+任意8个0或1组成的都是一个字节；
+1kb = 1024b
+1mb = 1024kb
+1gb = 1024mb
+
+2.什么是Buffer?
+Buffer是nodeJs全局对象上的一个类，是一个专门用于存储数据的类
+NodeJs提供了一个操作计算机底层API,而计算机底层只能识别0和1，所以就提供了一个专门用于存储字节数据的类
+
+如何创建一个Buffer对象
+Buffer.alloc(size[,fill,encoding);
+
+让元素居中的技巧：
+水平居中：left:50%; transform:translateX(-50%);
+垂直居中：right:50%; transform:translateY(-50%);
+
+

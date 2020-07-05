@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类的继承</title>
+  </head>
+  <script>
+    //面向对象的三大特性：封装，继承，多态
+    //继承:1.减少重复的代码 2.是多态的前提
+
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+      running() {
+        console.log("running");
+      }
+    }
+
+    class Student extends Person {
+      constructor(name, age, sno) {
+        super(name, age); //子类中必须初始化父类对象
+        this.sno = sno;
+      }
+    }
+
+    const stu = new Student("Eva", 18, "1245532201");
+    stu.running();
+  </script>
+  <body></body>
+</html>

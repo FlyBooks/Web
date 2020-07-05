@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      class Person {
+        //构造方法
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        //定义方法,跟es5中直接在原型中添加方法一样
+        running() {
+          console.log(this.name, this.age + 2);
+        }
+      }
+      const p = new Person("Eva", 18);
+      console.log(p.name);
+      p.running();
+
+      let func = p.running;
+      // func(); //报错
+      var obj = {
+        name: "kobe",
+        age: 40,
+      };
+
+      func.bind(obj)();
+    </script>
+  </head>
+  <body></body>
+</html>

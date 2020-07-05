@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表渲染</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            names: ["aab", "eif", "what", "haha"],
+            numbers: [11, 45, 67, 89, 110, 55, 66],
+          };
+        }
+
+        render() {
+          const { names, numbers } = this.state;
+          return (
+            <div>
+              <h1>名字列表</h1>
+              <ul>
+                {names.map((item) => {
+                  return <li>{item}</li>;
+                })}
+              </ul>
+              <h1>数字列表(过滤)</h1>
+              <ul>
+                {numbers
+                  .filter((item) => {
+                    return item > 50;
+                  })
+                  .map((item) => {
+                    return <li>{item}</li>;
+                  })
+                  }
+              </ul>
+              <h1>数字列表(截取)</h1>
+              <ul>
+              {
+                numbers.slice(0,4).map((item)=>{
+                  return <li>{item}</li>
+                })
+              }
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

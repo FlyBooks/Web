@@ -38,4 +38,10 @@ Buffer.alloc(size[,fill,encoding);
 水平居中：left:50%; transform:translateX(-50%);
 垂直居中：right:50%; transform:translateY(-50%);
 
+文件读取：
+fs.readFile(path[,options], callback);
+fs.readFileSync(path[,options]);
 
+注意点：
+没有指定第二个参数，默认会将读取到的数据放到Buffer中
+第二个参数指定为utf8, 返回的数据就是字符串

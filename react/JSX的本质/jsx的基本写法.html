@@ -15,24 +15,21 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
       crossorigin
     ></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <script type="text/babel">
-      class App extends React.Component {
-        constructor() {
-          super();
-          this.state = {};
-        }
+    <script>
+      //jsx是React.createElement的语法糖
+      let content = React.createElement("h1", null, "hello world");
+      ReactDOM.render(content, document.getElementById("app"));
 
-        render() {
-          return (
-            <div>
-              <h1></h1>
-            </div>
-          );
-        }
-      }
-      ReactDOM.render(<App />, document.getElementByI("app"));
+      /*
+      为什么要采用虚拟DOM,而不直接修改真实的DOM呢？
+      1.很难跟踪状态的改变：原有的开发模式，我们很难跟踪到状态的改变，不方便我们对应用程序进行调试；
+      2.操作真实的DOM性能较低：传统的开发模式会进行频繁的DOM操作，导致性能非常低；
+
+      虚拟DOM:
+      帮助我们从命令式编程转到了声明式编程模式
+      
+      */
     </script>
   </body>
 </html>

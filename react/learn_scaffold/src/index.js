@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './子传父通信-函数传递.js';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

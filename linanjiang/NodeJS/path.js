@@ -49,9 +49,9 @@ console.log(__filename, "filename");
 let fs = require("fs");
 fs.stat(__filename, function (error, status) {
   console.log(status);
-  if(status.isFile()){
-    console.log("当前路径对应的是一个文件")
-  }else if(state.isDirectory()){
+  if (status.isFile()) {
+    console.log("当前路径对应的是一个文件");
+  } else if (state.isDirectory()) {
     console.log("当前路径对应的是一个文件夹");
   }
 });

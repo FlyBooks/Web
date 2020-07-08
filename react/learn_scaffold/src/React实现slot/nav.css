@@ -1,0 +1,30 @@
+.nav{
+  display: flex;
+}
+
+.nav_left{
+  width: 77px;
+  height: 44px;
+  background-color: antiquewhite;
+  overflow: hidden;
+  text-align: center;
+  line-height: 44px;
+}
+
+.nav_right{
+  width: 77px;
+  height: 44px;
+  text-align: center;
+  line-height: 44px;
+  background-color: lightblue;
+  overflow: hidden;
+}
+
+.nav_middle{
+  flex: 1;
+  background-color: lightgoldenrodyellow;
+  overflow: hidden;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+}

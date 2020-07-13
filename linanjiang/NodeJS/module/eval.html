@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //通过eval执行代码的缺点：存在依赖关系，字符串可以访问外界数据，不够安全
+      let str = "console.log('it666.com')";
+      eval(str);
+      let name = "eva";
+      let str2 = "console.log(name);";
+      eval(str2);
+
+      //new Funtion(str)方法来执行
+      let strFun = "console.log('function str')";
+      let fn = new Function(strFun);
+      console.log(fn())
+    </script>
+  </head>
+  <body></body>
+</html>

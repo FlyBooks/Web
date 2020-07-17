@@ -1,0 +1,13 @@
+ul{
+  list-style: none;
+  width: 80px;
+  height: 20px;
+}
+ul li{
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: brown;
+  text-align: center;
+  text-shadow: 2px 2px yellowgreen;
+}

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 // import App from './内联样式/app.js';
 
 // import App from "./普通css/app";
-import App from "./css_modules/app";
+// import App from "./css_modules/app";
+import App from "./styled-components/app";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>卡拉ok歌词效果</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      div {
+        width: 650px;
+        height: 100px;
+        margin: 100px auto;
+        font-size: 45px;
+        font-weight: bold;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-color: red;
+        background-image: url("../../images/text_bg.jpg");
+        background-repeat: no-repeat;
+        background-position: -770px 0;
+        animation: lyric 5s linear 0s infinite;
+      }
+      @keyframes lyric {
+        from {
+          background-position: -770px 0;
+        }
+        to {
+          background-position: 0px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      受伤的心，就像破碎的玻璃
+    </div>
+  </body>
+</html>

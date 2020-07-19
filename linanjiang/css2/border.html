@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>边框图片</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div{
+        width: 200px;
+        height: 200px;
+        border: 90px solid black;
+        margin: 50px auto;
+        border-image-source: url("../../images//border.jpg");
+        background: pink;
+        border-image-slice: 70 70 70 70;
+        border-image-repeat: repeat;
+        border-image-outset: 10px 30px 50px 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

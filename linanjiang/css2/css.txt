@@ -1,0 +1,21 @@
+border-image-source: url("../../images//border.jpg"); /*告诉浏览器使用这张图片作为边框图片*/
+如果只通过border-image-source指定了哪一张图片作为边框的图片，默认情况下会将图片放到边框的四个顶点；
+边框图片的优先级高于高于边框颜色；
+border-image-slice: 70 70 70 70;/*告诉浏览器如何对指定的边框图片进行切割*/
+border-image-width： 10px; /*告诉浏览器边框图片的显示宽度*/
+border-image-repeat: stretch; /*告诉浏览器除了边框图片四个角以外的图片如何填充，默认是拉伸*/
+border-image-outset: 10px 30px 50px 70px; /*告诉浏览器边框图片需要向外移动多少 上 右 下 左*/
+
+vertical-align: 设置元素的垂直对齐方式，是设置给需要对齐的那个元素本身的；
+vertical-align只对行内元素有效；
+text-align是设置给需要对齐元素的父元素的
+
+/* 默认情况下会从上至下渐变;至少传递2个颜色，至多没有上线；
+默认情况下，系统会自动计算纯色跟渐变色的范围，但是我们也可以自己手动设置 */
+background: linear-gradient(yellow,green);
+ /* background-clip可以背景裁剪为文字的形状，-webkit是一个私用的属性*/
+-webkit-background-clip: text;
+background-clip: text;
+
+径向渐变：默认从中心点向四周扩散
+background:radial-gradient(red,green);

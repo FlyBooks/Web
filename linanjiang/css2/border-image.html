@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>边框图片</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div{
+        width: 200px;
+        height: 200px;
+        border: 90px solid black;
+        margin: 50px auto;
+
+        /* border-image: 资源地址  切割方式 填充模式*/
+        border-image: url("../../images/border.jpg") 70 fill stretch;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>线性渐变练习</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      div {
+        width: 450px;
+        margin: 100px auto;
+        height: 200px;
+        text-align: center;
+        line-height: 200px;
+        border: 1px solid pink;
+        font-size: 100px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.3);
+        /* background-color: skyblue; */
+        /* color: transparent; */
+        /* background-clip可以背景裁剪为文字的形状，-webkit是一个私用的属性*/
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-image: linear-gradient(
+          -45deg,
+          transparent 100px,
+          white 150px,
+          white 180px,
+          transparent 220px
+        );
+        background-position: -250px 0;
+        background-repeat: no-repeat;
+        transition: all 5s;
+      }
+      div:hover {
+        background-position: 250px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      智趣学院
+    </div>
+  </body>
+</html>

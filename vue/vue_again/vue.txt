@@ -1,0 +1,25 @@
+v-on的修饰符：
+.stop 阻止事件冒泡
+.prevent 
+
+组件中的data如果不是通过函数返回的，那么多个组件就会共用一份数据，就会导致数据混乱；
+如果组件中的data是通过函数返回的，那么每创建一个新的组件，都会调用一次这个方法，将这个方法返回的数据和
+当前创建的组件绑定在一起，这样就有效的避免了数据混乱；
+
+<component v-bind:is="home"></component>
+
+vue的生命周期方法：
+1.创建期间的生命周期方法：
+beforeCreate
+created
+beforeMount
+mounted
+2.运行期间的生命周期方法：
+beforeUpdate
+updated
+3.销毁期间的生命周期方法：
+beforeDestroy
+destroyed
+
+
+

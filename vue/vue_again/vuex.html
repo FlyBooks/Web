@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-cloak</title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vuex.js"></script>
+    <script>
+      /*
+      只要祖先组件中保存了vuex对象，那么祖先组件和其所有的后代组件都可以使用vuex中保存的共享数据了
+       */
+
+      const store = new Vuex.Store({
+        state: {
+          msg: "哈哈哈",
+        },
+      });
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          store: store,
+          data: {
+            msg: "hello again",
+          },
+          components: {
+            son: {
+              template: "#son",
+              components: {
+                grandson: {
+                  template: "#grandson",
+                },
+              },
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <template id="son">
+      <div>
+        son
+        <grandson></grandson>
+      </div>
+    </template>
+    <template id="grandson">
+      <div>
+        grandson
+        <div>store: {{this.$store.state.msg}}</div>
+      </div>
+    </template>
+    <div id="app">
+      <son></son>
+    </div>
+  </body>
+</html>

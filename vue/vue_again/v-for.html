@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for</title>
+  <script src="../lib/vue.js"></script>
+  <script>
+    //v-for可以遍历数组，字符串，数字，对象
+
+    window.onload = function(){
+      const vue = new Vue({
+        el:"#app",
+        data:{
+          names:["zhangsan",'lisi','wangwu'],
+          obj:{
+            name:"Eva",
+            age: 18,
+            height: 1.68
+          }
+        }
+      });
+    };
+  </script>
+</head>
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <ul>
+      <li v-for="name in names" :key="name">{{name}}</li>
+    </ul>
+   <p>数字</p>
+   <ul>
+     <li v-for="(value,index) in 6" :key="value">{{value}}---索引{{index}}</li>
+   </ul>
+   <ul>
+     <li v-for="(v,k,indey) in obj">{{v}}--{{k}}--{{indey}}</li>
+   </ul>
+  </div>
+</body>
+</html>

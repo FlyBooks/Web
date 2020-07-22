@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-cloak</title>
+  <script src="../lib/vue.js"></script>
+  <script>
+    /*
+    在使用过滤器的时候，可以在过滤器名称后面加上();如果给过滤器的名称后面加上了(), 那么就可以给过滤器函数传递参数
+    第一个是默认的参数（省略），第二个是你要传递的参数
+    */ 
+
+    window.onload = function(){
+      const vue = new Vue({
+        el:"#app",
+        data:{
+          msg: "hello again"
+        },
+        filters:{
+          dateFormat(date){
+            const newDate = new Date(date);
+            const year = newDate.getFullYear();
+            const month = newDate.getMonth()+1+ "";
+            const day = newDate.getDate()+ "";
+            const hour = newDate.getHours()+ "";
+            const mins = newDate.getMinutes()+ "";
+            const second = newDate.getSeconds()+ "";
+            return `${year}--${month.padStart(2,"0")}--${day.padStart(2,'0')} ${hour.padStart(2,'0')}::${mins.padStart(2,'0')}::${second.padStart(2,'0')}`;
+          }
+        }
+      });
+    };
+  </script>
+</head>
+<body>
+  <div id="app">
+    <p>{{Date.now() |dateFormat }}</p>
+  </div>
+</body>
+</html>

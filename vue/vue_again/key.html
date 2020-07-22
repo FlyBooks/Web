@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-cloak</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+      .v-enter {
+        opacity: 0;
+      }
+      .v-enter-to {
+        opacity: 1;
+      }
+      .v-enter-active {
+        transition: all 3s;
+      }
+      .v-leave {
+        opacity: 1;
+      }
+      .v-leave-to {
+        opacity: 0;
+      }
+      .v-leave-active {
+        transition: all 3s;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            infos: ["lisi", "wangwu", "zhangsan"],
+            newOne: "",
+          },
+          methods: {
+            addNewOne() {
+              this.infos.unshift(this.newOne);
+            },
+            del(index) {
+              this.infos.splice(index, 1);
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="newOne" />
+      <input type="button" value="添加" @click="addNewOne" />
+
+      <transition-group appear tag="ul">
+        <li v-for="(name,index) in infos" :key="name" @click="del(index)">
+          <input type="checkbox" /> {{name}}
+        </li>
+      </transition-group>
+    </div>
+  </body>
+</html>

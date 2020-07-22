@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡动画</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .small {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+      .v-enter {
+        opacity: 0;
+      }
+      .v-enter-to {
+        opacity: 1;
+      }
+      .v-enter-active {
+        transition: all 3s;
+      }
+      .two-enter {
+        opacity: 0;
+        margin-left: 0px;
+      }
+      .two-enter-to {
+        opacity: 1;
+        margin-left: 100px;
+      }
+      .two-enter-active {
+        transition: all 3s;
+      }
+      .v-leave {
+        opacity: 1;
+      }
+      .v-leave-to {
+        opacity: 0;
+      }
+      .v-leave-active {
+        transition: all 3s;
+      }
+    </style>
+    <script>
+      /*
+      如何给Vue控制的元素添加动画：
+      1.需要将执行动画的元素放到transition组件里面
+      2.transition组件中的元素显示的时候会自动查找.v-enter,.v-enter-to,.v-enter-active这些类名；
+      离开的时候会自动查找.v-leave,.v-leave-to,.v-leave-active这些类名；
+      3.我们需要在.v-enter,.v-enter-to(离开的时候：.v-leave,.v-leave-to)中指定动画开始的状态
+      在.v-enter-active和.v-leave-active中指定动画执行的状态；
+       */
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+            isShow: true,
+          },
+          methods: {
+            toggle() {
+              this.isShow = !this.isShow;
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="button" @click="toggle()" />
+      <transition appear><div v-show="isShow" class="small"></div></transition>
+      <transition appear name="two"><div v-show="isShow" class="small"></div></transition>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-cloak</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+      .size {
+        font-size: 40px;
+        font-weight: bold;
+        text-shadow: 1px 1px tomato;
+      }
+    </style>
+    <script>
+      // v-bind是给“任意标签”的“任意属性”绑定数据的
+      // 如果想让v-bind去style中查找类名，那么必须把类名放到数组中，
+      // 同时还需要利用引号将类名括起来才会去style中查找
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p :class="['size']">{{msg}}</p>
+    <p :style="{color: 'blue'}">测试</p>
+    </div>
+  </body>
+</html>

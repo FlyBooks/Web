@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      // 函数：每次调用都会执行
+      // 计算属性：只要返回的结果没有发生变化，那么计算属性只会被执行一次
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+            msg2: "abcdef",
+          },
+          computed: {
+            messageReverse() {
+              console.log("计算属性");
+              return this.msg.split("").reverse().join("");
+            },
+          },
+          methods: {
+            msgReverse() {
+              console.log("方法~~");
+              return this.msg2.split("").reverse().join("");
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{messageReverse}}</p>
+      <p>{{messageReverse}}</p>
+      <p>{{messageReverse}}</p>
+      <p>{{messageReverse}}</p>
+      <p>{{messageReverse}}</p>
+      <p>函数：{{msgReverse()}}</p>
+      <p>函数：{{msgReverse()}}</p>
+      <p>函数：{{msgReverse()}}</p>
+      <p>函数：{{msgReverse()}}</p>
+    </div>
+  </body>
+</html>

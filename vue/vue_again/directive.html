@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>directive</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      //
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+          },
+          directives: {
+            color: {
+              bind: function (el, fontColor) {
+                console.log(el, fontColor);
+                el.style.color = "red";
+              },
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{msg}}</p>
+      <p v-color="'red','blue'">hhhhh</p>
+    </div>
+  </body>
+</html>

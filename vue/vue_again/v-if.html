@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      // v-if:条件渲染，如果v-if取值是true就渲染该元素，如果是false就不渲染
+      //v-if特点：如果条件不满足根本不会创建这个元素
+      // v-if注意点:v-if可以从数据模型中获取数据，也可以直接赋值一个表达式
+      // v-if跟v-else之间不能有其他元素插入
+
+      //v-
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+            isShow: false,
+            score: 60,
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p v-if="isShow">我是true</p>
+      <p v-else>我是false</p>
+      <hr />
+      <p v-if="score > 90">优秀</p>
+      <p v-else-if="score >80">良好</p>
+      <p v-else>差</p>
+    </div>
+  </body>
+</html>

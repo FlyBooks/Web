@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-cloak</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      /*
+       */
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+            subCmp: "son1",
+          },
+          components: {
+            son1: {
+              template: "#son1",
+            },
+            son2: {
+              template: "#son2",
+            },
+          },
+          methods: {
+            changeCmp() {
+              this.subCmp = this.subCmp === "son1" ? "son2" : "son1";
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="changeComponent" @click="changeCmp()" />
+      <keep-alive>
+        <component :is="subCmp"></component>
+      </keep-alive>
+    </div>
+
+    <template id="son1">
+      <div><input type="checkbox" /> xixi</div>
+    </template>
+
+    <template id="son2">
+      <div>
+        new page2
+        <p>should show???</p>
+      </div>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-text and v-html</title>
+  <script src="../lib/vue.js"></script>
+  <script>
+    // v-text就相当于过去学习的innerText
+    // v-html就相当于过去学习的innerHTML
+
+    window.onload = function(){
+      const vue = new Vue({
+        el:"#app",
+        data:{
+          msg: "hello again",
+          name:"<span>我是小明</span>"
+        }
+      });
+    };
+  </script>
+</head>
+<body>
+  <div id="app">
+    <p v-text="name">------{{msg}}-----</p>
+    <p v-text="msg">------****-----</p>
+    <hr/>
+    <div v-html="name">blablab</div>
+    <div v-html="msg">xixx</div>
+  </div>
+</body>
+</html>

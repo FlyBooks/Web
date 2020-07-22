@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-cloak</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      /*作用域插槽的应用场景： 子组件提供数据，父组件决定如何渲染；
+      匿名插槽的名称是default;
+       */
+
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            msg: "hello again",
+          },
+          components: {
+            cmp1: {
+              template: "#son1",
+              data() {
+                return {
+                  names: ["hahh", "what"],
+                };
+              },
+            },
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <template id="son1">
+      <div>
+        <p>我是子组件头部</p>
+        <slot name="one"></slot>
+        <slot name="two" :names="names"></slot>
+        <p>我是子组件尾部</p>
+      </div>
+    </template>
+    <div id="app">
+      <p>{{msg}}</p>
+      <cmp1>
+        <div slot="one">hahahh~~~</div>
+        <template v-slot:two="slotProps">
+          使用v-slot指令{{slotProps.names}}
+        </template>
+      </cmp1>
+    </div>
+  </body>
+</html>

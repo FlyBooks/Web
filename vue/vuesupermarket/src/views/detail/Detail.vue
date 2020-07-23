@@ -17,6 +17,7 @@
       <img src="../../assets/img/common/top.png" />
     </back-top>
     <detail-bottom-bar @addCart="addToCart()"></detail-bottom-bar>
+    <!-- <toast msg="hhhhhhhhhhhhhhhhh"/> -->
   </div>
 </template>
 
@@ -43,6 +44,7 @@ import { itemListListener, listenBackToTop } from "../../common/mixin.js";
 import Scroll from "../../components/common/scroll/Scroll.vue";
 import BackTop from "../../components/content/backTop/BackTop.vue";
 import RecommendView from "../../components/content/goods/GoodsList";
+// import Toast from "../../components/common/toast/Toast.vue";
 import { debounce } from "../../common/utils.js";
 
 export default {
@@ -57,6 +59,7 @@ export default {
     DetailComments,
     DetailBottomBar,
     RecommendView,
+    // Toast,
     Scroll,
     BackTop
   },
@@ -178,7 +181,10 @@ export default {
       productInfo.num = 1;
       productInfo.checked = true;
 
-      this.$store.dispatch('addCartInfo',productInfo)
+      this.$store.dispatch('addCartInfo',productInfo).then((res)=>{
+        // console.log(res,'catch')
+        this.$toast.show(res,3000);
+      });
     }
   },
   mixins: [itemListListener, listenBackToTop],

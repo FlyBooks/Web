@@ -1,13 +1,22 @@
 <template>
   <div id="detail">
-    <detail-nav-bar @titleclick="titleClick" ref="detailNavBar"></detail-nav-bar>
+    <detail-nav-bar
+      @titleclick="titleClick"
+      ref="detailNavBar"
+    ></detail-nav-bar>
     <scroll class="scroll" ref="scroll" :probe-num="3" @scroll="contentScroll">
       <div>
         <detail-swiper :topimages="topImages"></detail-swiper>
         <detail-base-info :goodsinfo="goodsInfo"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
-        <detail-goods-info :detailinfo="detailInfo" @imgload="freshPic"></detail-goods-info>
-        <detail-param-info ref="param" :paramsinfo="paramInfo"></detail-param-info>
+        <detail-goods-info
+          :detailinfo="detailInfo"
+          @imgload="freshPic"
+        ></detail-goods-info>
+        <detail-param-info
+          ref="param"
+          :paramsinfo="paramInfo"
+        ></detail-param-info>
         <detail-comments ref="comments" :comments="comments"></detail-comments>
 
         <recommend-view :goods="recommends" ref="recommends"></recommend-view>
@@ -36,7 +45,7 @@ import {
   getRecommend,
   GoodsInfo,
   Shop,
-  GoodParam
+  GoodParam,
 } from "../../network/detail.js";
 
 import { itemListListener, listenBackToTop } from "../../common/mixin.js";
@@ -61,12 +70,12 @@ export default {
     RecommendView,
     // Toast,
     Scroll,
-    BackTop
+    BackTop,
   },
   created() {
     //created钩子函数一般主要是用来初始化数据的
     this.id = this.$route.params.id;
-    getDetail(this.id).then(res => {
+    getDetail(this.id).then((res) => {
       //轮播图信息数据
       this.topImages = res.result.itemInfo.topImages;
       //这里返回的是类，所以一定要new
@@ -112,7 +121,7 @@ export default {
     });
 
     //获取推荐的数据
-    getRecommend().then(res => {
+    getRecommend().then((res) => {
       this.recommends = res.data.list;
     });
   },
@@ -127,7 +136,7 @@ export default {
       comments: {},
       recommends: [],
       themeTopYs: [],
-      getThemeTopYs: null
+      getThemeTopYs: null,
     };
   },
   methods: {
@@ -181,16 +190,16 @@ export default {
       productInfo.num = 1;
       productInfo.checked = true;
 
-      this.$store.dispatch('addCartInfo',productInfo).then((res)=>{
+      this.$store.dispatch("addCartInfo", productInfo).then((res) => {
         // console.log(res,'catch')
-        this.$toast.show(res,3000);
+        this.$toast.show(res, 3000);
       });
-    }
+    },
   },
   mixins: [itemListListener, listenBackToTop],
   destroyed() {
     this.$bus.$off("imgloadfinished", this.itemImgListener);
-  }
+  },
   // updated(){
   //   this.themeTopYs = [];
   //   this.themeTopYs.push(0);
@@ -201,7 +210,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 #detail {
   height: 100vh;
   position: relative;

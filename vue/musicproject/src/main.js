@@ -1,12 +1,21 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import loading from "./plugins/loading";
+import fastclick from "fastclick";
+import "./assets/css/base.scss";
 
-Vue.config.productionTip = false
+fastclick.attach(document.body); //fastclick解决移动端100~300毫秒的点击事件延迟问题
+
+Vue.config.productionTip = false;
+Vue.use(ElementUI);
+Vue.use(loading);
 
 new Vue({
   router,
   store,
-  render: h => h(App)
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");

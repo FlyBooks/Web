@@ -1,30 +1,48 @@
 <template>
   <div class="recommend">
-    <Banner :banners="banners"></Banner>
+    <banner :banners="banners"></banner>
+    <recommend-song
+      :recommendsongs="recomendSongs"
+      title="推荐歌单"
+    ></recommend-song>
+    <recommend-song
+      :recommendsongs="recomendSongs"
+      title="推荐歌单"
+    ></recommend-song>
   </div>
 </template>
 
 <script>
-import { getHotComments } from "../api";
-import Banner from "../components/Banner.vue";
+import { getBanners, getRecommendSongs, getLatestAlbum } from "../api";
+import Banner from "../components/recommend/Banner.vue";
+import RecommendSong from "../components/recommend/RecommendSong.vue";
 export default {
   name: "Recommend",
   components: {
     Banner,
+    RecommendSong,
   },
   data() {
     return {
       banners: [],
+      recomendSongs: [],
+      newLatestAlbum: [],
     };
   },
   created() {
-    this.getHotComments2();
+    this.getBanners();
   },
   methods: {
-    async getHotComments2() {
-      const res = await getHotComments();
+    async getBanners() {
+      const res = await getBanners();
+      const recomendSongs = await getRecommendSongs();
+      const newLatestAlbum = await getLatestAlbum();
+
       this.banners = res.data.banners;
-      console.log(this.banners);
+      //推荐歌单数据
+      this.recomendSongs = recomendSongs.data.result;
+      //最新专辑数据
+      this.newLatestAlbum = newLatestAlbum.data.albums;
     },
   },
 };

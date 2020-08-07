@@ -3,11 +3,11 @@
     <Header></Header>
     <tabbar></tabbar>
     <router-view></router-view>
-    <div class="theme">
+    <!-- <div class="theme">
       <button @click="changeThemeColor('color1')"></button>
       <button @click="changeThemeColor('color2')"></button>
       <button @click="changeThemeColor('color3')"></button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -18,12 +18,12 @@ export default {
   name: "App",
   components: {
     Header,
-    Tabbar
+    Tabbar,
   },
   methods: {
-    changeThemeColor(data) {
-      document.documentElement.setAttribute("theme-data", data);
-    },
+    // changeThemeColor(data) {
+    //   document.documentElement.setAttribute("theme-data", data);
+    // },
   },
 };
 </script>
@@ -32,7 +32,7 @@ export default {
 @import "./assets/css/variable.scss";
 @import "./assets/css/mixin.scss";
 
-.theme {
+/* .theme {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -51,5 +51,5 @@ export default {
       background-color: $background-color-theme2;
     }
   }
-}
+} */
 </style>

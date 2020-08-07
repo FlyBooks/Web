@@ -15,7 +15,6 @@ export function request(config) {
   );
   axiosInstance.interceptors.response.use(
     (result) => {
-      // console.log(result,'network');
       return result;
     },
     (error) => {

@@ -1,5 +1,10 @@
 <template>
-  <swiper ref="mySwiper" :options="swiperOptions" class="swiper banner">
+  <swiper
+    ref="mySwiper"
+    :options="swiperOptions"
+    class="swiper banner"
+    v-if="banners.length > 0"
+  >
     <swiper-slide
       v-for="banner in banners"
       :key="banner.bannerId"
@@ -14,15 +19,14 @@
 </template>
 
 <script>
-import { getHotComments } from "../api";
-import "swiper/swiper-bundle.css";
-import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 export default {
   name: "Banner",
   components: {
-    Swiper,
-    SwiperSlide,
+    swiper,
+    swiperSlide,
   },
   props: {
     banners: {
@@ -43,14 +47,13 @@ export default {
           el: ".swiper-pagination",
           clickable: true,
         },
+        speed: 1000,
         observer: true,
         observeParents: true,
         observeSlideChildren: true,
       },
+      index: 0,
     };
-  },
-  directives: {
-    swiper: directive,
   },
 };
 </script>
@@ -63,5 +66,17 @@ export default {
       height: 300px;
     }
   }
+}
+</style>
+<style lang="scss">
+@import "../../assets/css/mixin.scss";
+.swiper-pagination-bullet {
+  opacity: 1;
+  background-color: #ffffff;
+  width: 16px;
+  height: 16px;
+}
+.swiper-pagination-bullet-active {
+  @include bg_color();
 }
 </style>

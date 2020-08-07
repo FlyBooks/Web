@@ -1,0 +1,26 @@
+.whc(@w:100px,@h:100px,@c:red) {
+  /*设置默认值*/
+  width: @w;
+  height: @h;
+  background-color: @c;
+}
+
+.box1 {
+  .whc(200px, 200px, red);
+}
+
+.box2 {
+  .whc(100px, 100px, yellowgreen);
+}
+
+.box3 {
+  .whc();
+}
+
+.animation(@name,@duration,...) {
+  animation: @arguments;
+}
+
+.box4 {
+  .animation(loading, 3s, linear, 0,infinite);
+}

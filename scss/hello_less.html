@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style type="text/less">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .father {
+        width: 200px;
+        height: 200px;
+        .center;
+        background: red;
+        .son {
+          width: 100px;
+          height: 100px;
+          .center;
+          background: lightblue;
+        }
+      }
+    </style>
+
+    <script src="./lib/less.js"></script>
+  </head>
+  <body>
+    <div class="father">
+      <div class="son"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+.box1 {
+  /*设置默认值*/
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+.box2 {
+  /*设置默认值*/
+  width: 100px;
+  height: 100px;
+  background-color: yellowgreen;
+}
+.box3 {
+  /*设置默认值*/
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+.box4 {
+  animation: loading 3s linear 0 infinite;
+}

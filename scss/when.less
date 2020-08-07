@@ -1,0 +1,12 @@
+/*
+(),()就相当于js中的逻辑或
+()and()就相当于js中的逻辑与
+*/
+.setHW(@width,@height) when(@width>50px) {
+  width: @width;
+  height: @height;
+}
+
+.hello{
+  .setHW(100px, 200px);
+}

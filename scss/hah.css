@@ -1,0 +1,9 @@
+.one_entry:hover {
+  background-color: wheat;
+}
+.one_entry:hover .content {
+  background-color: wheat;
+}
+.content {
+  background-color: yellowgreen;
+}

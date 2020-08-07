@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+        text-align: center;
+        width: 600px;
+        height: 600px;
+        display: flex;
+        border: 1px solid black;
+        margin: 100px auto;
+      }
+      ul > li {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background-color: yellowgreen;
+        align-self: center;
+      }
+      ul > li:nth-child(2) {
+        background-color: lightblue;
+        align-self: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </body>
+</html>

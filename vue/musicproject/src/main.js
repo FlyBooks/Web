@@ -7,12 +7,16 @@ import "element-ui/lib/theme-chalk/index.css";
 import loading from "./plugins/loading";
 import fastclick from "fastclick";
 import "./assets/css/base.scss";
+import VueLazyload from "vue-lazyload";
 
 fastclick.attach(document.body); //fastclick解决移动端100~300毫秒的点击事件延迟问题
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(loading);
+Vue.use(VueLazyload,{
+  loading: require("./assets/images/loading.png")
+});
 
 new Vue({
   router,

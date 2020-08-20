@@ -5,7 +5,7 @@
     </div>
     <div class="songs-display">
       <div class="song-display" v-for="song in recommendsongs" :key="song.id">
-        <img :src="song.picUrl" alt="" />
+        <img v-lazy="song.picUrl" alt="" @click="sendId(song.id)" />
         <p>{{ song.name }}</p>
       </div>
     </div>
@@ -27,6 +27,15 @@ export default {
       require: true,
     },
   },
+  methods: {
+    sendId(id) {
+      if (this.title === "推荐歌单") {
+        this.$emit("songid", id, "song");
+      } else {
+        this.$emit("songid", id, "album");
+      }
+    },
+  },
 };
 </script>
 
@@ -34,18 +43,20 @@ export default {
 @import "../../assets/css/variable.scss";
 @import "../../assets/css/mixin.scss";
 .recommend-song {
+  @include bg_sub_color();
   .song-title {
     width: 100%;
     height: 84px;
     line-height: 84px;
-    @include bg_sub_color();
+
     h3 {
       @include font_size($font_large);
       font-weight: bold;
       @include text_color();
       padding: 0px 20px;
-      border-left: 8px solid hotpink;
+      /* border-left: 8px solid hotpink; */
     }
+    border-bottom: 2px solid #cccccc;
   }
   .songs-display {
     display: flex;
@@ -62,6 +73,9 @@ export default {
       }
       p {
         @include clamp(2);
+        @include font_size($font_samll);
+        @include text_color();
+        text-align: center;
       }
     }
   }

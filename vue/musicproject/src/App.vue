@@ -1,24 +1,28 @@
 <template>
   <div id="app">
     <Header></Header>
-    <tabbar></tabbar>
+    <Tabbar></Tabbar>
     <router-view></router-view>
     <!-- <div class="theme">
       <button @click="changeThemeColor('color1')"></button>
       <button @click="changeThemeColor('color2')"></button>
       <button @click="changeThemeColor('color3')"></button>
     </div> -->
+    <Player></Player>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import Tabbar from "./components/Tabbar.vue";
+import Player from "./views/Player.vue";
+
 export default {
   name: "App",
   components: {
     Header,
     Tabbar,
+    Player,
   },
   methods: {
     // changeThemeColor(data) {

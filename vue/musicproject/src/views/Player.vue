@@ -1,33 +1,29 @@
 <template>
-  <div class="player">
-    <player-header></player-header>
-    <player-middle></player-middle>
-    <play-bottom></play-bottom>
+  <div>
+    <fullpage-player></fullpage-player>
+    <mini-player @showlistplayer="showListPlayer()"></mini-player>
+    <list-player ref="listPlayer"></list-player>
   </div>
 </template>
 
 <script>
-import PlayerHeader from "../components/player/PlayerHeader.vue";
-import PlayerMiddle from "../components/player/PlayerMiddle.vue";
-import PlayBottom from "../components/player/PlayerBottom.vue";
+import FullpagePlayer from "../components/player/FullpagePlayer.vue";
+import MiniPlayer from "../components/player/MiniPlayer.vue";
+import ListPlayer from "../components/player/ListPlayer.vue";
 
 export default {
   name: "Player",
   components: {
-    PlayerHeader,
-    PlayerMiddle,
-    PlayBottom,
+    FullpagePlayer,
+    MiniPlayer,
+    ListPlayer,
+  },
+  methods: {
+    showListPlayer() {
+      this.$refs.listPlayer.showPlayer();
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.player {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: pink;
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>

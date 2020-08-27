@@ -5,7 +5,12 @@
     </div>
     <div class="song-content">
       <ul class="song-items">
-        <li v-for="song in newsong" :key="song.id" class="song-item">
+        <li
+          v-for="song in newsong"
+          :key="song.id"
+          class="song-item"
+          @click="showFullpagePlayer()"
+        >
           <img v-lazy="song.song.album.picUrl" alt="" />
           <div>
             <h3>{{ song.song.album.name }}</h3>
@@ -18,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "NewSong",
   props: {
@@ -26,6 +32,12 @@ export default {
       default: () => [],
       required: true,
     },
+  },
+  methods: {
+    showFullpagePlayer() {
+      this.setIsFullpagePlay(true);
+    },
+    ...mapActions(["setIsFullpagePlay"]),
   },
 };
 </script>

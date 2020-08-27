@@ -4,7 +4,12 @@
       <div class="play-img"></div>
       <p class="play-bottom">播放全部</p>
     </li>
-    <li v-for="item in playlist" :key="item.id" class="item">
+    <li
+      v-for="item in playlist"
+      :key="item.id"
+      class="item"
+      @click.stop="showFullpagePlayer()"
+    >
       <h3>{{ item.name }}</h3>
       <div>{{ item.al.name }}-{{ item.ar[0].name }}</div>
     </li>
@@ -19,6 +24,11 @@ export default {
       type: Array,
       default: () => [],
       required: true,
+    },
+  },
+  methods: {
+    showFullpagePlayer() {
+      this.$store.dispatch("setIsFullpagePlay", true);
     },
   },
 };

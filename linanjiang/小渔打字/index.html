@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小渔打字</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: url("./images/bg.jpg") center center no-repeat;
+        background-size: cover;
+        overflow: hidden;
+      }
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .specter {
+        width: 300px;
+        height: 300px;
+        background: url("./images/yy.png") center center no-repeat;
+        position: absolute;
+      }
+      .specter span {
+        text-shadow: 5px 5px 5px #3e437a;
+        position: absolute;
+        left: 80px;
+        top: 200px;
+        font-size: 30px;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oImg = document.querySelector("img");
+        let oAudio = document.querySelector("audio");
+        oImg.onclick = function () {
+          // this.style.display = "none";
+          this.parentNode.removeChild(oImg);
+          oAudio.play();
+          setInterval(function () {
+            let oDiv1 = new Specter();
+            oDiv1.fly();
+          }, 2000);
+        };
+
+        class Specter {
+          constructor() {
+            let oDiv = document.createElement("div");
+            oDiv.className = "specter";
+            oDiv.style.top = "1000px";
+            oDiv.style.left = Math.random() * 1000 + "px";
+            let oSpan = document.createElement("span");
+            let randNum = Math.floor(Math.random() * 26 + 65);
+            oSpan.innerText = String.fromCharCode(randNum);
+            oDiv.appendChild(oSpan);
+            document.body.appendChild(oDiv);
+            this.oDiv = oDiv;
+          }
+          fly() {
+            let offset = parseInt(this.oDiv.style.top);
+            this.timer = setInterval(() => {
+              offset -= 40;
+              this.oDiv.style.top = offset + "px";
+              if (offset <= -300) {
+                this.deleteSpecter();
+              }
+            }, 200);
+          }
+          deleteSpecter() {
+            this.oDiv.parentNode.removeChild(this.oDiv);
+            clearInterval(this.timer);
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <img src="./images/play.png" alt="" />
+    <audio src="./media/bg.ogg" loop autoplay></audio>
+  </body>
+</html>

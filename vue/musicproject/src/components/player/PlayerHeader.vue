@@ -1,6 +1,6 @@
 <template>
   <div class="player-header">
-    <div class="left"></div>
+    <div class="left" @click="hiddleFullpagePlayer()"></div>
     <div class="middle">
       <h3>演员</h3>
       <p>薛之谦</p>
@@ -9,6 +9,19 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "PlayerHeader",
+  methods: {
+    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer"]),
+    hiddleFullpagePlayer() {
+      this.setIsFullpagePlay(false);
+      this.setIsMiniPlayer(true);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 @import "../../assets/css/mixin.scss";
 @import "../../assets/css/variable.scss";

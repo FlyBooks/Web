@@ -1,6 +1,6 @@
 <template>
-  <div class="mini-player">
-    <div class="player-left">
+  <div class="mini-player" v-show="this.isMiniPlayer">
+    <div class="player-left" @click="showFullpagePlayer()">
       <img
         src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
         alt=""
@@ -18,11 +18,20 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "MiniPlayer",
+  computed: {
+    ...mapState(["isMiniPlayer"]),
+  },
   methods: {
+    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer"]),
     showListPlayer() {
       this.$emit("showlistplayer");
+    },
+    showFullpagePlayer() {
+      this.setIsFullpagePlay(true);
+      this.setIsMiniPlayer(false);
     },
   },
 };

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小渔吃豆</title>
+    <link rel="stylesheet" href="./css/beans.css" />
+    <script src="./js/ShakeMap.js"></script>
+    <script src="./js/ShakeFood.js"></script>
+    <script src="./js/Snake.js"></script>
+    <script>
+      window.onload = function () {
+        let snakeMap = new ShakeMap();
+        let snakeFood = new ShakeFood(100, 100, "./images/body.png", snakeMap);
+        let snake = new Snake({ snakeMap: snakeMap });
+        snakeFood.render();
+        snake.render();
+        document.body.onkeydown = function (event) {
+          snake.move(event.keyCode);
+        };
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

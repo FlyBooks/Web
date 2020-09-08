@@ -63,6 +63,7 @@
             let randNum = Math.floor(Math.random() * 26 + 65);
             oSpan.innerText = String.fromCharCode(randNum);
             oDiv.appendChild(oSpan);
+            oDiv.classList.add(String.fromCharCode(randNum));
             document.body.appendChild(oDiv);
             this.oDiv = oDiv;
           }
@@ -70,6 +71,9 @@
             let offset = parseInt(this.oDiv.style.top);
             this.timer = setInterval(() => {
               offset -= 40;
+              if (!this.oDiv) {
+                clearInterval(this.timer);
+              }
               this.oDiv.style.top = offset + "px";
               if (offset <= -300) {
                 this.deleteSpecter();
@@ -77,10 +81,20 @@
             }, 200);
           }
           deleteSpecter() {
-            this.oDiv.parentNode.removeChild(this.oDiv);
+            // console.log(this.oDiv.parentNode);
+            this.oDiv.parentNode && this.oDiv.parentNode.removeChild(this.oDiv);
             clearInterval(this.timer);
+            // console.log(222);
           }
         }
+
+        document.body.onkeydown = function (event) {
+          let currentKye = event.key.toUpperCase();
+          let deletingSpecter = document.querySelector(`.${currentKye}`);
+
+          deletingSpecter &&
+            deletingSpecter.parentNode.removeChild(deletingSpecter);
+        };
       };
     </script>
   </head>

@@ -16,7 +16,7 @@
         snakeFood.render();
         snake.render();
         document.body.onkeydown = function (event) {
-          snake.move(event.keyCode);
+          snake.move(event.keyCode,snakeFood);
         };
       };
     </script>

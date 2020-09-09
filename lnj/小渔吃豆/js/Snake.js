@@ -15,7 +15,11 @@ class Snake {
       { x: 1, y: 1, type: 0 },
       { x: 0, y: 1, type: 0 },
     ];
+    this.flag = false;
     this.snakeMap = snakeMap;
+    let oMapProps = getComputedStyle(this.snakeMap.oMap);
+    this.row = parseInt(oMapProps.width) / this.width - 1;
+    this.column = parseInt(oMapProps.height) / this.height - 1;
   }
 
   render() {
@@ -45,7 +49,7 @@ class Snake {
     }
   }
 
-  move(keyCode) {
+  move(keyCode, snakeFood) {
     for (let i = this.bodies.length - 1; i > 0; i--) {
       this.bodies[i].x = this.bodies[i - 1].x;
       this.bodies[i].y = this.bodies[i - 1].y;
@@ -55,20 +59,41 @@ class Snake {
     switch (keyCode) {
       case 37:
         this.bodies[0].x -= 1;
+        if (this.bodies[0].x < 0) {
+          this.flag = true;
+          alert("GAME OVER");
+        }
         break; //left
       case 38:
         this.bodies[0].y -= 1;
+        if (this.bodies[0].y < 0) {
+          this.flag = true;
+          alert("GAME OVER");
+        }
         break; //up
       case 39:
         this.bodies[0].x += 1;
+        if (this.bodies[0].x > this.row) {
+          this.flag = true;
+          alert("GAME OVER");
+        }
         break; //right
       case 40:
         this.bodies[0].y += 1;
+        if (this.bodies[0].y > this.column) {
+          this.flag = true;
+          alert("GAME OVER");
+        }
         break; //down
       default:
         break;
     }
 
-    this.render();
+    if (snakeFood.x === this.bodies[0].x && snakeFood.y === this.bodies[0].y) {
+      let lastBody = this.bodies[this.bodies.length - 1];
+      this.bodies.push({ x: lastBody.x, y: lastBody.y, type: 0 });
+      snakeFood.removeAndRerender();
+    }
+    !this.flag && this.render();
   }
 }

@@ -11,20 +11,25 @@ class ShakeFood {
 
   render() {
     let oDiv = document.createElement("div");
-    const { x, y } = this.generateLocation();
+    this.generateLocation();
     oDiv.style.position = "absolute";
-    oDiv.style.left = this.width * x + "px";
-    oDiv.style.top = this.height * y + "px";
+    oDiv.style.left = this.width * this.x + "px";
+    oDiv.style.top = this.height * this.y + "px";
     oDiv.style.width = this.width + "px";
     oDiv.style.height = this.height + "px";
 
     oDiv.style.background = `url(${this.img})`;
+    this.oFood = oDiv;
     this.snakeMap.oMap.appendChild(oDiv);
   }
 
   generateLocation() {
-    let x = Math.ceil(Math.random() * this.rowNums);
-    let y = Math.ceil(Math.random() * this.colNums);
-    return { x: x, y: y };
+    this.x = Math.ceil(Math.random() * this.rowNums);
+    this.y = Math.ceil(Math.random() * this.colNums);
+  }
+
+  removeAndRerender() {
+    this.oFood.parentNode.removeChild(this.oFood);
+    this.render();
   }
 }

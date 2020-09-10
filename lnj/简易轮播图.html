@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>简易轮播图</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      div {
+        margin: 100px auto;
+        width: 680px;
+        border: 1px solid #ccc;
+        position: relative;
+        /* box-sizing: border-box; */
+      }
+      div > img {
+        width: 680px;
+        vertical-align: bottom;
+      }
+      p {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transition: translateY(-50%);
+      }
+      p span {
+        /* display: inline-block; */
+        width: 25px;
+        height: 25px;
+        background: rgba(255, 255, 255, 0.5);
+        font-size: 25px;
+        line-height: 25px;
+        color: white;
+        text-align: center;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let aImgs = [
+          "./images/ad1.jpg",
+          "./images/ad2.jpg",
+          "./images/ad3.jpg",
+          "./images/ad4.jpg",
+          "./images/ad5.jpg",
+        ];
+        let pre = document.querySelector(".previous");
+        let next = document.querySelector(".next");
+        let img = document.querySelector("div>img");
+        let index = 0;
+        let maxIndex = aImgs.length - 1;
+        pre.onclick = function () {
+          index--;
+          if (index < 0) {
+            index = maxIndex;
+          }
+          img.setAttribute("src", aImgs[index]);
+        };
+
+        next.onclick = function () {
+          index++;
+          if (index > maxIndex) {
+            index = 0;
+          }
+          img.setAttribute("src", aImgs[index]);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <img src="./images/ad1.jpg" alt="" />
+      <p>
+        <span class="previous">&lt;</span>
+        <span class="next">&gt;</span>
+      </p>
+    </div>
+  </body>
+</html>

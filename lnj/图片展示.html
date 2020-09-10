@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片展示</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      div {
+        width: 670px;
+        border: 1px solid black;
+        margin: 100px auto;
+      }
+      div > img {
+        width: 670px;
+        height: 300px;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        /* vertical-align: bottom; */
+      }
+      li img {
+        width: 120px;
+        vertical-align: bottom;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oImg = document.querySelector("div>img");
+        let liImgs = document.querySelectorAll("li>img");
+
+        for (liImg of liImgs) {
+          liImg.onclick = change;
+        }
+
+        function change() {
+          oImg.setAttribute("src", this.getAttribute("src"));
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <img src="./images/ad1.jpg" alt="" />
+      <ul>
+        <li><img src="./images/ad1.jpg" alt="" /></li>
+        <li><img src="./images/ad2.jpg" alt="" /></li>
+        <li><img src="./images/ad3.jpg" alt="" /></li>
+        <li><img src="./images/ad4.jpg" alt="" /></li>
+        <li><img src="./images/ad5.jpg" alt="" /></li>
+      </ul>
+    </div>
+  </body>
+</html>

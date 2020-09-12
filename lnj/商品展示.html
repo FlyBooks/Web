@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品展示</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 300px;
+        margin: 100px auto;
+        border: 1px solid #ccc;
+      }
+      div > img {
+        width: 300px;
+      }
+      ul {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      ul > li {
+        border: 2px solid transparent;
+        box-sizing: border-box;
+      }
+      ul > li > img {
+        width: 50px;
+        vertical-align: bottom;
+      }
+      .shine-border{
+        border: 2px solid yellowgreen;
+      }
+    </style>
+    <script>
+      window.onload = function(){
+        let oImg = document.querySelector("div>img");
+        let oLiImgs = document.querySelectorAll("ul>li>img");
+
+        for(let img of oLiImgs){
+          img.onmouseenter = function(){
+            oImg.setAttribute("src", this.src);
+            this.parentNode.className = "shine-border";
+          };
+          img.onmouseleave = function(){
+            this.parentNode.className = "";
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <img src="./images/pic1.jpg" alt="" />
+      <ul>
+        <li>
+          <img src="./images/pic1.jpg" alt="" />
+        </li>
+        <li>
+          <img src="./images/pic2.jpg" alt="" />
+        </li>
+        <li>
+          <img src="./images/pic3.jpg" alt="" />
+        </li>
+        <li>
+          <img src="./images/pic4.jpg" alt="" />
+        </li>
+        <li>
+          <img src="./images/pic5.jpg" alt="" />
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

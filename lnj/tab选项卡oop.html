@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面向对象的tab选项卡</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #tab {
+        margin: 100px auto;
+        width: 550px;
+      }
+      ul {
+        list-style: none;
+        width: 550px;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        background-color: lightblue;
+      }
+      ul > li {
+        width: 100px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background-color: lightcoral;
+      }
+      .selected {
+        background-color: gold;
+      }
+      #tab_bottom {
+        width: 100%;
+        height: 100px;
+        background-color: yellowgreen;
+      }
+      #tab_bottom > .tab-content {
+        width: 100%;
+        height: 100%;
+      }
+      #tab_bottom > .tab-content {
+        display: none;
+      }
+      #tab_bottom > .tab-content:first-child {
+        display: block;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        class Tab {
+          constructor() {
+            this.oLis = document.querySelectorAll("ul>li");
+            this.tab_contents = document.querySelectorAll(
+              "#tab_bottom>.tab-content"
+            );
+            this.preIndex = 0;
+          }
+
+          click() {
+            for (let index = 0; index < this.oLis.length; index++) {
+              this.oLis[index].onclick = () => {
+                this.oLis[this.preIndex].classList.remove("selected");
+                this.oLis[index].classList.add("selected");
+
+                this.tab_contents[this.preIndex].setAttribute(
+                  "style",
+                  "display:none"
+                );
+                this.tab_contents[index].setAttribute("style", "display:block");
+                this.preIndex = index;
+              };
+            }
+          }
+        }
+
+        let oTab = new Tab();
+
+        oTab.click();
+      };
+    </script>
+  </head>
+  <body>
+    <div id="tab">
+      <ul id="tab_top">
+        <li class="selected">新闻</li>
+        <li>视频</li>
+        <li>音乐</li>
+        <li>军事</li>
+        <li>财经</li>
+      </ul>
+      <div id="tab_bottom">
+        <div class="tab-content">新闻的内容</div>
+        <div class="tab-content">视频的内容</div>
+        <div class="tab-content">音乐的内容</div>
+        <div class="tab-content">军事的内容</div>
+        <div class="tab-content">财经的内容</div>
+      </div>
+    </div>
+  </body>
+</html>

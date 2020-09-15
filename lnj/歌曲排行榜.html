@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歌曲排行榜</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .select_top {
+        width: 450px;
+        margin: 100px auto;
+        border: 1px solid #cccccc;
+        text-align: center;
+      }
+      hl {
+        font-weight: bold;
+        font-size: 20px;
+        text-shadow: 0px 0px 5px #cccccc;
+      }
+      ul {
+        list-style: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 20px;
+      }
+      ul > li {
+        text-align: left;
+
+        border-bottom: 1px solid #cccccc;
+      }
+      .actions {
+        margin: 20px 0px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oLis = document.querySelectorAll("ul>li>input[type=checkbox]");
+        let all_select = document.querySelector("#all_select");
+        let cancel_select = document.querySelector("#cancel_select");
+        let reverse_select = document.querySelector("#reverse_select");
+
+        all_select.onclick = function () {
+          oLis.forEach((item) => {
+            item.checked = true;
+          });
+        };
+        cancel_select.onclick = function () {
+          oLis.forEach((item) => {
+            item.checked = false;
+          });
+        };
+
+        reverse_select.onclick = function () {
+          oLis.forEach((item) => {
+            item.checked = !item.checked;
+          });
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="select_top">
+      <h1>歌曲排行榜</h1>
+      <ul>
+        <li><input type="checkbox" />醒着做梦</li>
+        <li><input type="checkbox" />红玫瑰</li>
+        <li><input type="checkbox" />one love</li>
+        <li><input type="checkbox" />modern lonelines</li>
+        <li><input type="checkbox" />my love</li>
+        <li><input type="checkbox" />git the ground</li>
+      </ul>
+      <div class="actions">
+        <input type="button" value="全选" id="all_select" />
+        <input type="button" value="取消全选" id="cancel_select" />
+        <input type="button" value="反选" id="reverse_select" />
+      </div>
+    </div>
+  </body>
+</html>

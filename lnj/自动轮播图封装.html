@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自动轮播图</title>
+    <script src="./js/autoplay.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 450px;
+        height: 300px;
+        border: 1px solid #cccccc;
+        margin: 100px auto;
+        overflow: hidden;
+        position: relative;
+      }
+      .box > ul {
+        list-style: none;
+        display: flex;
+        margin-left: 0px;
+      }
+      .box > ul > li > img {
+        width: 450px;
+        height: 300px;
+      }
+      p {
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        top: 50%;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      p > span {
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+        background-color: rgba(255, 255, 255, 0.5);
+        font-size: 30px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oPre = document.querySelector("#previous");
+        let oNext = document.querySelector("#next");
+        let oBox = document.querySelector(".box");
+        let oUl = document.querySelector(".box > ul");
+        let oImgs = document.querySelectorAll("ul>li>img");
+        let index = 0;
+        let offset = parseInt(getComputedStyle(oImgs[index]).width);
+
+        oPre.onclick = function () {
+          autoMovePre();
+        };
+
+        oNext.onclick = function () {
+          index++;
+          if (index > oImgs.length - 1) {
+            oUl.style.marginLeft = 0 + "px";
+            index = 1;
+          }
+
+          slowMove(oUl, -offset * index);
+        };
+
+        let autoTimerId;
+        autoTimerId = setInterval(function () {
+          oPre.onclick();
+        }, 2000);
+
+        oBox.onmouseenter = function () {
+          clearInterval(autoTimerId);
+        };
+
+        oBox.onmouseleave = function () {
+          autoTimerId && clearInterval(autoTimerId);
+
+          autoTimerId = setInterval(function () {
+            oPre.onclick();
+          }, 3000);
+        };
+
+        function autoMovePre() {
+          index--;
+          if (index < 0) {
+            index = oImgs.length - 1;
+            oUl.style.marginLeft = -offset * index + "px";
+            index--;
+          }
+          slowMove(oUl, -offset * index);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <ul>
+        <li><img src="./images/ad1.jpg" alt="" /></li>
+        <li><img src="./images/ad2.jpg" alt="" /></li>
+        <li><img src="./images/ad3.jpg" alt="" /></li>
+        <li><img src="./images/ad4.jpg" alt="" /></li>
+        <li><img src="./images/ad5.jpg" alt="" /></li>
+        <li><img src="./images/ad1.jpg" alt="" /></li>
+      </ul>
+      <p>
+        <span id="previous">&lt;</span>
+        <span id="next">&gt;</span>
+      </p>
+    </div>
+  </body>
+</html>

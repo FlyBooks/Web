@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let obj = { name: "test", age: 18 };
+      for (let key in obj) {
+        console.log(obj[key]);
+        obj.timer = setInterval(function () {
+          console.log(key);
+          clearInterval(obj.timer); //这个定时器这样写就关闭不了了???
+        }, 1000);
+      }
+      
+    </script>
+  </head>
+  <body></body>
+</html>

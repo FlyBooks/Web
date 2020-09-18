@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>匀速动画</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: yellowgreen;
+        margin-top: 10px;
+        margin-left: 0px;
+      }
+      #line500 {
+        width: 500px;
+        height: 10px;
+        background-color: lightblue;
+      }
+      #line200 {
+        width: 200px;
+        height: 10px;
+        background-color: lightsalmon;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let box = document.querySelector(".box");
+        let running500 = document.querySelector("#running500");
+        let running200 = document.querySelector("#running200");
+        let stop = document.querySelector("#stop");
+        // let offset = 0;
+        let timer = null;
+
+        function move(target, step) {
+          offset = parseInt(box.style.marginLeft) || 0;
+          console.log(box.style.marginLeft, "offset");
+          if (offset > target) {
+            step = -step;
+          }
+
+          timer && clearInterval(timer);
+          timer = setInterval(function () {
+            offset += step;
+
+            if (Math.abs(offset - target) <= Math.abs(step)) {
+              clearInterval(timer);
+              offset = target;
+            }
+            box.style.marginLeft = offset + "px";
+          }, 100);
+        }
+
+        running500.onclick = function () {
+          let target = 500;
+          // timer && clearInterval(timer);
+          // timer = setInterval(function () {
+          //   offset += 10;
+          //   if (offset >= target) {
+          //     clearInterval(timer);
+          //     offset = target;
+          //   }
+          //   box.style.marginLeft = offset + "px";
+          // }, 100);
+          move(target, 10);
+        };
+
+        running200.onclick = function () {
+          let target = 200;
+          let step = -13;
+          // timer && clearInterval(timer);
+          // timer = setInterval(function () {
+          //   offset += step;
+
+          //   if (Math.abs(offset - target) <= Math.abs(step)) {
+          //     clearInterval(timer);
+          //     offset = target;
+          //   }
+          //   box.style.marginLeft = offset + "px";
+          // }, 100);
+          move(target, 13);
+        };
+
+        stop.onclick = function () {
+          clearInterval(timer);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="500" id="running500" />
+    <input type="button" value="200" id="running200" />
+    <input type="button" value="停止" id="stop" />
+    <div class="box"></div>
+    <div id="line500"></div>
+    <div id="line200"></div>
+  </body>
+</html>

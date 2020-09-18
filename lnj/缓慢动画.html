@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>匀速动画</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: yellowgreen;
+        margin-top: 10px;
+        margin-left: 0px;
+      }
+      #line500 {
+        width: 500px;
+        height: 10px;
+        background-color: lightblue;
+      }
+      #line200 {
+        width: 200px;
+        height: 10px;
+        background-color: lightsalmon;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let box = document.querySelector(".box");
+        let running500 = document.querySelector("#running500");
+        let running200 = document.querySelector("#running200");
+        let stop = document.querySelector("#stop");
+        let timer = null;
+        let step = 0;
+
+        function move(target) {
+          offset = parseInt(box.style.marginLeft) || 0;
+
+          timer && clearInterval(timer);
+          timer = setInterval(function () {
+            offset += step;
+            step = (target - offset) * 0.3;
+            if (Math.abs(offset - target) <= 1) {
+              clearInterval(timer);
+              offset = target;
+            }
+            box.style.marginLeft = offset + "px";
+          }, 100);
+        }
+
+        running500.onclick = function () {
+          let target = 500;
+          move(target);
+        };
+
+        running200.onclick = function () {
+          let target = 200;
+
+          move(target);
+        };
+
+        stop.onclick = function () {
+          clearInterval(timer);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="500" id="running500" />
+    <input type="button" value="200" id="running200" />
+    <input type="button" value="停止" id="stop" />
+    <div class="box"></div>
+    <div id="line500"></div>
+    <div id="line200"></div>
+  </body>
+</html>

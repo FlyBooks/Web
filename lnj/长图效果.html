@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>长图效果</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .long-pic {
+        width: 600px;
+        height: 300px;
+        border: 1px solid #cccccc;
+        overflow: hidden;
+        position: relative;
+        margin: 100px auto;
+      }
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+      #pic_top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+      }
+      #pic_bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oImg = document.querySelector("img");
+        let pic_top = document.querySelector("#pic_top");
+        let pic_bottom = document.querySelector("#pic_bottom");
+        let longPicBox = document.querySelector(".long-pic");
+        let imgProps = getComputedStyle(oImg);
+        let moveLength =
+          parseInt(getComputedStyle(longPicBox).height) -
+          parseInt(imgProps.height);
+        console.log(moveLength, "moveLength");
+        let timer = null;
+        let offset = 0;
+
+        pic_top.onmouseenter = function () {
+          timer && clearInterval(timer);
+          timer = setInterval(function () {
+            offset -= 10;
+            if (offset <= moveLength) {
+              clearInterval(timer);
+              return;
+            }
+            oImg.style.top = offset + "px";
+          }, 200);
+        };
+
+        pic_top.onmouseleave = function () {
+          clearInterval(timer);
+        };
+
+        pic_bottom.onmouseenter = function () {
+          timer && clearInterval(timer);
+          timer = setInterval(function () {
+            offset += 20;
+            if (offset >= 0) {
+              clearInterval(timer);
+              return;
+            }
+
+            oImg.style.top = offset + "px";
+          }, 200);
+        };
+
+        pic_bottom.onmouseleave = function () {
+          clearInterval(timer);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="long-pic">
+      <img src="./images/long.gif" alt="" />
+      <div id="pic_top"></div>
+      <div id="pic_bottom"></div>
+    </div>
+  </body>
+</html>

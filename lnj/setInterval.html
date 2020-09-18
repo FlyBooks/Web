@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const s = new Date().getSeconds();
+
+      setTimeout(function () {
+        // 输出 "2"，表示回调函数并没有在 500 毫秒之后立即执行
+        console.log("Ran after " + (new Date().getSeconds() - s) + " seconds");
+      }, 500);
+
+      while (true) {
+        if (new Date().getSeconds() - s >= 2) {
+          console.log("Good, looped for 2 seconds");
+          break;
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

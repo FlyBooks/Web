@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>吸顶效果</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        width: 100%;
+        vertical-align: bottom;
+      }
+    </style>
+    <script src="./js/tools.js"></script>
+    <script>
+      window.onload = function () {
+        let oTop = document.querySelector("#top");
+        let oNav = document.querySelector("#nav");
+        let top = parseInt(getComputedStyle(oTop).height);
+        console.log(top);
+        window.onscroll = function () {
+          if (top < getPageScroll().y) {
+            oNav.style.position = "fixed";
+            oNav.style.top = "0px";
+            oNav.style.left = "0px";
+          } else {
+            oNav.style.position = "";
+          }
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <img src="./images/nba-top.jpg" alt="" id="top" />
+    <img src="./images/nba-nav.jpg" alt="" id="nav" />
+    <img src="./images/nba-body.jpg" alt="" />
+  </body>
+</html>

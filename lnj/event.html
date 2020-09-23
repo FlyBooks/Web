@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件对象</title>
+    <script>
+      window.onload = function () {
+        /*
+      1.什么是事件对象?
+      事件对象就是一个系统自动创建的一个对象, 当注册的事件被触发的时候, 系统就会自动创建事件对象
+      event = event || window.event;
+
+      */
+        let oBtn = document.querySelector("button");
+        let oA = document.querySelector("a");
+
+        oBtn.addEventListener("click", function () {
+          alert(666);
+        });
+        oBtn.addEventListener("click", function () {
+          alert(777);
+        });
+
+        oA.onclick = function (event) {
+          event = event || window.event;
+          alert("hhhhh");
+          event.preventDefault(); //存在兼容性问题, 只有高级浏览器支持, 低级浏览器需要使用event.returnValue=false;
+          // return false; //企业推荐这种方式
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <button>hh</button>
+    <a href="http://www.baidu.com">取消默认事件</a>
+  </body>
+</html>

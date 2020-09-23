@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>offsetX</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 200px;
+        height: 200px;
+        background-color: yellowgreen;
+        margin: 100px auto;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oDiv = document.querySelector("div");
+        let oDivStyle = getComputedStyle(oDiv);
+
+        document.body.onmousemove = function (event) {
+          event = event || window.event;
+          console.log(
+            event.clientX - parseFloat(oDivStyle.width) / 2,
+            event.clientY - parseFloat(oDivStyle.height) / 2
+          );
+          oDiv.style.marginLeft =
+            event.clientX - parseFloat(oDivStyle.width) / 2 + "px";
+          oDiv.style.marginTop =
+            event.clientY - parseFloat(oDivStyle.height) / 2 + "px";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

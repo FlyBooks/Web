@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件捕获与冒泡</title>
+    <style>
+      #father {
+        width: 200px;
+        height: 200px;
+        background-color: yellowgreen;
+      }
+      #son {
+        width: 100px;
+        height: 100px;
+        background-color: honeydew;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oFather = document.querySelector("#father");
+        let oSon = document.querySelector("#son");
+        oFather.onclick = function (event) {
+          event = event || window.event;
+
+          event.stopPropagation();
+          console.log("father");
+        };
+        oSon.onclick = function (event) {
+          event = event || window.event;
+          event.stopPropagation();
+          console.log("son");
+        };
+        // oSon.addEventListener(
+        //   "click",
+        //   function () {
+        //     console.log("son");
+        //   },
+        //   true
+        // );
+        // oFather.addEventListener(
+        //   "click",
+        //   function () {
+        //     console.log("father");
+        //   },
+        //   true
+        // );
+      };
+    </script>
+  </head>
+  <body>
+    <div id="father">
+      <div id="son"></div>
+    </div>
+  </body>
+</html>

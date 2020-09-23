@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        padding: 50px;
+        border: 50px solid #000000;
+        background: red;
+        background-clip: content-box;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oBox = document.getElementById("box");
+        let style = getComputedStyle(oBox); //只能获取样式, 而不能修改样式, 是只读的
+        console.log(style.width, style.height);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+</html>

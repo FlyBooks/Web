@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星空</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      document,
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        overflow: hidden;
+      }
+      span {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background: url("./images/star.png") no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: shiny 1s alternate infinite;
+      }
+
+      @keyframes shiny {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      span:hover {
+        transform: scale(3, 3) rotate(180deg) !important;
+        transition: all 1s;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        const { width, height } = getDocWH();
+
+        for (let i = 0; i < 30; i++) {
+          let oSpan = document.createElement("span");
+          let top = height * Math.random();
+          let left = width * Math.random();
+          oSpan.style.top = top + "px";
+          oSpan.style.left = left + "px";
+          let scaleNum = 2 * Math.random();
+          oSpan.style.transform = `scale(${scaleNum},${scaleNum})`;
+          oSpan.style.animationDelay = 1 * Math.random() + "s";
+          document.body.appendChild(oSpan);
+        }
+        function getDocWH() {
+          let width, height;
+          if (window.innerHeight) {
+            width = window.innerWidth;
+            height = window.innerHeight;
+          } else if (document.compatMode === "BackCompat") {
+            width = document.body.clientWidth;
+            height = document.body.clientHeight;
+          } else {
+            width = document.documentElement.clientWidth;
+            height = document.documentElement.clientHeight;
+          }
+
+          return {
+            width,
+            height,
+          };
+        }
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

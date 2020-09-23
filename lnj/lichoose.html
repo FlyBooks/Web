@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>冒泡事件target的应用</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      ul {
+        width: 300px;
+        height: 120px;
+        list-style: none;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 100px auto;
+      }
+      li {
+        width: 100%;
+        height: 20px;
+      }
+      .selected {
+        background-color: khaki;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        //in the past
+        // let oLis = document.querySelectorAll("li");
+        // let currentItem = oLis[0];
+        // for (let item of oLis) {
+        //   item.onclick = change;
+        // }
+
+        // function change() {
+        //   this.classList.add("selected");
+        //   currentItem.classList.remove("selected");
+        //   currentItem = this;
+        // }
+        //bubbling apply
+        let oUl = document.querySelector("ul");
+        let li = document.querySelector(".selected");
+
+        oUl.onclick = function (event) {
+          event = event || window.event;
+          event.target.classList.add("selected");
+          li.classList.remove("selected");
+          li = event.target;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <ul>
+      <li class="selected">one</li>
+      <li>two</li>
+      <li>three</li>
+      <li>four</li>
+      <li>five</li>
+    </ul>
+  </body>
+</html>

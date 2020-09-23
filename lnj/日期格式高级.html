@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>日期格式高级格式化</title>
+    <script>
+      dateFormat("yyyy-MM-DD hh::mm:ss", new Date());
+      dateFormat("hh::mm:ss", new Date());
+
+      function dateFormat(format, date) {
+        let year = format.match(/y+/);
+        if (year && year[0]) {
+          let y = (date.getFullYear() + "").substr(4 - year[0].length);
+          format = format.replace(year, y);
+        }
+
+        let obj = {
+          "M+": date.getMonth() + 1,
+          "D+": date.getDate(),
+          "h+": date.getHours(),
+          "m+": date.getMinutes(),
+          "s+": date.getSeconds(),
+        };
+
+        for (let key in obj) {
+          let value = format.match(new RegExp(key));
+          if (value && value[0].length === 1) {
+            format = format.replace(value, obj[key]);
+          } else if (value && value[0].length === 2) {
+            let dateValue = "00" + obj[key];
+            format = format.replace(
+              value,
+              dateValue.substr((obj[key] + "").length)
+            );
+          }
+        }
+
+        console.log(format);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

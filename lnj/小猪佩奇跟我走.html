@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小猪佩奇跟我走</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oPig = document.querySelector("img");
+        let style = getComputedStyle(oPig);
+
+        document.body.onmousemove = function (event) {
+          event = event || window.event;
+          console.log(parseFloat(style.width) / 2, parseFloat(style.width));
+
+          oPig.style.marginLeft =
+            event.clientX - parseFloat(style.width) / 2 + "px";
+          oPig.style.marginTop =
+            event.clientY - parseFloat(style.height) / 2 + "px";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <img src="./images/pig.gif" alt="" />
+  </body>
+</html>

@@ -32,7 +32,6 @@
         offset += step;
         if (Math.abs(target - offset) <= 1) {
           el.style[attr] = target + "px";
-          console.log(target, "target");
           flag = true;
         } else {
           el.style[attr] = offset + "px";
@@ -43,7 +42,6 @@
         clearInterval(el.timer);
         fn && fn();
       }
-      console.log(flag, "flag");
     }, 200);
   }
 

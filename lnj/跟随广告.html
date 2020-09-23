@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>跟随广告</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      p {
+        text-align: center;
+        line-height: 30px;
+      }
+    </style>
+    <script src="./js/tools.js"></script>
+    <script src="./js/autoplay_enhancement.js"></script>
+    <script>
+      window.onload = function () {
+        let oImg = document.querySelector("img");
+        let middle =
+          (getScreen().height - parseInt(getComputedStyle(oImg).height)) / 2;
+        console.log(middle);
+        slowMove2(oImg, { top: middle });
+        window.onscroll = function () {
+          slowMove2(oImg, { top: middle + getPageScroll().y });
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <img src="./images/left_ad.png" alt="" />
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+    <p>1</p>
+  </body>
+</html>

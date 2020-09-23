@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拖拽效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .nav {
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        background-color: skyblue;
+        text-align: center;
+      }
+      .mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.35);
+        display: none;
+      }
+      .logon {
+        width: 350px;
+        height: 400px;
+        border: 1px solid black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: blanchedalmond;
+        display: none;
+        cursor: move;
+      }
+      .logon > span {
+        width: 35px;
+        height: 35px;
+        background-color: chocolate;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oP = document.querySelector(".nav>p");
+        let oMask = document.querySelector(".mask");
+        let oLogon = document.querySelector(".logon");
+        let close = document.querySelector(".logon>span");
+        oP.onclick = function () {
+          oMask.style.display = "block";
+          oLogon.style.display = "block";
+        };
+
+        oLogon.onmousedown = function (event) {
+          event = event || window.event;
+          const X = event.pageX - oLogon.offsetLeft;
+          const Y = event.pageY - oLogon.offsetTop;
+          oLogon.onmousemove = function (event) {
+            event = event || window.event;
+
+            oLogon.style.left = event.pageX - X + "px";
+            oLogon.style.top = event.pageY - Y + "px";
+          };
+        };
+        oLogon.onmouseup = function () {
+          oLogon.onmousemove = null;
+        };
+
+        close.onclick = function () {
+          oMask.style.display = "none";
+          oLogon.style.display = "none";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="nav">
+      <p>我是p标签</p>
+    </div>
+    <a href="http://www.bing.com">官网</a>
+    <div class="mask"></div>
+    <div class="logon">
+      <span></span>
+    </div>
+  </body>
+</html>

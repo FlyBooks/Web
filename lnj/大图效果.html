@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大图效果</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .left {
+        width: 900px;
+        margin-top: 100px;
+        margin-left: 100px;
+        display: flex;
+        justify-content: space-between;
+      }
+      #small_pic {
+        width: 400px;
+        height: 400px;
+        position: relative;
+      }
+      .left span {
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+      #big_pic {
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+        display: none;
+        position: relative;
+      }
+      #big_pic > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let smallPic = document.querySelector("#small_pic");
+        let oSpan = document.querySelector("#small_pic>span");
+        let bigPic = document.querySelector("#big_pic");
+        let bigPicImg = document.querySelector("#big_pic>img");
+
+        smallPic.onmouseenter = function (event) {
+          event = event || window.event;
+          oSpan.style.display = "block";
+          bigPic.style.display = "block";
+          let x = event.offsetX;
+          let y = event.offsetY;
+          smallPic.onmousemove = function (event) {
+            event = event || window.event;
+            let X = event.pageX - 200;
+            let Y = event.pageY - 200;
+            X = X < 0 ? 0 : X;
+            Y = Y < 0 ? 0 : Y;
+
+            let maxX =
+              parseInt(getComputedStyle(smallPic).width) -
+              parseInt(getComputedStyle(oSpan).width);
+            let maxY =
+              parseInt(getComputedStyle(smallPic).height) -
+              parseInt(getComputedStyle(oSpan).height);
+
+            X = X > maxX ? maxX : X;
+            Y = Y > maxY ? maxY : Y;
+            oSpan.style.top = Y + "px";
+            oSpan.style.left = X + "px";
+
+            let maxBigPicX = bigPicImg.offsetWidth - bigPic.offsetWidth;
+            let maxBigPicY = bigPicImg.offsetWidth - bigPic.offsetWidth;
+            console.log(bigPicImg.offsetWidth, bigPic.offsetWidth);
+            let bImgX = (X / maxX) * maxBigPicX;
+            let bImgY = (Y / maxY) * maxBigPicY;
+            bigPicImg.style.left = -bImgX + "px";
+            bigPicImg.style.top = -bImgY + "px";
+          };
+        };
+
+        smallPic.onmouseleave = function () {
+          oSpan.style.display = "none";
+          bigPic.style.display = "none";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="left">
+      <div id="small_pic">
+        <img src="./images/small.jpg" alt="" /> <span></span>
+      </div>
+      <div id="big_pic">
+        <img src="./images/big.jpg" alt="" />
+      </div>
+    </div>
+  </body>
+</html>

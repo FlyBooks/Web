@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>弹性导航</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .nav {
+        width: 900px;
+        height: 63px;
+        background: url("./images/doubleOne.png") no-repeat right center;
+        border: 1px solid black;
+        margin: 100px auto;
+        position: relative;
+      }
+      ul {
+        position: relative;
+        z-index: 2;
+      }
+      ul > li {
+        list-style: none;
+        float: left;
+        width: 88px;
+        height: 63px;
+        line-height: 63px;
+        text-align: center;
+      }
+      span {
+        display: inline-block;
+        width: 88px;
+        height: 63px;
+        background: url("./images/tMall.png") no-repeat;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <script src="./js/autoplay_enhancement.js"></script>
+    <script>
+      window.onload = function () {
+        let oLis = document.querySelectorAll("li");
+        let oSpan = document.querySelector("span");
+        for (let index in oLis) {
+          oLis[index].onmouseenter = function () {
+            slowMove2(oSpan, { left: this.offsetLeft });
+            //oSpan.style.left = this.offsetLeft + "px";
+          };
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="nav">
+      <ul>
+        <li>双11狂欢</li>
+        <li>服装会场</li>
+        <li>数码家电</li>
+        <li>家具建材</li>
+        <li>母婴童装</li>
+        <li>手机会场</li>
+        <li>美妆会场</li>
+        <li>进口会场</li>
+        <li>飞猪旅行</li>
+      </ul>
+      <span></span>
+    </div>
+  </body>
+</html>

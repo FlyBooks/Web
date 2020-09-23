@@ -8,7 +8,7 @@ my @arr1 = (1,2,3);
 my @arr2 = (4,5,6);
 my @arr = @arr1, @arr2;
 return @arr;
-return @arr1, @arr2;
+# return @arr1, @arr2;
 }
 
 say Data::Dumper::Dumper(&summary());

@@ -58,9 +58,10 @@
         processDeg.onmousedown = function (event) {
           event = event || window.event;
           let pageX1 = event.pageX;
+          let begin = parseFloat(processDeg.style.left) || 0;
           processDeg.onmousemove = function (event) {
             event = event || window.event;
-            let left = event.pageX - pageX1;
+            let left = event.pageX - pageX1 + begin;
             let leftMax = processBar.offsetWidth - processPercent;
             left = left < 0 ? 0 : left;
             left = left > leftMax ? leftMax : left;

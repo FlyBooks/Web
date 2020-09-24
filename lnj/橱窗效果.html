@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>橱窗展示</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 800px;
+        height: 175px;
+        border: 1px solid #cccccc;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+        vertical-align: top;
+        position: relative;
+      }
+      .bar {
+        width: 100%;
+        height: 10px;
+        vertical-align: bottom;
+        background-color: #cccccc;
+        position: relative;
+      }
+      .bar > .process {
+        width: 10%;
+        height: 100%;
+        background-color: yellowgreen;
+        border-radius: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oBox = document.querySelector(".box");
+        let oUl = document.querySelector("ul");
+        let oLis = document.querySelectorAll("ul>li");
+        let processBar = document.querySelector(".bar");
+        let processDeg = document.querySelector(".process");
+
+        let offsetWidth = oLis[0].offsetWidth * oLis.length;
+        oUl.style.width = offsetWidth + "px";
+
+        let boxOffsetWidth = oBox.offsetWidth;
+        let processPercent =
+          (boxOffsetWidth / oUl.offsetWidth) * processBar.offsetWidth;
+        processDeg.style.width = processPercent + "px";
+
+        processDeg.onmousedown = function (event) {
+          event = event || window.event;
+          let pageX1 = event.pageX;
+          processDeg.onmousemove = function (event) {
+            event = event || window.event;
+            let left = event.pageX - pageX1;
+            let leftMax = processBar.offsetWidth - processPercent;
+            left = left < 0 ? 0 : left;
+            left = left > leftMax ? leftMax : left;
+            processDeg.style.left = left + "px";
+            oUl.style.left =
+              (-left / leftMax) * (offsetWidth - boxOffsetWidth) + "px";
+            // console.log(oUl.style.left, processPercent);
+          };
+        };
+
+        document.onmouseup = function () {
+          processDeg.onmousemove = null;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <ul>
+        <li><img src="./images/img1.jpg" alt="" /></li>
+        <li><img src="./images/img2.jpg" alt="" /></li>
+        <li><img src="./images/img3.jpg" alt="" /></li>
+        <li><img src="./images/img4.jpg" alt="" /></li>
+        <li><img src="./images/img5.jpg" alt="" /></li>
+        <li><img src="./images/img6.jpg" alt="" /></li>
+        <li><img src="./images/img7.jpg" alt="" /></li>
+        <li><img src="./images/img8.jpg" alt="" /></li>
+        <li><img src="./images/img9.jpg" alt="" /></li>
+        <li><img src="./images/img10.jpg" alt="" /></li>
+      </ul>
+      <div class="bar">
+        <div class="process"></div>
+      </div>
+    </div>
+  </body>
+</html>

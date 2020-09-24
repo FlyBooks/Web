@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>楼层效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      ul {
+        width: 100%;
+        height: 100%;
+      }
+      ul > li {
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        font-size: 100px;
+        text-align: center;
+      }
+      ol {
+        position: fixed;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        width: 100px;
+        height: 150px;
+        list-style: none;
+        border: 1px solid #cccccc;
+        text-align: center;
+      }
+      ol > li {
+        width: 100%;
+        height: 20%;
+        border-bottom: 1px solid #cccccc;
+        box-sizing: border-box;
+      }
+      .selected {
+        background-color: palevioletred;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oLis = document.querySelectorAll("ul>li");
+        let bgColors = [
+          "lightblue",
+          "lightyellow",
+          "grey",
+          "yellowgreen",
+          "lightpink",
+        ];
+
+        for (let i = 0; i < oLis.length; i++) {
+          oLis[i].style.backgroundColor = bgColors[i];
+        }
+        let oFloors = document.querySelectorAll("ol>li");
+        let height = getScreen().height;
+        for (let i = 0; i < oFloors.length; i++) {
+          currentItem = oFloors[0];
+          oFloors[i].onclick = function () {
+            this.classList.add("selected");
+            currentItem.classList.remove("selected");
+            currentItem = this;
+            //window.scrollTo(0, i * height);
+            esasMove(i * height);
+          };
+        }
+
+        function esasMove(target) {
+          let timer, step;
+
+          timer && clearInterval(timer);
+
+          timer = setInterval(function () {
+            let position = getPageScroll().y;
+            step = (target - position) * 0.3;
+            position += step;
+            if (Math.abs(Math.floor(step)) < 1) {
+              window.scrollTo(0, target);
+              clearInterval(timer);
+            } else {
+              window.scrollTo(0, position);
+            }
+          }, 200);
+        }
+      };
+    </script>
+    <script src="./js/tools.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li>第1层楼</li>
+      <li>第2层楼</li>
+      <li>第3层楼</li>
+      <li>第4层楼</li>
+      <li>第5层楼</li>
+    </ul>
+    <ol>
+      <li class="selected">第1层楼</li>
+      <li>第2层楼</li>
+      <li>第3层楼</li>
+      <li>第4层楼</li>
+      <li>第5层楼</li>
+    </ol>
+  </body>
+</html>

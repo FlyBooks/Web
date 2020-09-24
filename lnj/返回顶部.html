@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>返回顶部</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      img {
+        width: 100%;
+        vertical-align: bottom;
+      }
+      span {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: cornflowerblue;
+        display: inline-block;
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        text-align: center;
+        line-height: 50px;
+        display: none;
+      }
+    </style>
+    <script src="./js/tools.js"></script>
+    <script>
+      window.onload = function () {
+        let oTop = document.querySelector("span");
+        window.onscroll = function () {
+          if (getPageScroll().y > 200) {
+            oTop.style.display = "block";
+            let timer,
+              position = getPageScroll().y,
+              step;
+            oTop.onclick = function () {
+              timer && clearInterval(timer);
+              timer = setInterval(function () {
+                step = position * 0.3;
+                position -= step;
+                if (Math.abs(Math.floor(step)) < 1) {
+                  window.scrollTo(0, 0);
+                  clearInterval(timer);
+                } else {
+                  window.scrollTo(0, position);
+                }
+              }, 50);
+            };
+          } else {
+            oTop.style.display = "none";
+          }
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <img src="./images/nba-top.jpg" alt="" />
+    <img src="./images/nba-nav.jpg" alt="" />
+    <img src="./images/nba-body.jpg" alt="" />
+    <span>TOP</span>
+  </body>
+</html>

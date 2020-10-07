@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖练习</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      div {
+        background-color: red;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <script src="./js/tools.js"></script>
+    <script>
+      window.onload = function () {
+        let oDiv = document.querySelector("div");
+
+        half();
+
+        window.onresize = throttle(function () {
+          half();
+          console.log(111);
+        });
+
+        function half() {
+          const { width, height } = getScreen();
+          oDiv.style.width = width / 2 + "px";
+          oDiv.style.height = height / 2 + "px";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

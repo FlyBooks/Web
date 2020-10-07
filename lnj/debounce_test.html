@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>debounce封装</title>
+    <script>
+      window.onload = function () {
+        let oInput = document.querySelector("input");
+
+        function test(event) {
+          console.log("haha~", event);
+        }
+
+        function debounce(fn, delay = 1000) {
+          let timerId = null;
+
+          return function (...args) {
+            timerId && clearTimeout(timerId);
+            timerId = setTimeout(() => {
+              fn.apply(this, args);
+            }, delay);
+          };
+        }
+        oInput.oninput = debounce(test, 1000);
+      };
+    </script>
+  </head>
+  <body>
+    <input type="text" />
+  </body>
+</html>

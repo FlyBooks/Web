@@ -60,7 +60,6 @@ function waterFall(column, oItems) {
   for (let i = 0; i < oItems.length; i++) {
     let item = oItems[i];
 
-    console.log(column, "column");
     if (i < column) {
       item.style.position = "";
       firstLineHeight.push(item.offsetHeight);
@@ -71,7 +70,6 @@ function waterFall(column, oItems) {
       });
       item.style.position = "absolute";
       item.style.top = minOffsetHeight + "px";
-      console.log(minIndex, "minIndex", minOffsetHeight, firstLineHeight);
 
       item.style.left = oItems[minIndex].offsetLeft + "px";
       firstLineHeight[minIndex] += item.offsetHeight;

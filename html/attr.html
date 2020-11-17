@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      window.onload = function () {
+        function disable_button(ID, SELECTOR) {
+          var $button = SELECTOR ? $(SELECTOR) : $("#" + ID);
+          console.log($button);
+          // $button.attr("disabled", true); //fix issue: after hover buttom, button text is unclear
+          $button.prop("disabled", true);
+        }
+
+        let input = document.querySelector("input");
+        disable_button("yes");
+        $("#yes").click(function () {
+          alert(123);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <input type="checkbox" id="check123" />
+    <button id="yes" type="submit">hhh</button>
+  </body>
+</html>

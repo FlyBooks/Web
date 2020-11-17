@@ -12,6 +12,7 @@ sub new{
 
 sub useCall{
     my ($self) = @_;
+    say  Data::Dumper::Dumper($self);
     my  @params = caller;
     say Data::Dumper::Dumper(\@params);
 }

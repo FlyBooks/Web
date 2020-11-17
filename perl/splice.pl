@@ -28,10 +28,20 @@ say join(',',@remove1);
 #param3 删除的个数
 #param4 需要插入的数组
 
-my @array2 = 0..5;
-my @newarray2 = splice @array2,2,1,qw(aa bb cc);
+# my @array2 = 0..5;
+# my @newarray2 = splice @array2,2,1,qw(aa bb cc);
 
-print "===========four parameters===================\n";
-say join(',',@array2);
-say join(',',@newarray2);
+# print "===========four parameters===================\n";
+# say join(',',@array2);
+# say join(',',@newarray2);
+# say('hello'x3);
 
+
+# sub nary_print {
+#   my $n = shift;
+#   while (my @next_n = splice @_, 0, $n) {
+#     say join q{ -- }, @next_n;
+#   }
+# }
+
+# nary_print(3, qw(a b c d e f g h));

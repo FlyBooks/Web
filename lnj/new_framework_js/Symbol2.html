@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="./MyIterator.js"></script>
+  <script>
+    let name = Symbol("name");
+    console.log(name);
+    let obj = {
+      [name]: "Eva",
+      age: 18,
+    };
+    let obj2 = {
+      name: "Taylor",
+      age: 20,
+      gender: "female",
+    };
+
+    // for (let value of obj2) {
+    //   console.log(value);
+    // }
+
+    let arr = ["Eva", "Taylor", "Younger"];
+
+    let it = arr[Symbol.iterator]();
+    console.log(it.next());
+    console.log(it.next());
+    console.log(it.next());
+    console.log(it.next());
+
+    let myArr = new MyIterator(1, 2, 3);
+    let it2 = myArr[Symbol.iterator]();
+    console.log(it2.next());
+    console.log(it2.next());
+    console.log(it2.next());
+    console.log(it2.next());
+    // console.log(it2.next());
+  </script>
+  <body></body>
+</html>

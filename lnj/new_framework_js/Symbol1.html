@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let name = Symbol("name");
+      let say = Symbol("say");
+      let obj = {
+        [name]: "Eva",
+        [say]: function () {
+          return "hello";
+        },
+      };
+
+      obj.name = "Lulu";
+      console.log(obj);
+    </script>
+  </head>
+  <body></body>
+</html>

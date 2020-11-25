@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>catch</title>
+    <script>
+      let promise = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          // resolve("successfully~~~");
+          reject("failed ^^");
+        }, 500);
+      });
+
+      promise.then(function (error) {
+        console.log(error, 123);
+      }); //如果上一个promise有错误，则一定要写catch否则会报错；只要是promise的状态是失败的，如果没有监听就会报错
+
+      // p2.then(function (data) {
+      //   console.log("hhhh");
+      // });
+    </script>
+  </head>
+  <body></body>
+</html>

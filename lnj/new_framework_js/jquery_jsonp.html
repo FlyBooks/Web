@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      $.ajax({
+        url:
+          "http://127.0.0.1:80/Projects/Web/lnj/new_framework_js/php/jquery.php",
+        dataType: "jsonp", //跨域请求数据
+        data: {
+          name: "Eva",
+          age: 19,
+        },
+        success: function (msg) {
+          console.log(msg);
+        },
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

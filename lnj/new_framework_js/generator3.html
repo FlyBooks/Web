@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>generator</title>
+  </head>
+  <script>
+    function request() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve("数据加载完成！");
+        }, 2000);
+      });
+    }
+
+    function* gen() {
+      yield request();
+      yield request();
+      yield request();
+    }
+    let it = gen();
+    it.next()
+      .value.then(function (data) {
+        console.log(data, 1);
+        return it.next().value;
+      })
+      .then(function (data) {
+        console.log(data, 2);
+        return it.next().value;
+      })
+      .then(function (data) {
+        console.log(data, 3);
+        return it.next().value;
+      });
+  </script>
+  <body></body>
+</html>

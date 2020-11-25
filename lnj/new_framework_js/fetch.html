@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch</title>
+    <script>
+      window.onload = function () {
+        // fetch("http://127.0.0.1:80/Projects/Web/lnj/new_framework_js/echo.php", {
+        //   method: "post",
+        //   body: JSON.stringify({ job: "student", age: 18 }),
+        // })
+        //   .then(function (res) {
+        //     return res.text();
+        //   })
+        //   .then(function (data) {
+        //     console.log(data);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
+
+        fetch(
+          "http://127.0.0.1:80/Projects/Web/lnj/new_framework_js/echo.php",
+          {
+            method: "post",
+            body: JSON.stringify({ teacher: "zq", age: 666 }),
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+          .then(function (res) {
+            // console.log(res.text());
+            return res.text();
+            // return res;
+          })
+          .then(function (data) {
+            console.log( data);
+          })
+          .catch(function (e) {
+            console.log(e);
+          });
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

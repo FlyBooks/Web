@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script></script>
+    <script>
+      window.onload = function () {
+        let oUl = document.createElement("ul");
+        document.body.appendChild(oUl);
+        $("input").on("input", function (e) {
+          $.ajax({
+            dataType: "jsonp",
+            data: {
+              wd: this.value,
+              prod: "pc",
+              from: "pc_web",
+            },
+            url: "https://www.baidu.com/sugrec",
+            success: function (data) {
+              console.log(data);
+              let lis = [];
+              data.g.forEach(function (value) {
+                lis.push(`<li>${value.q}</li>`);
+              });
+              oUl.innerHTML = lis.join("");
+            },
+          });
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <input type="text" />
+  </body>
+</html>

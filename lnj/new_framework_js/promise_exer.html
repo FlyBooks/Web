@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let arr = [
+          "http://127.0.0.1:80/Projects/Web/images/1.jpg",
+          "http://127.0.0.1:80/Projects/Web/images/2.jpg",
+          "http://127.0.0.1:80/Projects/Web/images/3.jpg",
+        ];
+
+        let p1 = new Promise(function (resolve, reject) {
+          let oImage1 = new Image();
+          oImage1.src = arr[0];
+          oImage1.onload = function () {
+            resolve(oImage1);
+          };
+
+          oImage1.onerror = function () {
+            reject("图片加载失败~");
+          };
+        });
+        let errorFn = function (msg) {
+          console.log(msg);
+        };
+        p1.then(function (img) {
+          document.body.appendChild(img);
+          return new Promise(function (resolve, reject) {
+            let oImage2 = new Image();
+            oImage2.src = arr[1];
+            oImage2.onload = function () {
+              resolve(oImage2);
+            };
+            oImage2.onerror = function () {
+              reject("图片加载失败");
+            };
+          });
+        })
+          .then(function (obj) {
+            document.body.appendChild(obj);
+            console.log("图片加载成功");
+            return new Promise(function (resolve, reject) {
+              let oImage3 = new Image();
+              oImage3.src = arr[2];
+              oImage3.onload = function () {
+                resolve(oImage3);
+              };
+              oImage3.onerror = function () {
+                reject("图片加载失败");
+              };
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

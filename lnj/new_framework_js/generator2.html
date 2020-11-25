@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // let obj = {
+      //   name: "Eva",
+      //   age: 18,
+      //   [Symbol.iterator]() {
+      //     let that = this;
+      //     let index = 0;
+      //     let keys = Object.keys(that);
+      //     return {
+      //       next() {
+      //         if (index < keys.length) {
+      //           return { value: that[keys[index++]], done: false };
+      //         } else {
+      //           return { value: undefined, done: true };
+      //         }
+      //       },
+      //     };
+      //   },
+      // };
+
+      // let it = obj[Symbol.iterator]();
+      // console.log(it.next());
+      // console.log(it.next());
+      // console.log(it.next());
+      // for (let value of obj) {
+      //   console.log("value", value);
+      // }
+
+      let person = {
+        name: "Eva",
+        gender: "female",
+        age: 20,
+      };
+
+      function* gen(obj) {
+        let keys = Object.keys(obj);
+        console.log(keys);
+        for (let index = 0; index < keys.length; index++) {
+          yield obj[keys[index]];
+        }
+      }
+
+      person[Symbol.iterator] = gen;
+      let it = person[Symbol.iterator](person);
+      console.log(it.next());
+    </script>
+  </head>
+  <body></body>
+</html>

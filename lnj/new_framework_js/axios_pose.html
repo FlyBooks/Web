@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>axios_get</title>
+  </head>
+  <script src="./axios.js"></script>
+  <script>
+    window.onload = function () {
+      axios
+        .post("http://127.0.0.1:80/Projects/Web/lnj/new_framework_js/echo.php",{
+          teacher: 'Tom',
+          age: 26
+        })
+        .then(function (res) {
+          console.log(res.data);
+        });
+    };
+  </script>
+  <body></body>
+</html>

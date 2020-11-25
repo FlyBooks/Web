@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let arr = [
+          "http://127.0.0.1:80/Projects/Web/images/1.jpg",
+          "http://127.0.0.1:80/Projects/Web/images/2.jpg",
+          "http://127.0.0.1:80/Projects/Web/images/3.jpg",
+        ];
+        function loadImage(url) {
+          return new Promise(function (resolve, reject) {
+            let oImage = new Image();
+            let time = Math.random() * 1000;
+            setTimeout(function () {
+              oImage.src = url;
+            }, time);
+
+            oImage.onload = function () {
+              resolve(oImage);
+            };
+            oImage.onerror = function () {
+              reject("图片加载失败");
+            };
+          });
+        }
+        // for (let i = 0; i < arr.length; i++) {
+        //   loadImage(arr[i]).then(function (data) {
+        //     console.log(i);
+        //     document.body.appendChild(data);
+        //   });
+        // }
+        let promises = [];
+        for (let i = 0; i < arr.length; i++) {
+          promises.push(loadImage(arr[i]));
+        }
+
+        Promise.all(promises)
+          .then((results) => {
+            results.forEach(function (result) {
+              document.body.appendChild(result);
+            });
+          })
+          .catch(function () {
+            console.log("图片加载失败");
+          });
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

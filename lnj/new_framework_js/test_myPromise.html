@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./myPromise.js"></script>
+    <script>
+      // let promise1 = new Promise(function (resolve, reject) {
+      //   resolve("xixi");
+      // });
+      // let promise2 = new MyPromise(function (resolve, reject) {
+      //   setTimeout(function () {
+      //     // resolve("haha");
+      //     reject("reject failed");
+      //   }, 2000);
+
+      //   // reject("pppp");
+      // });
+
+      // let pReturn = new MyPromise(function (resolve, reject) {
+      //   setTimeout(function () {
+      //     resolve("return successful promise");
+      //   }, 1000);
+      // });
+
+      // let p2 = promise2.then(
+      //   function (data) {
+      //     console.log("成功数据1", data);
+      //     return pReturn;
+      //   },
+      //   function (error) {
+      //     console.log("失败1", error);
+      //     return pReturn;
+      //   }
+      // );
+
+      // p2.then(
+      //   function (data) {
+      //     console.log("成功数据2", data);
+      //   },
+      //   function (error) {
+      //     console.log("2222222222222", error);
+      //   }
+      // );
+
+      // let oprimise = new Promise(function (resolve, reject) {
+      //   console.log(2333);
+      //   resolve("official success");
+      // });
+
+      // let p2 = new Promise(function (resolve, reject) {
+      //   reject("failure");
+      // });
+
+      // oprimise
+      //   .then(function (data) {
+      //     console.log(data, "成功1");
+      //     return p2;
+      //   })
+      //   .then(
+      //     function (data) {
+      //       console.log(data, "成功2");
+      //     },
+      //     function (error) {
+      //       console.log(error, "失败2");
+      //     }
+      //   );
+
+      let myPromise = new MyPromise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve("success");
+        }, 2000);
+      });
+
+      myPromise
+        .then(function (data) {
+          xxxx;
+          console.log(data);
+        })
+        .catch(function (e) {
+          console.log(e, "catch");
+        });
+    </script>
+  </head>
+  <body></body>
+</html>

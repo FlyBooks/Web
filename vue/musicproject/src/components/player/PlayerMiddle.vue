@@ -1,7 +1,7 @@
 <template>
   <swiper class="banner">
     <swiper-slide :options="swiperOptions">
-      <div class="cd-wrapper">
+      <div class="cd-wrapper" ref="img">
         <img
           src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
           alt=""
@@ -126,7 +126,7 @@
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import ScrollView from "../../components/ScrollView.vue";
-
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "PlayerMiddle",
   components: {
@@ -146,6 +146,21 @@ export default {
       },
     };
   },
+  methods: {
+    ...mapActions(["setIsPlaying"]),
+  },
+  computed: {
+    ...mapGetters(["isPlaying"]),
+  },
+  watch: {
+    isPlaying(newValue, oldValue) {
+      if (newValue) {
+        this.$refs.img.classList.add("inactive");
+      } else {
+        this.$refs.img.classList.remove("inactive");
+      }
+    },
+  },
 };
 </script>
 
@@ -156,8 +171,8 @@ export default {
   position: fixed;
   top: 150px;
   bottom: 250px;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   .cd-wrapper {
     display: block;
     width: 500px;
@@ -166,6 +181,11 @@ export default {
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
+    animation: sport 3s linear infinite;
+    animation-play-state: running;
+    &.inactive {
+      animation-play-state: paused;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -177,13 +197,21 @@ export default {
     @include font_size($font_medium);
     @include text_color();
   }
-  .float-lyric{
-    li{
+  .float-lyric {
+    li {
       text-align: center;
       @include font_size($font_medium);
       @include text_color();
-      margin:10px 0;
+      margin: 10px 0;
     }
+  }
+}
+@keyframes sport {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

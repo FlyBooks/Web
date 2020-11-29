@@ -5,4 +5,10 @@ export default {
   setIsMiniPlayer({ commit }, flag) {
     commit("setIsMiniPlayer", flag);
   },
+  setIsPlaying({ commit }, flag) {
+    commit("setIsPlaying", flag);
+  },
+  setModeType({ commit }, value) {
+    commit("setModeType", value);
+  },
 };

@@ -1,37 +1,53 @@
 <template>
   <div class="mini-player" v-show="this.isMiniPlayer">
     <div class="player-left" @click="showFullpagePlayer()">
-      <img
-        src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
-        alt=""
-      />
+      <div class="wrap-img" ref="img">
+        <img
+          src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
+          alt=""
+        />
+      </div>
       <div class="song-info">
         <h3>演员</h3>
         <p>薛之谦</p>
       </div>
     </div>
     <div class="player-right">
-      <div class="play"></div>
+      <div class="play" @click="changePlay" ref="playMusic"></div>
       <div class="list" @click="showListPlayer"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "MiniPlayer",
   computed: {
-    ...mapState(["isMiniPlayer"]),
+    ...mapState(["isMiniPlayer", "isPlaying"]),
   },
   methods: {
-    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer"]),
+    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer", "setIsPlaying"]),
     showListPlayer() {
       this.$emit("showlistplayer");
     },
     showFullpagePlayer() {
       this.setIsFullpagePlay(true);
       this.setIsMiniPlayer(false);
+    },
+    changePlay() {
+      this.setIsPlaying(!this.isPlaying);
+    },
+  },
+  watch: {
+    isPlaying(newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playMusic.classList.add("active");
+        this.$refs.img.classList.add("inactive");
+      } else {
+        this.$refs.playMusic.classList.remove("active");
+        this.$refs.img.classList.remove("inactive");
+      }
     },
   },
 };
@@ -53,11 +69,19 @@ export default {
   .player-left {
     display: flex;
     padding: 0px 20px;
-    img {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
+    .wrap-img {
+      animation: sport 3s linear infinite;
+      animation-play-state: running;
+      &.inactive {
+        animation-play-state: paused;
+      }
+      img {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+      }
     }
+
     .song-info {
       /* display: flex;
       flex-direction: column;
@@ -80,15 +104,27 @@ export default {
     display: flex;
     align-items: center;
     .play {
-      @include bg_img("../../assets/images/play");
+      @include bg_img("../../assets/images/pause");
       width: 70px;
       height: 70px;
+      &.active {
+        @include bg_img("../../assets/images/play");
+      }
     }
     .list {
       @include bg_img("../../assets/images/list");
       width: 100px;
       height: 100px;
     }
+  }
+}
+
+@keyframes sport {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

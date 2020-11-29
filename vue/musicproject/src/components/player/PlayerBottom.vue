@@ -10,9 +10,9 @@
       <span>00:00</span>
     </div>
     <div class="bottom-control">
-      <div class="mode"></div>
+      <div class="mode loop" ref="mode" @click="changeMode"></div>
       <div class="prev"></div>
-      <div class="play"></div>
+      <div class="play" @click="changePlayState()" ref="playLabel"></div>
       <div class="next"></div>
       <div class="fav"></div>
     </div>
@@ -20,8 +20,50 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import modeType from "../../store/modeType.js";
+
 export default {
   name: "PlayerBottom",
+  methods: {
+    ...mapActions(["setIsPlaying", "setModeType"]),
+    changePlayState() {
+      this.setIsPlaying(!this.isPlaying);
+    },
+    changeMode() {
+      if (this.modeType === modeType.loop) {
+        this.setModeType(modeType.one);
+      } else if (this.modeType === modeType.one) {
+        this.setModeType(modeType.random);
+      } else if (this.modeType === modeType.random) {
+        this.setModeType(modeType.loop);
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(["isPlaying", "modeType"]),
+  },
+  watch: {
+    isPlaying(newValue, oldValue) {
+      if (newValue) {
+        this.$refs.playLabel.classList.add("active");
+      } else {
+        this.$refs.playLabel.classList.remove("active");
+      }
+    },
+    modeType(newValue) {
+      if (newValue === modeType.loop) {
+        this.$refs.mode.classList.remove("random");
+        this.$refs.mode.classList.add("loop");
+      } else if (newValue === modeType.one) {
+        this.$refs.mode.classList.remove("loop");
+        this.$refs.mode.classList.add("one");
+      } else if (newValue === modeType.random) {
+        this.$refs.mode.classList.remove("one");
+        this.$refs.mode.classList.add("random");
+      }
+    },
+  },
 };
 </script>
 
@@ -79,13 +121,24 @@ export default {
       height: 84px;
     }
     .mode {
-      @include bg_img("../../assets/images/loop");
+      &.loop {
+        @include bg_img("../../assets/images/loop");
+      }
+      &.one {
+        @include bg_img("../../assets/images/one");
+      }
+      &.random {
+        @include bg_img("../../assets/images/shuffle");
+      }
     }
     .prev {
       @include bg_img("../../assets/images/prev");
     }
     .play {
-      @include bg_img("../../assets/images/play");
+      @include bg_img("../../assets/images/pause");
+      &.active {
+        @include bg_img("../../assets/images/play");
+      }
     }
     .next {
       @include bg_img("../../assets/images/next");

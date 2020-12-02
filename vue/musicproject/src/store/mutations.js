@@ -11,4 +11,7 @@ export default {
   setModeType(state, value) {
     state.modeType = value;
   },
+  setIsShowListPlayer(state, value) {
+    state.isShowListPlayer = value;
+  },
 };

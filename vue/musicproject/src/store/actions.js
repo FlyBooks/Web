@@ -11,4 +11,7 @@ export default {
   setModeType({ commit }, value) {
     commit("setModeType", value);
   },
+  setIsShowListPlayer({ commit }, value) {
+    commit("setIsShowListPlayer", value);
+  },
 };

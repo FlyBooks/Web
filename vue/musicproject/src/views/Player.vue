@@ -1,7 +1,7 @@
 <template>
   <div>
     <fullpage-player></fullpage-player>
-    <mini-player @showlistplayer="showListPlayer()"></mini-player>
+    <mini-player></mini-player>
     <list-player ref="listPlayer"></list-player>
   </div>
 </template>
@@ -17,11 +17,6 @@ export default {
     FullpagePlayer,
     MiniPlayer,
     ListPlayer,
-  },
-  methods: {
-    showListPlayer() {
-      this.$refs.listPlayer.showPlayer();
-    },
   },
 };
 </script>

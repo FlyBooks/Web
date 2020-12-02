@@ -8,4 +8,7 @@ export default {
   modeType(state) {
     return state.modeType;
   },
+  isShowListPlayer(state) {
+    return state.isShowListPlayer;
+  },
 };

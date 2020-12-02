@@ -155,9 +155,9 @@ export default {
   watch: {
     isPlaying(newValue, oldValue) {
       if (newValue) {
-        this.$refs.img.classList.add("inactive");
-      } else {
         this.$refs.img.classList.remove("inactive");
+      } else {
+        this.$refs.img.classList.add("inactive");
       }
     },
   },

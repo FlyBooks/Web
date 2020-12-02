@@ -46,9 +46,9 @@ export default {
   watch: {
     isPlaying(newValue, oldValue) {
       if (newValue) {
-        this.$refs.playLabel.classList.add("active");
-      } else {
         this.$refs.playLabel.classList.remove("active");
+      } else {
+        this.$refs.playLabel.classList.add("active");
       }
     },
     modeType(newValue) {
@@ -136,6 +136,7 @@ export default {
     }
     .play {
       @include bg_img("../../assets/images/pause");
+
       &.active {
         @include bg_img("../../assets/images/play");
       }

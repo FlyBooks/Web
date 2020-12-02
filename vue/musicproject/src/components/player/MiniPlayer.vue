@@ -27,9 +27,14 @@ export default {
     ...mapState(["isMiniPlayer", "isPlaying"]),
   },
   methods: {
-    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer", "setIsPlaying"]),
+    ...mapActions([
+      "setIsFullpagePlay",
+      "setIsMiniPlayer",
+      "setIsPlaying",
+      "setIsShowListPlayer",
+    ]),
     showListPlayer() {
-      this.$emit("showlistplayer");
+      this.setIsShowListPlayer(true);
     },
     showFullpagePlayer() {
       this.setIsFullpagePlay(true);
@@ -42,11 +47,11 @@ export default {
   watch: {
     isPlaying(newValue, oldValue) {
       if (newValue) {
-        this.$refs.playMusic.classList.add("active");
-        this.$refs.img.classList.add("inactive");
-      } else {
         this.$refs.playMusic.classList.remove("active");
         this.$refs.img.classList.remove("inactive");
+      } else {
+        this.$refs.playMusic.classList.add("active");
+        this.$refs.img.classList.add("inactive");
       }
     },
   },

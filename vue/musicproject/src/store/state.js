@@ -4,4 +4,5 @@ export default {
   isMiniPlayer: false,
   isPlaying: true,
   modeType: modeType.loop,
+  isShowListPlayer: false,
 };

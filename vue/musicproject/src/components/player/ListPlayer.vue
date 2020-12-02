@@ -1,5 +1,5 @@
 <template>
-  <div class="list-player" v-show="isShow">
+  <div class="list-player" v-show="isShowListPlayer">
     <div class="wrapper">
       <div class="list-top">
         <div class="play-mode">
@@ -69,12 +69,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setIsPlaying", "setModeType"]),
-    showPlayer() {
-      this.isShow = true;
-    },
+    ...mapActions(["setIsPlaying", "setModeType", "setIsShowListPlayer"]),
     hidePlayer() {
-      this.isShow = false;
+     this.setIsShowListPlayer(false);
     },
     play() {
       this.setIsPlaying(!this.isPlaying);
@@ -90,14 +87,14 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isPlaying", "modeType"]),
+    ...mapGetters(["isPlaying", "modeType", "isShowListPlayer"]),
   },
   watch: {
     isPlaying(newValue) {
       if (newValue) {
-        this.$refs.play.classList.add("active");
-      } else {
         this.$refs.play.classList.remove("active");
+      } else {
+        this.$refs.play.classList.add("active");
       }
     },
     modeType(newValue) {

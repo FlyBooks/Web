@@ -52,11 +52,32 @@ export function getAlbumContent(id) {
   });
 }
 
-export function testApi() {
-  return axiosInstance.get("get", {
+//获取歌曲信息
+export function getSongsDetail(ids) {
+  return request({
+    url: "/song/detail",
     params: {
-      name: "Selena",
-      age: 18,
+      ids,
+    },
+  });
+}
+
+//获取歌词
+export function getLyric(id) {
+  return request({
+    url: "/lyric",
+    params: {
+      id,
+    },
+  });
+}
+
+//get song video
+export function getVideoUrl(id) {
+  return request({
+    url: "/song/url",
+    params: {
+      id,
     },
   });
 }

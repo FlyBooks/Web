@@ -71,7 +71,7 @@ export default {
   methods: {
     ...mapActions(["setIsPlaying", "setModeType", "setIsShowListPlayer"]),
     hidePlayer() {
-     this.setIsShowListPlayer(false);
+      this.setIsShowListPlayer(false);
     },
     play() {
       this.setIsPlaying(!this.isPlaying);
@@ -161,6 +161,8 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 700px;
+      overflow: hidden;
       .item {
         border-top: 1px solid #cccccc;
         height: 100px;

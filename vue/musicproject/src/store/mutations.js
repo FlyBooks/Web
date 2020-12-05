@@ -14,4 +14,10 @@ export default {
   setIsShowListPlayer(state, value) {
     state.isShowListPlayer = value;
   },
+  setSongs(state, list) {
+    state.songs = list;
+  },
+  setLyric(state, lyric) {
+    state.currentLyric = lyric;
+  },
 };

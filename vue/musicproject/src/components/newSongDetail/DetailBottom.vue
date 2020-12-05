@@ -8,7 +8,7 @@
       v-for="item in playlist"
       :key="item.id"
       class="item"
-      @click.stop="showFullpagePlayer()"
+      @click.stop="showFullpagePlayer(item.id)"
     >
       <h3>{{ item.name }}</h3>
       <div>{{ item.al.name }}-{{ item.ar[0].name }}</div>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "DetailBottom",
   props: {
@@ -27,8 +29,12 @@ export default {
     },
   },
   methods: {
-    showFullpagePlayer() {
+    ...mapActions(["setSongsDetail", "setCurrentLyric", "setIsMiniPlayer"]),
+    showFullpagePlayer(id) {
+      this.setSongsDetail([id]);
       this.$store.dispatch("setIsFullpagePlay", true);
+      this.setCurrentLyric(id);
+      this.setIsMiniPlayer(false);
     },
   },
 };

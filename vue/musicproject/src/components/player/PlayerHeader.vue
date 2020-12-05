@@ -2,15 +2,15 @@
   <div class="player-header">
     <div class="left" @click="hiddleFullpagePlayer()"></div>
     <div class="middle">
-      <h3>演员</h3>
-      <p>薛之谦</p>
+      <h3>{{ this.currentSong.name }}</h3>
+      <p>{{ this.currentSong.artist }}</p>
     </div>
     <div class="right"></div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PlayerHeader",
   methods: {
@@ -19,6 +19,9 @@ export default {
       this.setIsFullpagePlay(false);
       this.setIsMiniPlayer(true);
     },
+  },
+  computed: {
+    ...mapGetters(["currentSong"]),
   },
 };
 </script>

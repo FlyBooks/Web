@@ -2,14 +2,11 @@
   <div class="mini-player" v-show="this.isMiniPlayer">
     <div class="player-left" @click="showFullpagePlayer()">
       <div class="wrap-img" ref="img">
-        <img
-          src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
-          alt=""
-        />
+        <img :src="currentSong.picUrl" alt="" />
       </div>
       <div class="song-info">
-        <h3>演员</h3>
-        <p>薛之谦</p>
+        <h3>{{ currentSong.name }}</h3>
+        <p>{{ currentSong.artist }}</p>
       </div>
     </div>
     <div class="player-right">
@@ -25,6 +22,7 @@ export default {
   name: "MiniPlayer",
   computed: {
     ...mapState(["isMiniPlayer", "isPlaying"]),
+    ...mapGetters(["currentSong"]),
   },
   methods: {
     ...mapActions([

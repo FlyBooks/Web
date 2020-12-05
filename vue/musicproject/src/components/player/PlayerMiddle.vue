@@ -2,119 +2,16 @@
   <swiper class="banner">
     <swiper-slide :options="swiperOptions">
       <div class="cd-wrapper" ref="img">
-        <img
-          src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
-          alt=""
-        />
+        <img :src="currentSong.picUrl" alt="" />
       </div>
-      <p class="lyric">hihi</p>
+      <p class="lyric">{{ firstLineLyric }}</p>
     </swiper-slide>
     <swiper-slide class="float-lyric">
       <scroll-view>
         <ul>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li v-for="(value, index) in currentLyric" :key="index">
+            {{ value }}
+          </li>
         </ul>
       </scroll-view>
     </swiper-slide>
@@ -150,7 +47,12 @@ export default {
     ...mapActions(["setIsPlaying"]),
   },
   computed: {
-    ...mapGetters(["isPlaying"]),
+    ...mapGetters(["isPlaying", "currentSong", "currentLyric"]),
+    firstLineLyric() {
+      for (let key in this.currentLyric) {
+        return this.currentLyric[key];
+      }
+    },
   },
   watch: {
     isPlaying(newValue, oldValue) {
@@ -181,7 +83,7 @@ export default {
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
-    animation: sport 3s linear infinite;
+    animation: sport 5s linear infinite;
     animation-play-state: running;
     &.inactive {
       animation-play-state: paused;

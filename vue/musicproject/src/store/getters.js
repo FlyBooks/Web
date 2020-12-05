@@ -11,4 +11,18 @@ export default {
   isShowListPlayer(state) {
     return state.isShowListPlayer;
   },
+  currentSong(state) {
+    if (Object.keys(state.songs).length === 0) {
+      return {
+        name: "",
+        artist: "",
+        picUrl: null,
+        id: "",
+      };
+    }
+    return state.songs[state.currentIndex];
+  },
+  currentLyric(state) {
+    return state.currentLyric;
+  },
 };

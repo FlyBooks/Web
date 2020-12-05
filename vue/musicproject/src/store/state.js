@@ -5,4 +5,7 @@ export default {
   isPlaying: true,
   modeType: modeType.loop,
   isShowListPlayer: false,
+  songs: [],
+  currentIndex: 0,
+  currentLyric: {},
 };

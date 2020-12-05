@@ -6,10 +6,7 @@
       <play-bottom></play-bottom>
     </div>
     <div class="bg-img">
-      <img
-        src="http://p3.music.126.net/JzsER44sOReoM6mR8XKnsw==/109951165182029540.jpg"
-        alt=""
-      />
+      <img :src="currentSong.picUrl" alt="" />
     </div>
   </div>
 </template>
@@ -27,9 +24,9 @@ export default {
     PlayerMiddle,
     PlayBottom,
   },
-  computed:{
-    ...mapGetters(["isFullpagePlay"])
-  }
+  computed: {
+    ...mapGetters(["isFullpagePlay", "currentSong"]),
+  },
 };
 </script>
 

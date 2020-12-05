@@ -3,23 +3,27 @@ use warnings;
 use feature 'say';
 use Data::Dumper;
 
-# my $s_string = "perlmeme.org";
-# my $s_char = 'l';
+# open (my $fh, '<', "./flag.perl") or die "could not open file  $!";
+# my $s_content ='';
+# while (<$fh>) {
+#   chomp($_);
+#       $s_content .= $_;
+# }
 
-# my $result = index($s_string,$s_char);
-# say $result;
+# close ($fh);
+# say Data::Dumper::Dumper($s_content);
 
-
-# my $match = ".owaht_www";
-
-# $match =~ /\.o(.*)_(.*)/;
-# say $1;
-# say $2;
-
-sub fun{
-  my ($hr, $name) = @_;
-  Data::Dumper::Dumper($hr);
-  Data::Dumper::Dumper($name);
+# 只读方式打开文件
+open(DATA1, "<./flag.perl");
+ 
+# 打开新文件并写入
+open(DATA2, ">file2.txt");
+ 
+# 拷贝数据
+while(<DATA1>)
+{
+   print DATA2 $_;
 }
+close( DATA1 );
+close( DATA2 );
 
-fun(_ {name: 'Eva'})

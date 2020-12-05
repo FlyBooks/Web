@@ -36,8 +36,9 @@ export default {
   methods: {
     showFullpagePlayer() {
       this.setIsFullpagePlay(true);
+      this.setIsMiniPlayer(false);
     },
-    ...mapActions(["setIsFullpagePlay"]),
+    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer"]),
   },
 };
 </script>

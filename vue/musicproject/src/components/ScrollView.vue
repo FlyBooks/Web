@@ -48,6 +48,11 @@ observer:观察者对象
         fn(this.y);
       });
     },
+    refresh() {
+      setTimeout(() => {
+        this.iscroll.refresh();
+      }, 100);
+    },
   },
 };
 </script>

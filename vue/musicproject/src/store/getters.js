@@ -25,4 +25,7 @@ export default {
   currentLyric(state) {
     return state.currentLyric;
   },
+  songs(state) {
+    return state.songs;
+  },
 };

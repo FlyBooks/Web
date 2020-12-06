@@ -36,7 +36,6 @@ export default {
     },
     showFullpagePlayer() {
       this.setIsFullpagePlay(true);
-      this.setIsMiniPlayer(false);
     },
     changePlay() {
       this.setIsPlaying(!this.isPlaying);

@@ -3,11 +3,6 @@
     <Header></Header>
     <Tabbar></Tabbar>
     <router-view></router-view>
-    <!-- <div class="theme">
-      <button @click="changeThemeColor('color1')"></button>
-      <button @click="changeThemeColor('color2')"></button>
-      <button @click="changeThemeColor('color3')"></button>
-    </div> -->
     <Player></Player>
   </div>
 </template>

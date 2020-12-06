@@ -8,39 +8,19 @@
           <p v-if="this.modeType === 1">单曲循环</p>
           <p v-if="this.modeType === 2">随机播放</p>
         </div>
-        <div class="del"></div>
+        <div class="del" @click="delAllSong()"></div>
       </div>
       <div class="list-middle">
-        <scroll-view>
+        <scroll-view ref="scrollview">
           <ul>
-            <li class="item">
+            <li class="item" v-for="(value, index) in songs" :key="value.id">
               <div class="item-left">
-                <div class="play-img" @click="play" ref="play"></div>
-                <p>演员</p>
+                <div class="play-img" @click="play()"></div>
+                <p>{{ value.name }}</p>
               </div>
               <div class="item-right">
                 <div class="fav"></div>
-                <div class="del"></div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="item-left">
-                <div class="play-img"></div>
-                <p>演员</p>
-              </div>
-              <div class="item-right">
-                <div class="fav"></div>
-                <div class="del"></div>
-              </div>
-            </li>
-            <li class="item">
-              <div class="item-left">
-                <div class="play-img"></div>
-                <p>演员</p>
-              </div>
-              <div class="item-right">
-                <div class="fav"></div>
-                <div class="del"></div>
+                <div class="del" @click="delSong(index)"></div>
               </div>
             </li>
           </ul>
@@ -69,9 +49,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setIsPlaying", "setModeType", "setIsShowListPlayer"]),
+    ...mapActions([
+      "setIsPlaying",
+      "setModeType",
+      "setIsShowListPlayer",
+      "setIsMiniPlayer",
+      "delSongs",
+    ]),
     hidePlayer() {
       this.setIsShowListPlayer(false);
+      this.setIsMiniPlayer(true);
     },
     play() {
       this.setIsPlaying(!this.isPlaying);
@@ -85,20 +72,28 @@ export default {
         this.setModeType(modeType.loop);
       }
     },
+    delSong(index) {
+      this.delSongs(index);
+    },
+    delAllSong() {
+      this.delSong();
+    },
   },
   computed: {
-    ...mapGetters(["isPlaying", "modeType", "isShowListPlayer"]),
+    ...mapGetters(["isPlaying", "modeType", "isShowListPlayer", "songs"]),
   },
   watch: {
-    isPlaying(newValue) {
-      if (newValue) {
-        this.$refs.play.classList.remove("active");
-      } else {
-        this.$refs.play.classList.add("active");
-      }
-    },
+    // isPlaying(newValue) {
+    //   console.log(this.$refs.play, "play");
+    // if (newValue) {
+    //   this.$refs.play.classList.remove("active");
+    // } else {
+    //   this.$refs.play.classList.add("active");
+    // }
+    // },
     modeType(newValue) {
       if (newValue === modeType.loop) {
+        console.log(this.$refs.mode, "mode");
         this.$refs.mode.classList.remove("random");
         this.$refs.mode.classList.add("loop");
       } else if (newValue === modeType.one) {
@@ -107,6 +102,11 @@ export default {
       } else if (newValue === modeType.random) {
         this.$refs.mode.classList.remove("one");
         this.$refs.mode.classList.add("random");
+      }
+    },
+    isShowListPlayer(newValue) {
+      if (newValue) {
+        this.$refs.scrollview.refresh();
       }
     },
   },

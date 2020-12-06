@@ -1,6 +1,6 @@
 <template>
   <ul class="detail-bottom">
-    <li class="play-all">
+    <li class="play-all" @click="playAllSongs()">
       <div class="play-img"></div>
       <p class="play-bottom">播放全部</p>
     </li>
@@ -34,6 +34,14 @@ export default {
       this.setSongsDetail([id]);
       this.$store.dispatch("setIsFullpagePlay", true);
       this.setCurrentLyric(id);
+      this.setIsMiniPlayer(false);
+    },
+    playAllSongs() {
+      const songIds = this.playlist.map((list) => {
+        return list.id;
+      });
+      this.setSongsDetail(songIds);
+      this.$store.dispatch("setIsFullpagePlay", true);
       this.setIsMiniPlayer(false);
     },
   },

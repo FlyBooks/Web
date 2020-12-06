@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setIsPlaying"]),
+    ...mapActions(["setIsPlaying", "setLyric", "setCurrentLyric"]),
   },
   computed: {
     ...mapGetters(["isPlaying", "currentSong", "currentLyric"]),
@@ -60,6 +60,11 @@ export default {
         this.$refs.img.classList.remove("inactive");
       } else {
         this.$refs.img.classList.add("inactive");
+      }
+    },
+    currentSong(newValue) {
+      if (newValue) {
+        this.setCurrentLyric(newValue.id);
       }
     },
   },

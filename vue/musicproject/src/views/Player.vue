@@ -2,7 +2,7 @@
   <div>
     <fullpage-player></fullpage-player>
     <mini-player></mini-player>
-    <list-player ref="listPlayer"></list-player>
+    <list-player></list-player>
     <audio :src="currentSong.url"></audio>
   </div>
 </template>

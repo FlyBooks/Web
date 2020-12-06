@@ -19,9 +19,10 @@ export default {
     const res = await getSongsDetail(ids.join(","));
     const musicUrl = await getVideoUrl(ids.join(","));
     const list = [];
+
     res.data.songs.forEach((value, index) => {
       const song = {
-        name: value.al.name,
+        name: value.name,
         picUrl: value.al.picUrl,
       };
 
@@ -31,7 +32,7 @@ export default {
       }, "");
 
       song.artist = artist;
-      song.id = ids[index];
+      song.id = value.id;
       list.push(song);
     });
 
@@ -47,6 +48,10 @@ export default {
       commit("setLyric", newLyric);
     }
   },
+  delSongs({ commit }, index) {
+    commit("delSongs", index);
+  },
+
 };
 
 function parseLyric(lyric) {

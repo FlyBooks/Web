@@ -9,7 +9,7 @@
           v-for="song in newsong"
           :key="song.id"
           class="song-item"
-          @click="showFullpagePlayer()"
+          @click="showFullpagePlayer(song.id)"
         >
           <img v-lazy="song.song.album.picUrl" alt="" />
           <div>
@@ -34,11 +34,12 @@ export default {
     },
   },
   methods: {
-    showFullpagePlayer() {
+    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer", "setSongsDetail"]),
+    showFullpagePlayer(songId) {
+      this.setSongsDetail([songId]);
       this.setIsFullpagePlay(true);
       this.setIsMiniPlayer(false);
     },
-    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer"]),
   },
 };
 </script>

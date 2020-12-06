@@ -41,8 +41,8 @@ export default {
   async setCurrentLyric({ commit }, id) {
     const res = await getLyric(id);
 
-    if (res.data.nolyric) {
-      commit("setLyric", {});
+    if (res.data.nolyric || res.data.uncollected) {
+      commit("setLyric", { 0: "no lyric" });
     } else {
       const newLyric = parseLyric(res.data.lrc.lyric);
       commit("setLyric", newLyric);
@@ -51,7 +51,6 @@ export default {
   delSongs({ commit }, index) {
     commit("delSongs", index);
   },
-
 };
 
 function parseLyric(lyric) {

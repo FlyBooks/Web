@@ -26,7 +26,11 @@ export default {
         picUrl: value.al.picUrl,
       };
 
-      song.url = musicUrl.data.data[index].url;
+      let audioIndex = musicUrl.data.data.findIndex((url) => {
+        return url.id === value.id;
+      });
+      song.url = musicUrl.data.data[audioIndex].url;
+
       const artist = value.ar.reduce((oldValue, newValue) => {
         return oldValue ? oldValue + " " + newValue.name : newValue.name;
       }, "");

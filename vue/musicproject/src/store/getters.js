@@ -28,4 +28,7 @@ export default {
   songs(state) {
     return state.songs;
   },
+  currentIndex(state) {
+    return state.currentIndex;
+  },
 };

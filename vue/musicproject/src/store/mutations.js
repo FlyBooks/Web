@@ -38,11 +38,21 @@ export default {
     } else {
       state.songs.splice(0);
     }
-
+    if (index < state.currentIndex) {
+      state.currentIndex--;
+    }
     if (state.songs.length === 0) {
       this.state.isFullpagePlay = false;
       this.state.isMiniPlayer = false;
       this.state.isShowListPlayer = false;
     }
+  },
+  setcurrentIndex(state, index) {
+    if (index < 0) {
+      index = state.songs.length - 1;
+    } else if (index > state.songs.length - 1) {
+      index = 0;
+    }
+    state.currentIndex = index;
   },
 };

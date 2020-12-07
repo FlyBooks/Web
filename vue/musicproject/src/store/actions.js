@@ -51,6 +51,9 @@ export default {
   delSongs({ commit }, index) {
     commit("delSongs", index);
   },
+  setcurrentIndex({ commit }, index) {
+    commit("setcurrentIndex", index);
+  },
 };
 
 function parseLyric(lyric) {

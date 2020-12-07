@@ -12,15 +12,24 @@
       </div>
       <div class="list-middle">
         <scroll-view ref="scrollview">
-          <ul>
-            <li class="item" v-for="(value, index) in songs" :key="value.id">
+          <ul ref="play">
+            <li
+              class="item"
+              v-for="(value, index) in songs"
+              :key="value.id"
+              @click="playSong(index)"
+            >
               <div class="item-left">
-                <div class="play-img" @click="play()"></div>
+                <div
+                  class="play-img"
+                  @click.stop="play()"
+                  v-show="currentIndex === index"
+                ></div>
                 <p>{{ value.name }}</p>
               </div>
               <div class="item-right">
                 <div class="fav"></div>
-                <div class="del" @click="delSong(index)"></div>
+                <div class="del" @click.stop="delSong(index)"></div>
               </div>
             </li>
           </ul>
@@ -55,6 +64,7 @@ export default {
       "setIsShowListPlayer",
       "setIsMiniPlayer",
       "delSongs",
+      "setcurrentIndex",
     ]),
     hidePlayer() {
       this.setIsShowListPlayer(false);
@@ -78,22 +88,29 @@ export default {
     delAllSong() {
       this.delSong();
     },
+    playSong(index) {
+      this.setcurrentIndex(index);
+    },
   },
   computed: {
-    ...mapGetters(["isPlaying", "modeType", "isShowListPlayer", "songs"]),
+    ...mapGetters([
+      "isPlaying",
+      "modeType",
+      "isShowListPlayer",
+      "songs",
+      "currentIndex",
+    ]),
   },
   watch: {
-    // isPlaying(newValue) {
-    //   console.log(this.$refs.play, "play");
-    // if (newValue) {
-    //   this.$refs.play.classList.remove("active");
-    // } else {
-    //   this.$refs.play.classList.add("active");
-    // }
-    // },
+    isPlaying(newValue) {
+      if (newValue) {
+        this.$refs.play.classList.remove("active");
+      } else {
+        this.$refs.play.classList.add("active");
+      }
+    },
     modeType(newValue) {
       if (newValue === modeType.loop) {
-        console.log(this.$refs.mode, "mode");
         this.$refs.mode.classList.remove("random");
         this.$refs.mode.classList.add("loop");
       } else if (newValue === modeType.one) {
@@ -163,6 +180,17 @@ export default {
       align-items: center;
       height: 700px;
       overflow: hidden;
+      ul {
+        &.active {
+          .item {
+            .item-left {
+              .play-img {
+                @include bg_img("../../assets/images/small_play");
+              }
+            }
+          }
+        }
+      }
       .item {
         border-top: 1px solid #cccccc;
         height: 100px;
@@ -179,9 +207,6 @@ export default {
             width: 56px;
             height: 56px;
             @include bg_img("../../assets/images/small_pause");
-            &.active {
-              @include bg_img("../../assets/images/small_play");
-            }
           }
           p {
             margin-left: 10px;

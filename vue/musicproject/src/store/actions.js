@@ -20,7 +20,7 @@ export default {
     const musicUrl = await getVideoUrl(ids.join(","));
     const list = [];
 
-    res.data.songs.forEach((value, index) => {
+    res.data.songs.forEach((value) => {
       const song = {
         name: value.name,
         picUrl: value.al.picUrl,
@@ -45,12 +45,11 @@ export default {
   async setCurrentLyric({ commit }, id) {
     const res = await getLyric(id);
 
-    if (res.data.nolyric || res.data.uncollected) {
-      commit("setLyric", { 0: "no lyric" });
-    } else {
-      const newLyric = parseLyric(res.data.lrc.lyric);
-      commit("setLyric", newLyric);
+    let newLyric = parseLyric(res.data.lrc.lyric);
+    if (Object.keys(newLyric).length === 0) {
+      newLyric = { 0: "no lyric" };
     }
+    commit("setLyric", newLyric);
   },
   delSongs({ commit }, index) {
     commit("delSongs", index);

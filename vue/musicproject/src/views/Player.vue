@@ -1,9 +1,17 @@
 <template>
   <div>
-    <fullpage-player></fullpage-player>
+    <fullpage-player
+      :audioTotalTime="this.audioTotalTime"
+      :currentTime="currentTime"
+    ></fullpage-player>
     <mini-player></mini-player>
     <list-player></list-player>
-    <audio :src="currentSong.url" ref="musicPlay"></audio>
+    <audio
+      :src="currentSong.url"
+      ref="musicPlay"
+      autoplay="autoplay"
+      @timeupdate="timeupdate"
+    ></audio>
   </div>
 </template>
 
@@ -23,6 +31,17 @@ export default {
   computed: {
     ...mapGetters(["currentSong", "isPlaying", "currentIndex"]),
   },
+  data() {
+    return {
+      audioTotalTime: 0,
+      currentTime: 0,
+    };
+  },
+  methods: {
+    timeupdate(e) {
+      this.currentTime = e.target.currentTime;
+    },
+  },
   watch: {
     isPlaying(newValue) {
       if (newValue) {
@@ -40,6 +59,16 @@ export default {
         }
       };
     },
+    currentSong(newValue) {
+      this.$refs.musicPlay.oncanplay = () => {
+        this.audioTotalTime = this.$refs.musicPlay.duration;
+      };
+    },
+  },
+  mounted() {
+    this.$refs.musicPlay.oncanplay = () => {
+      this.audioTotalTime = this.$refs.musicPlay.duration;
+    };
   },
 };
 </script>

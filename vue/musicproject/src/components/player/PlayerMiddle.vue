@@ -7,7 +7,7 @@
       <p class="lyric">{{ firstLineLyric }}</p>
     </swiper-slide>
     <swiper-slide class="float-lyric">
-      <scroll-view>
+      <scroll-view ref="lyricscroll">
         <ul>
           <li v-for="(value, index) in currentLyric" :key="index">
             {{ value }}
@@ -65,6 +65,7 @@ export default {
     currentSong(newValue) {
       if (newValue) {
         this.setCurrentLyric(newValue.id);
+        this.$refs.lyricscroll.refresh();
       }
     },
   },

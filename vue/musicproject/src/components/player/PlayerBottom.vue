@@ -1,13 +1,13 @@
 <template>
   <div class="play-bottom">
     <div class="bottom-process">
-      <span>00::00</span>
+      <span>{{ showTime(currentTime) }}</span>
       <div class="process-bar">
         <div class="process-line">
           <div class="process-dot"></div>
         </div>
       </div>
-      <span>00:00</span>
+      <span>{{ showTime(audioTotalTime) }}</span>
     </div>
     <div class="bottom-control">
       <div class="mode loop" ref="mode" @click="changeMode"></div>
@@ -25,6 +25,18 @@ import modeType from "../../store/modeType.js";
 
 export default {
   name: "PlayerBottom",
+  props: {
+    audioTotalTime: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    currentTime: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+  },
   methods: {
     ...mapActions(["setIsPlaying", "setModeType", "setcurrentIndex"]),
     changePlayState() {
@@ -44,6 +56,22 @@ export default {
     },
     nextOne() {
       this.setcurrentIndex(this.currentIndex + 1);
+    },
+    formatTime(time) {
+      let minutes = parseInt(time / 60);
+      minutes = minutes >= 10 ? minutes : "0" + minutes;
+      let seconds = parseInt(time - minutes * 60);
+      seconds = seconds >= 10 ? seconds : "0" + seconds;
+
+      return {
+        minutes,
+        seconds,
+      };
+    },
+    showTime(time) {
+      const getTime = this.formatTime(time);
+
+      return `${getTime.minutes}:${getTime.seconds}`;
     },
   },
   computed: {
@@ -69,6 +97,9 @@ export default {
         this.$refs.mode.classList.add("random");
       }
     },
+  },
+  mounted() {
+    this.formatTime(this.audioTotalTime);
   },
 };
 </script>

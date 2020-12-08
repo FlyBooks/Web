@@ -3,7 +3,7 @@
     <div class="wrapper">
       <player-header></player-header>
       <player-middle></player-middle>
-      <play-bottom></play-bottom>
+      <play-bottom :audioTotalTime="this.audioTotalTime" :currentTime="currentTime"></play-bottom>
     </div>
     <div class="bg-img">
       <img :src="currentSong.picUrl" alt="" />
@@ -23,6 +23,18 @@ export default {
     PlayerHeader,
     PlayerMiddle,
     PlayBottom,
+  },
+  props: {
+    audioTotalTime: {
+      type: Number,
+      required: true,
+      defalut: 0,
+    },
+    currentTime: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   computed: {
     ...mapGetters(["isFullpagePlay", "currentSong"]),

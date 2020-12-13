@@ -55,4 +55,7 @@ export default {
     }
     state.currentIndex = index;
   },
+  setCurTime(state, time) {
+    state.curTime = time;
+  },
 };

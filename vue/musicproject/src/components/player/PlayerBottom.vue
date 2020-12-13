@@ -2,18 +2,18 @@
   <div class="play-bottom">
     <div class="bottom-process">
       <span>{{ showTime(currentTime) }}</span>
-      <div class="process-bar">
-        <div class="process-line">
+      <div class="process-bar" @click="fastForward" ref="processBar">
+        <div class="process-line" ref="processLine">
           <div class="process-dot"></div>
         </div>
       </div>
       <span>{{ showTime(audioTotalTime) }}</span>
     </div>
     <div class="bottom-control">
-      <div class="mode loop" ref="mode" @click="changeMode"></div>
-      <div class="prev" @click="previousOne()"></div>
-      <div class="play" @click="changePlayState()" ref="playLabel"></div>
-      <div class="next" @click="nextOne()"></div>
+      <div class="mode loop" ref="mode" @click.stop="changeMode"></div>
+      <div class="prev" @click.stop="previousOne()"></div>
+      <div class="play" @click.stop="changePlayState()" ref="playLabel"></div>
+      <div class="next" @click.stop="nextOne()"></div>
       <div class="fav"></div>
     </div>
   </div>
@@ -38,7 +38,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setIsPlaying", "setModeType", "setcurrentIndex"]),
+    ...mapActions([
+      "setIsPlaying",
+      "setModeType",
+      "setcurrentIndex",
+      "setCurTime",
+    ]),
     changePlayState() {
       this.setIsPlaying(!this.isPlaying);
     },
@@ -73,6 +78,16 @@ export default {
 
       return `${getTime.minutes}:${getTime.seconds}`;
     },
+    fastForward(event) {
+      const processBarWidth = this.$refs.processBar.offsetWidth;
+      let fastWidth = event.offsetX > 0 ? event.offsetX : 0;
+      fastWidth = fastWidth > processBarWidth ? processBarWidth : fastWidth;
+
+      const curTime = (fastWidth / processBarWidth) * this.audioTotalTime;
+      this.setCurTime(curTime);
+      this.$refs.processLine.style.width =
+        (fastWidth / processBarWidth) * 100 + "%";
+    },
   },
   computed: {
     ...mapGetters(["isPlaying", "modeType", "currentIndex"]),
@@ -96,6 +111,10 @@ export default {
         this.$refs.mode.classList.remove("one");
         this.$refs.mode.classList.add("random");
       }
+    },
+    currentTime(newValue) {
+      this.$refs.processLine.style.width =
+        (this.currentTime / this.audioTotalTime) * 100 + "%";
     },
   },
   mounted() {
@@ -129,7 +148,7 @@ export default {
       height: 10px;
       border-radius: 2px;
       .process-line {
-        width: 50%;
+        width: 0%;
         height: 100%;
         position: relative;
         background-color: #ccc;

@@ -2,8 +2,11 @@
   <div class="fullpage-player" v-show="this.isFullpagePlay">
     <div class="wrapper">
       <player-header></player-header>
-      <player-middle></player-middle>
-      <play-bottom :audioTotalTime="this.audioTotalTime" :currentTime="currentTime"></play-bottom>
+      <player-middle :currentTime="currentTime"></player-middle>
+      <play-bottom
+        :audioTotalTime="this.audioTotalTime"
+        :currentTime="currentTime"
+      ></play-bottom>
     </div>
     <div class="bg-img">
       <img :src="currentSong.picUrl" alt="" />

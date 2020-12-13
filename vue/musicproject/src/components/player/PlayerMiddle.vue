@@ -9,7 +9,11 @@
     <swiper-slide class="float-lyric">
       <scroll-view ref="lyricscroll">
         <ul>
-          <li v-for="(value, index) in currentLyric" :key="index">
+          <li
+            v-for="(value, index) in currentLyric"
+            :key="index"
+            :class="{ active: index === lyricTime }"
+          >
             {{ value }}
           </li>
         </ul>
@@ -41,7 +45,15 @@ export default {
         observeParents: true,
         observeSlideChildren: true,
       },
+      lyricTime: "0",
     };
+  },
+  props: {
+    currentTime: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
   },
   methods: {
     ...mapActions(["setIsPlaying", "setLyric", "setCurrentLyric"]),
@@ -66,6 +78,24 @@ export default {
       if (newValue) {
         this.setCurrentLyric(newValue.id);
         this.$refs.lyricscroll.refresh();
+      }
+    },
+    currentTime(newTime, oldTime) {
+      const curT = Math.floor(newTime) + "";
+
+      if (this.currentLyric[curT]) {
+        this.lyricTime = curT;
+        const highlightLyricHeight = document.querySelector("li.active")
+          .offsetTop; //高亮歌词距顶部的距离
+
+        const WholeLyricHeight = this.$refs.lyricscroll.$el.offsetHeight; //可滚动的高度
+        if (highlightLyricHeight > WholeLyricHeight / 2) {
+          this.$refs.lyricscroll.scrollTo(
+            0,
+            WholeLyricHeight / 2 - highlightLyricHeight,
+            100
+          );
+        }
       }
     },
   },
@@ -111,6 +141,12 @@ export default {
       @include font_size($font_medium);
       @include text_color();
       margin: 10px 0;
+      &.active {
+        color: #ffffff;
+      }
+      &:last-of-type{
+        padding-bottom: 50%;
+      }
     }
   }
 }

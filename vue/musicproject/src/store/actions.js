@@ -29,6 +29,7 @@ export default {
       let audioIndex = musicUrl.data.data.findIndex((url) => {
         return url.id === value.id;
       });
+
       song.url = musicUrl.data.data[audioIndex].url;
 
       const artist = value.ar.reduce((oldValue, newValue) => {
@@ -39,13 +40,17 @@ export default {
       song.id = value.id;
       list.push(song);
     });
-
+    commit("setcurrentIndex", 0); //当重新设置了歌曲之后，currentIndex应该为0
     commit("setSongs", list);
   },
   async setCurrentLyric({ commit }, id) {
     const res = await getLyric(id);
 
-    let newLyric = parseLyric(res.data.lrc.lyric);
+    let newLyric = {};
+    if (res.data.lrc && res.data.lrc.lyric) {
+      newLyric = parseLyric(res.data.lrc.lyric);
+    }
+
     if (Object.keys(newLyric).length === 0) {
       newLyric = { 0: "no lyric" };
     }
@@ -56,6 +61,9 @@ export default {
   },
   setcurrentIndex({ commit }, index) {
     commit("setcurrentIndex", index);
+  },
+  setCurTime({ commit }, time) {
+    commit("setCurTime", time);
   },
 };
 

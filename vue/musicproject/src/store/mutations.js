@@ -45,6 +45,7 @@ export default {
       this.state.isFullpagePlay = false;
       this.state.isMiniPlayer = false;
       this.state.isShowListPlayer = false;
+      this.isPlaying = false;
     }
   },
   setcurrentIndex(state, index) {
@@ -57,5 +58,40 @@ export default {
   },
   setCurTime(state, time) {
     state.curTime = time;
+  },
+  setFavSongs(state, song) {
+    let isExist = state.favSongs.findIndex((value) => {
+      return song.id === value.id;
+    });
+
+    if (isExist === -1) {
+      state.favSongs.push(song);
+    } else {
+      state.favSongs.splice(isExist, 1);
+    }
+  },
+  setFavSongList(state, list) {
+    state.favSongs = list;
+  },
+  setHistorySong(state, hisSong) {
+    const isExist = state.historySongs.findIndex((value) => {
+      return value.id === hisSong.id;
+    });
+
+    if (isExist === -1) {
+      if (state.historySongs.length > 30) {
+        state.historySongs.splice(0, 1);
+      }
+      state.historySongs.push(hisSong);
+    }
+  },
+  setHistorySongList(state, list) {
+    state.historySongs = list;
+  },
+  setthemeIndex(state, index) {
+    if (index >= state.themes.length) {
+      index = 0;
+    }
+    state.themeIndex = index;
   },
 };

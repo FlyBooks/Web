@@ -22,6 +22,11 @@ import MiniPlayer from "../components/player/MiniPlayer.vue";
 import ListPlayer from "../components/player/ListPlayer.vue";
 import { mapGetters, mapActions } from "vuex";
 import modeType from "../store/modeType.js";
+import {
+  getRandomNumber,
+  setLocalStorage,
+  getLocalStorage,
+} from "../tools/tools.js";
 
 export default {
   name: "Player",
@@ -38,6 +43,8 @@ export default {
       "curTime",
       "modeType",
       "songs",
+      "favSongs",
+      "historySongs",
     ]),
   },
   data() {
@@ -47,7 +54,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setcurrentIndex"]),
+    ...mapActions([
+      "setcurrentIndex",
+      "setFavSongList",
+      "setHistorySong",
+      "setHistorySongList",
+    ]),
     timeupdate(e) {
       this.currentTime = e.target.currentTime;
     },
@@ -64,18 +76,13 @@ export default {
           this.$refs.musicPlay.play();
         }
       } else {
-        const index = this.getRandomNumber(0, this.songs.length - 1); //随机播放
+        const index = getRandomNumber(0, this.songs.length - 1); //随机播放
         if (index === this.currentIndex) {
           this.$refs.musicPlay.play();
         } else {
           this.setcurrentIndex(index);
         }
       }
-    },
-    getRandomNumber(min, max) {
-      min = Math.floor(min);
-      max = Math.ceil(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
     },
   },
   watch: {
@@ -96,6 +103,7 @@ export default {
       };
     },
     currentSong(newValue) {
+      this.setHistorySong(newValue);
       this.$refs.musicPlay.oncanplay = () => {
         this.audioTotalTime = this.$refs.musicPlay.duration;
       };
@@ -103,11 +111,28 @@ export default {
     curTime(newValue) {
       this.$refs.musicPlay.currentTime = newValue;
     },
+    favSongs(newValue) {
+      setLocalStorage("favSongList", newValue);
+    },
+    historySongs(newValue) {
+      setLocalStorage("hisSongList", newValue);
+    },
   },
   mounted() {
-    this.$refs.musicPlay.oncanplay = () => {
+    this.$refs.musicPlay.ondurationchange = () => {
       this.audioTotalTime = this.$refs.musicPlay.duration;
     };
+  },
+  created() {
+    const favSongList = getLocalStorage("favSongList");
+    if (favSongList.length > 0) {
+      this.setFavSongList(favSongList);
+    }
+
+    const hisSongList = getLocalStorage("hisSongList");
+    if (hisSongList.length > 0) {
+      this.setHistorySongList(hisSongList);
+    }
   },
 };
 </script>

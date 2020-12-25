@@ -9,4 +9,8 @@ export default {
   currentIndex: 0,
   currentLyric: {},
   curTime: 0,
+  favSongs: [],
+  historySongs: [],
+  themes: ["color1", "color2", "color3"],
+  themeIndex: 0,
 };

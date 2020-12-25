@@ -65,6 +65,21 @@ export default {
   setCurTime({ commit }, time) {
     commit("setCurTime", time);
   },
+  setFavSongs({ commit }, favSong) {
+    commit("setFavSongs", favSong);
+  },
+  setFavSongList({ commit }, list) {
+    commit("setFavSongList", list);
+  },
+  setHistorySong({ commit }, hisSong) {
+    commit("setHistorySong", hisSong);
+  },
+  setHistorySongList({ commit }, list) {
+    commit("setHistorySongList", list);
+  },
+  setthemeIndex({ commit }, index) {
+    commit("setthemeIndex", index);
+  },
 };
 
 function parseLyric(lyric) {

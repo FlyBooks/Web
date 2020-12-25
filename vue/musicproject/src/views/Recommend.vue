@@ -67,7 +67,20 @@ export default {
       //最新专辑数据
       this.newLatestAlbum = newLatestAlbum.data.albums;
       //新音乐数据
-      this.newSong = newSong.data.result;
+
+      this.newSong = newSong.data.result.map((song) => {
+        const artistsName = song.song.artists.reduce((oldValue, newValue) => {
+          return oldValue.name
+            ? oldValue.name + "-" + newValue.name
+            : newValue.name;
+        }, "");
+        return {
+          id: song.id,
+          picUrl: song.song.album.picUrl,
+          name: song.song.album.name,
+          artist: artistsName,
+        };
+      });
     },
     getSongId(id, type) {
       this.$router.push({

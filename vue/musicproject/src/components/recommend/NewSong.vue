@@ -3,42 +3,22 @@
     <div class="song-top">
       <h3>最新音乐</h3>
     </div>
-    <div class="song-content">
-      <ul class="song-items">
-        <li
-          v-for="song in newsong"
-          :key="song.id"
-          class="song-item"
-          @click="showFullpagePlayer(song.id)"
-        >
-          <img v-lazy="song.song.album.picUrl" alt="" />
-          <div>
-            <h3>{{ song.song.album.name }}</h3>
-            <p>{{ song.song.artists[0].name }}</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <new-song-list :newsong="newsong"></new-song-list>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import NewSongList from "../NewSongList.vue";
 export default {
   name: "NewSong",
+  components: {
+    NewSongList,
+  },
   props: {
     newsong: {
       type: Array,
       default: () => [],
       required: true,
-    },
-  },
-  methods: {
-    ...mapActions(["setIsFullpagePlay", "setIsMiniPlayer", "setSongsDetail"]),
-    showFullpagePlayer(songId) {
-      this.setSongsDetail([songId]);
-      this.setIsFullpagePlay(true);
-      this.setIsMiniPlayer(false);
     },
   },
 };
@@ -61,35 +41,6 @@ export default {
       padding: 0 20px;
     }
     border-bottom: 1px solid #cccccc;
-  }
-  .song-content {
-    .song-items {
-      width: 100%;
-      .song-item {
-        height: 200px;
-        display: flex;
-        align-items: center;
-        padding: 20px 20px;
-        border-bottom: 1px solid #cccccc;
-        img {
-          width: 150px;
-          height: 150px;
-          border-radius: 10px;
-          margin-right: 20px;
-        }
-        div {
-          @include text_color();
-          h3 {
-            @include font_size($font_medium);
-          }
-          p {
-            @include font_size($font_samll);
-            margin-top: 10px;
-            opacity: 0.6;
-          }
-        }
-      }
-    }
   }
 }
 </style>

@@ -8,6 +8,7 @@ const RecommendDetail = () => import("../views/RecommendDetail.vue");
 const Singer = () => import("../views/Singer.vue");
 const Rank = () => import(/* webpackChunkName: "Rank" */ "../views/Rank.vue");
 const Search = () => import("../views/Search.vue");
+const Profile = () => import("../views/Profile.vue");
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
     path: "/search",
     name: "Search",
     component: Search,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
   },
 ];
 

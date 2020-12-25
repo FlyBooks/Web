@@ -89,15 +89,18 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center; */
+      /* width: 50%; */
       margin-left: 10px;
       h3 {
         @include font_size($font_medium);
+        /* @include no-wrap(); */
         color: white;
       }
       p {
         margin-top: 5px;
         @include font_size($font_samll);
         @include text_color();
+        /* @include no-wrap(); */
       }
     }
   }
@@ -117,6 +120,7 @@ export default {
       @include bg_img("../../assets/images/list");
       width: 100px;
       height: 100px;
+      /* margin-right: 10px; */
     }
   }
 }

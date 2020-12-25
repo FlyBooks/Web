@@ -57,9 +57,20 @@ export default {
   },
   methods: {
     ...mapActions(["setIsPlaying", "setLyric", "setCurrentLyric"]),
+    findLiveIndex(index) {
+      if (index < 0) {
+        return this.lyricTime;
+      }
+      if (this.currentLyric[index + ""]) {
+        return index + "";
+      } else {
+        index--;
+        return this.findLiveIndex(index);
+      }
+    },
   },
   computed: {
-    ...mapGetters(["isPlaying", "currentSong", "currentLyric"]),
+    ...mapGetters(["isPlaying", "currentSong", "currentLyric", "curTime"]),
     firstLineLyric() {
       for (let key in this.currentLyric) {
         return this.currentLyric[key];
@@ -81,8 +92,11 @@ export default {
       }
     },
     currentTime(newTime, oldTime) {
-      const curT = Math.floor(newTime) + "";
-
+      let curT = Math.floor(newTime) + "";
+      // console.log(typeof this.curTime, typeof this.currentTime, "value");
+      if (this.curTime === this.currentTime + "") {
+        curT = this.findLiveIndex(parseInt(curT));
+      }
       if (this.currentLyric[curT]) {
         this.lyricTime = curT;
         const highlightLyricHeight = document.querySelector("li.active")
@@ -95,7 +109,15 @@ export default {
             WholeLyricHeight / 2 - highlightLyricHeight,
             100
           );
+        } else {
+          this.$refs.lyricscroll.scrollTo(0, 0, 100);
         }
+      }
+    },
+    currentLyric(newValue) {
+      for (let key in newValue) {
+        this.lyricTime = key;
+        return;
       }
     },
   },
@@ -144,7 +166,7 @@ export default {
       &.active {
         color: #ffffff;
       }
-      &:last-of-type{
+      &:last-of-type {
         padding-bottom: 50%;
       }
     }

@@ -131,3 +131,13 @@
     border-bottom-color: $border-color-theme2;
   }
 }
+
+@mixin border_color() {
+  border-color: $border-color-theme;
+  [data-theme="theme1"] & {
+    border-color: $border-color-theme1;
+  }
+  [data-theme="theme2"] & {
+    border-color: $border-color-theme2;
+  }
+}

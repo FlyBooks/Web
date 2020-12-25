@@ -28,7 +28,11 @@
                 <p>{{ value.name }}</p>
               </div>
               <div class="item-right">
-                <div class="fav"></div>
+                <div
+                  class="fav"
+                  @click.stop="collectMusic(value)"
+                  :class="{ active: isFav(value) }"
+                ></div>
                 <div class="del" @click.stop="delSong(index)"></div>
               </div>
             </li>
@@ -65,6 +69,7 @@ export default {
       "setIsMiniPlayer",
       "delSongs",
       "setcurrentIndex",
+      "setFavSongs",
     ]),
     hidePlayer() {
       this.setIsShowListPlayer(false);
@@ -91,6 +96,14 @@ export default {
     playSong(index) {
       this.setcurrentIndex(index);
     },
+    collectMusic(collectSong) {
+      this.setFavSongs(collectSong);
+    },
+    isFav(song) {
+      return this.favSongs.find((value) => {
+        return song.id === value.id;
+      });
+    },
   },
   computed: {
     ...mapGetters([
@@ -99,6 +112,7 @@ export default {
       "isShowListPlayer",
       "songs",
       "currentIndex",
+      "favSongs",
     ]),
   },
   watch: {
@@ -220,6 +234,9 @@ export default {
             width: 52px;
             height: 52px;
             @include bg_img("../../assets/images/small_un_favorite");
+            &.active {
+              @include bg_img("../../assets/images/small_favorite");
+            }
           }
           .del {
             width: 50px;

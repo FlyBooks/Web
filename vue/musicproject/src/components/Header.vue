@@ -2,29 +2,25 @@
   <div class="header" @click="changeTheme">
     <div class="headerleft"></div>
     <div class="headermiddle">网易云音乐</div>
-    <div class="headerright"></div>
+    <div class="headerright" @click.stop="showProfile()"></div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
-  data() {
-    return {
-      themes: ["color1", "color2", "color3"],
-      index: 0,
-    };
+  computed: {
+    ...mapGetters(["themeIndex", "themes"]),
   },
   methods: {
+    ...mapActions(["setthemeIndex"]),
     changeTheme() {
-      this.index++;
-      if (this.index >= this.themes.length) {
-        this.index = 0;
-      }
-      document.documentElement.setAttribute(
-        "theme-data",
-        this.themes[this.index]
-      );
+      this.setthemeIndex(this.themeIndex + 1);
+      document.documentElement.setAttribute("theme-data", this.themes);
+    },
+    showProfile() {
+      this.$router.push("/profile");
     },
   },
 };
@@ -48,7 +44,7 @@ export default {
   .headerleft {
     @include bg_img("../assets/images/logo");
   }
-  .headerright{
+  .headerright {
     @include bg_img("../assets/images/account");
   }
   .headermiddle {

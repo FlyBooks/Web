@@ -34,4 +34,16 @@ export default {
   curTime(state) {
     return state.curTime;
   },
+  favSongs(state) {
+    return state.favSongs;
+  },
+  historySongs(state) {
+    return state.historySongs;
+  },
+  themes(state) {
+    return state.themes[state.themeIndex];
+  },
+  themeIndex(state) {
+    return state.themeIndex;
+  },
 };

@@ -14,7 +14,11 @@
       <div class="prev" @click.stop="previousOne()"></div>
       <div class="play" @click.stop="changePlayState()" ref="playLabel"></div>
       <div class="next" @click.stop="nextOne()"></div>
-      <div class="fav"></div>
+      <div
+        class="fav"
+        @click.stop="collectMusic(currentSong)"
+        :class="{ active: isFav(currentSong) }"
+      ></div>
     </div>
   </div>
 </template>
@@ -22,6 +26,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import modeType from "../../store/modeType.js";
+import { formatTime } from "../../tools/tools.js";
 
 export default {
   name: "PlayerBottom",
@@ -43,6 +48,7 @@ export default {
       "setModeType",
       "setcurrentIndex",
       "setCurTime",
+      "setFavSongs",
     ]),
     changePlayState() {
       this.setIsPlaying(!this.isPlaying);
@@ -62,19 +68,8 @@ export default {
     nextOne() {
       this.setcurrentIndex(this.currentIndex + 1);
     },
-    formatTime(time) {
-      let minutes = parseInt(time / 60);
-      minutes = minutes >= 10 ? minutes : "0" + minutes;
-      let seconds = parseInt(time - minutes * 60);
-      seconds = seconds >= 10 ? seconds : "0" + seconds;
-
-      return {
-        minutes,
-        seconds,
-      };
-    },
     showTime(time) {
-      const getTime = this.formatTime(time);
+      const getTime = formatTime(time);
 
       return `${getTime.minutes}:${getTime.seconds}`;
     },
@@ -84,13 +79,27 @@ export default {
       fastWidth = fastWidth > processBarWidth ? processBarWidth : fastWidth;
 
       const curTime = (fastWidth / processBarWidth) * this.audioTotalTime;
-      this.setCurTime(curTime);
+      this.setCurTime(curTime.toFixed(2));
       this.$refs.processLine.style.width =
         (fastWidth / processBarWidth) * 100 + "%";
     },
+    collectMusic(favSong) {
+      this.setFavSongs(favSong);
+    },
+    isFav(collectSong) {
+      return this.favSongs.find((favSong) => {
+        return favSong.id === collectSong.id;
+      });
+    },
   },
   computed: {
-    ...mapGetters(["isPlaying", "modeType", "currentIndex"]),
+    ...mapGetters([
+      "isPlaying",
+      "modeType",
+      "currentIndex",
+      "currentSong",
+      "favSongs",
+    ]),
   },
   watch: {
     isPlaying(newValue, oldValue) {
@@ -118,7 +127,7 @@ export default {
     },
   },
   mounted() {
-    this.formatTime(this.audioTotalTime);
+    formatTime(this.audioTotalTime);
   },
 };
 </script>
@@ -202,6 +211,9 @@ export default {
     }
     .fav {
       @include bg_img("../../assets/images/un_favorite");
+      &.active {
+        @include bg_img("../../assets/images/favorite");
+      }
     }
   }
 }

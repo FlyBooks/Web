@@ -33,7 +33,9 @@ export default {
     showFullpagePlayer(id) {
       this.setSongsDetail([id]);
       this.$store.dispatch("setIsFullpagePlay", true);
+      console.log(122);
       this.setCurrentLyric(id);
+      console.log(123);
       this.setIsMiniPlayer(false);
     },
     playAllSongs() {
@@ -42,7 +44,6 @@ export default {
       });
       this.setSongsDetail(songIds);
       this.$store.dispatch("setIsFullpagePlay", true);
-      this.setIsMiniPlayer(false);
     },
   },
 };

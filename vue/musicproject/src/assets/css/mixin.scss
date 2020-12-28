@@ -13,6 +13,16 @@
 @mixin font_size($size) {
   @include font_dpr($size);
 }
+
+@mixin font_color(){
+  color: $font-color-theme;
+  [data-theme=theme1] & {
+    color: $font-color-theme1;
+  }
+  [data-theme=theme2] & {
+    color: $font-color-theme2;
+  }
+}
 // 不换行
 @mixin no-wrap() {
   text-overflow: ellipsis;

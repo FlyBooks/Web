@@ -1,7 +1,7 @@
 <template>
   <div class="header" @click="changeTheme">
     <div class="headerleft"></div>
-    <div class="headermiddle">网易云音乐</div>
+    <div class="headermiddle">Cloud Music</div>
     <div class="headerright" @click.stop="showProfile()"></div>
   </div>
 </template>

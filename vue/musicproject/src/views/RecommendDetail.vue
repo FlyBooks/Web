@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getNewSongDetail, getAlbumContent } from "../api";
+import { getNewSongDetail, getAlbumContent, getSingerInfo } from "../api";
 import SubHeader from "../components/newSongDetail/SubHeader.vue";
 import DetailTopPic from "../components/newSongDetail/DetailTopPic.vue";
 import DetailBottom from "../components/newSongDetail/DetailBottom.vue";
@@ -50,6 +50,13 @@ export default {
         this.title = this.newSongDetail.album.name;
         this.imgPath = this.newSongDetail.album.artist.picUrl;
         this.playlist = this.newSongDetail.songs;
+      } else if (this.$route.params.type === "singer") {
+        const singerInfo = await getSingerInfo(this.$route.params.id);
+        this.newSongDetail = singerInfo.data;
+        console.log(this.newSongDetail);
+        this.playlist = this.newSongDetail.hotSongs;
+        this.title = this.newSongDetail.artist.name;
+        this.imgPath = this.newSongDetail.artist.picUrl;
       }
     },
   },

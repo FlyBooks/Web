@@ -29,7 +29,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-around;
-
+  box-sizing: border-box;
   @include bg_sub_color();
   .tabitem {
     @include text_color();

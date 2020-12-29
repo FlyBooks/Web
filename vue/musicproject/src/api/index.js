@@ -137,3 +137,12 @@ export async function getArtistsByAllLetters() {
 
   return allArtists;
 }
+
+export function getSingerInfo(id) {
+  return request({
+    url: "/artists",
+    params: {
+      id,
+    },
+  });
+}

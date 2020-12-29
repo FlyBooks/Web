@@ -30,6 +30,7 @@ const routes = [
     path: "/singer",
     name: "Singer",
     component: Singer,
+    children: [{ path: "singerdetail/:id/:type", component: RecommendDetail }],
   },
   {
     path: "/rank",

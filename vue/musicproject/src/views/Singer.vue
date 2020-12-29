@@ -9,6 +9,7 @@
               v-for="artist in value.list"
               :key="artist.id"
               class="one-artist"
+              @click.stop="showSinger(artist.id)"
             >
               <img class="artist-pic" v-lazy="artist.picUrl" />
               <p class="artist-name">{{ artist.name }}</p>
@@ -30,6 +31,12 @@
         {{ value.key }}
       </li>
     </ul>
+    <div v-show="stickyTitle" class="stick-title" ref="stickyTitle">
+      {{ stickyTitle }}
+    </div>
+    <transition>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -48,6 +55,8 @@ export default {
       currentIndex: 0,
       stopInitial: 0,
       stopAfter: 0,
+      positionY: 0, //滑动的时候y轴坐标值
+      stickyTitleHeight: 0,
     };
   },
   methods: {
@@ -73,8 +82,10 @@ export default {
 
       this._fastJump(currentIndex);
     },
+    showSinger(artistId) {
+      this.$router.push(`/singer/singerdetail/${artistId}/singer`);
+    },
   },
-
   watch: {
     topArtistsInfo(newValue) {
       this.$nextTick(() => {
@@ -83,9 +94,53 @@ export default {
         });
       });
     },
+    stickyTitle() {
+      this.$nextTick(() => {
+        this.stickyTitleHeight = this.$refs.stickyTitle.offsetHeight;
+      });
+    },
+  },
+  mounted() {
+    this.$refs.scrollview.scroll((y) => {
+      this.positionY = y;
+      if (y > 0) {
+        this.currentIndex = 0;
+        return;
+      }
+      for (let i = 0; i < this.indexTopOffset.length - 1; i++) {
+        if (-y > this.indexTopOffset[i] && -y < this.indexTopOffset[i + 1]) {
+          this.currentIndex = i;
+
+          let diffOffsetY = y + this.indexTopOffset[this.currentIndex + 1];
+          let diffTitleOffsetY = 0;
+          if (diffOffsetY > 0 && diffOffsetY < this.stickyTitleHeight) {
+            diffTitleOffsetY = diffOffsetY - this.stickyTitleHeight; //固定标题的偏移位
+          } else {
+            diffTitleOffsetY = 0;
+          }
+          if (diffTitleOffsetY === this.diffTitleOffsetY) {
+            return;
+          }
+          this.diffTitleOffsetY = diffTitleOffsetY;
+          this.$refs.stickyTitle.style.transform = `translateY(${diffTitleOffsetY}px)`;
+          return;
+        }
+      }
+
+      this.currentIndex = this.indexTopOffset.length - 1;
+    });
   },
   async created() {
     this.topArtistsInfo = await getArtistsByAllLetters();
+  },
+  computed: {
+    stickyTitle() {
+      if (this.positionY >= 0) {
+        return "";
+      } else {
+        return this.topArtistsInfo[this.currentIndex].key;
+      }
+    },
   },
 };
 </script>
@@ -149,5 +204,38 @@ export default {
       }
     }
   }
+
+  .stick-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include font_size($font_medium);
+    height: 45px;
+    line-height: 45px;
+    padding-left: 5px;
+    color: white;
+    background: red;
+  }
+}
+
+.v-enter {
+  transform: translateX(100%);
+}
+.v-enter-to {
+  transform: translateX(0%);
+}
+.v-enter-active {
+  transition: transform 1s;
+}
+
+.v-leave {
+  transform: translateX(0%);
+}
+.v-leave-to {
+  transform: translateX(100%);
+}
+.v-leave-active {
+  transition: transform 1s;
 }
 </style>

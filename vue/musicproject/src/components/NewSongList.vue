@@ -31,7 +31,6 @@ export default {
     showFullpagePlayer(songId) {
       this.setSongsDetail([songId]);
       this.setIsFullpagePlay(true);
-      this.setIsMiniPlayer(false);
     },
   },
 };

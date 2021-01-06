@@ -23,3 +23,15 @@ export const setLocalStorage = (key, value) => {
 export const getLocalStorage = (key) => {
   return JSON.parse(window.localStorage.getItem(key));
 };
+
+export function debounce(fn, delay = 1000) {
+  let timerId = null;
+
+  return function() {
+    timerId && clearTimeout(timerId);
+    let that = this;
+    timerId = setTimeout(function(...args) {
+      fn.apply(that, args);
+    }, delay);
+  };
+}

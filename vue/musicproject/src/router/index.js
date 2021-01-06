@@ -36,6 +36,7 @@ const routes = [
     path: "/rank",
     name: "Rank",
     component: Rank,
+    children: [{path: "rankdetail/:id/:type", component: RecommendDetail}]
   },
   {
     path: "/search",

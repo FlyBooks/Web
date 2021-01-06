@@ -19,10 +19,10 @@ export default {
   width: 200px;
   height: 200px;
   background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: transition(-50%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 999;
 }
 .box {
@@ -43,7 +43,7 @@ export default {
   }
 }
 
-.text{
+.text {
   color: white;
   text-align: center;
 }

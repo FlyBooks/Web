@@ -10,8 +10,21 @@ export default {
 
     LoadingInstance.$mount(oDiv);
 
+    //添加全局方法
+    Vue.Loading = function() {
+      LoadingInstance.isShow = true;
+    };
+
+    Vue.Hiding = function() {
+      LoadingInstance.isShow = false;
+    };
+
     Vue.prototype.$loading = function() {
       LoadingInstance.isShow = true;
+    };
+
+    Vue.prototype.$hide = function() {
+      LoadingInstance.isShow = false;
     };
   },
 };

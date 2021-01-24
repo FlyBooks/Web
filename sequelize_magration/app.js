@@ -1,0 +1,1 @@
+// npx sequelize db:seed --seed 20210124091347-user.js

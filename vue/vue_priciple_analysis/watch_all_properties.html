@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object.defineProperty监听所有属性</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      window.onload = function () {
+        let obj = {
+          name: "codify",
+          age: 20,
+        };
+
+        class observe {
+          constructor(obj) {
+            this.obj = obj;
+            this.listObj(obj);
+          }
+          listObj(obj) {
+            if (obj && typeof obj === "object") {
+              for (let key in obj) {
+                this.setting(obj, key, obj[key]);
+              }
+            }
+          }
+          setting(obj, attr, value) {
+            this.listObj(value);
+
+            Object.defineProperty(obj, attr, {
+              configurable: true,
+              enumerable: true,
+              get() {
+                return value;
+              },
+              set: (newValue) => {
+                if (newValue !== value) {
+                  console.log(this);
+                  value = newValue;
+                  this.listObj(value);
+                  console.log("set方法被调用了");
+                }
+              },
+            });
+          }
+        }
+
+        new observe(obj);
+        obj.name = { b: "hiahia" };
+        obj.name.b = "xixi";
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+
+    </div>
+  </body>
+</html>

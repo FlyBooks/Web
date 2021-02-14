@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>set get</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      window.onload = function () {
+        const vm = new Vue({
+          el: "#app",
+          data: {
+            name: "TaylorSwift",
+            age: 18,
+          },
+        });
+
+        const obj = {};
+        let oldName = "Eva";
+        Object.defineProperty(obj, "name", {
+          configurable: true,
+          enumerable: true,
+          set(newValue) {
+            console.log("set method is executed now");
+            if (newValue !== oldName) {
+              oldName = newValue;
+            }
+          },
+          get() {
+            console.log("get method is executed now");
+            return oldName;
+          },
+        });
+        console.log(obj.name);
+        obj.name = "running";
+        console.log(obj.name);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name" />
+      <p>{{name + age}}</p>
+    </div>
+  </body>
+</html>

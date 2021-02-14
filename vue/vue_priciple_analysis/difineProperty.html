@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script>
+      window.onload = function () {
+        const vue = new Vue({
+          el: "#app",
+          data: {
+            name: "TaylorSwift",
+          },
+        });
+
+        let obj = {};
+
+        Object.defineProperty(obj, "name", {
+          //可以通过value，来告诉defineProperty方法新增的取值是什么
+          value: "Eva",
+          writable: true,
+          //默认情况下，通过defineProperty新增的属性是不能删除的
+          //要想可以删除，就必须设置configurable:true
+          configurable: true,
+          //默认情况下，是不可以迭代的，必须设置enumerable:true才可以迭代
+          enumerable: true,
+        });
+        console.log(obj);
+        // obj.name = "Selena";
+        // delete obj.name;
+        for (let key in obj) {
+          console.log(key, obj[key]);
+        }
+        //注意点:默认情况下，defineProperty新增的属性的值是不呢修改的，要设置writable:true才可以修改
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name" />
+      <p>{{name}}</p>
+    </div>
+  </body>
+</html>

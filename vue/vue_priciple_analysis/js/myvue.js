@@ -10,26 +10,40 @@ let compileUtil = {
     let reg = /\{\{(.+?)\}\}/gi;
     if (reg.test(value)) {
       let val = value.replace(reg, (match, p1) => {
-        console.log(match, "match", p1);
+        new Watcher(vm, p1, (newValue, oldValue) => {
+          node.textContent = this.processData(newValue);
+        });
         return this.processData(p1, vm);
       });
       console.log(val, "finally");
-      node.textContent = val;
+      return val;
     }
   },
   model: function (node, value, vm) {
     const val = this.processData(value, vm);
-    console.log(val, "model");
+
     node.value = val;
+    node.addEventListener("input", (e) => {
+      console.log(e.target.value);
+      console.log(22);
+    });
   },
   text: function (node, value, vm) {
+    new Watcher(vm, value, (newValue, oldValue) => {
+      node.innerHTML = newValue;
+    });
     node.innerHTML = vm.$data[value];
   },
   html: function (node, value, vm) {
+    new Watcher(vm, value, (newValue, oldValue) => {
+      node.innerText = newValue;
+      console.log(newValue, "new");
+    });
     node.innerText = vm.$data[value];
   },
   content: function (node, value, vm) {
-    this.processReg(node, value, vm);
+    let val = this.processReg(node, value, vm);
+    node.textContent = val;
   },
 };
 
@@ -125,11 +139,14 @@ class Observe {
   }
   setting(obj, attr, value) {
     this.listObj(value);
+    //将当前属性的所有观察者对象都放到当前属性的发布订阅对象中管理起来
+    let dep = new Dep(); //创建了属于当前属性的发布订阅对象
 
     Object.defineProperty(obj, attr, {
       configurable: true,
       enumerable: true,
       get() {
+        Dep.target && dep.addSub(Dep.target);
         return value;
       },
       set: (newValue) => {
@@ -137,6 +154,7 @@ class Observe {
           console.log(this);
           value = newValue;
           this.listObj(value);
+          dep.update();
           console.log("set方法被调用了");
         }
       },
@@ -146,4 +164,45 @@ class Observe {
 
 //实现数据变化之后更新ui界面，可以使用发布订阅模式来实现
 //先定义一个观察者类，再定义一个发布订阅类，然后通过发布订阅的类来管理观察者类
+class Watcher {
+  constructor(vm, attr, cb) {
+    this.vm = vm;
+    this.attr = attr;
+    this.cb = cb;
+    this.oldValue = this.getOldValue();
+  }
 
+  getOldValue() {
+    Dep.target = this;
+    let oldValue = compileUtil.processData(this.attr, this.vm);
+    Dep.target = null;
+    return oldValue;
+  }
+
+  //定义一个更新的方法，用于判断新值和旧值是否相同
+  update() {
+    let newValue = compileUtil.processData(this.attr, this.vm);
+
+    if (this.oldValue !== newValue) {
+      this.cb(newValue, this.oldValue);
+    }
+  }
+}
+
+class Dep {
+  constructor() {
+    this.subs = []; //这个数组就是专门管理某个属性所有的观察者对象的
+  }
+
+  //订阅观察的方法
+  addSub(watcher) {
+    this.subs.push(watcher);
+  }
+
+  // 发布订阅的方法
+  notify() {
+    this.subs.forEach((watcher) => {
+      watcher.update();
+    });
+  }
+}

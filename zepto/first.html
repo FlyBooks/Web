@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./libs/zepto.js"></script>
+    <script src="./libs/event.js"></script>
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        background-color: skyblue;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let oBtn = document.querySelector("#change");
+        let oBtn2 = document.querySelector("#back");
+        let oDiv = document.querySelector("div");
+
+        oBtn.onclick = function () {
+          $("#div").css({ backgroundColor: "red" });
+        };
+        $("#back").click(function () {
+          console.log(2333);
+          $("div").css({ backgroundColor: "yellow" });
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="Change Color" id="change" />
+    <input type="button" value="back" id="back" />
+    <div id="div"></div>
+  </body>
+</html>

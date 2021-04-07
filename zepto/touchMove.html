@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(to right, red, blue);
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        const oDiv = document.querySelector("div");
+        let start = 0,
+          end = 0,
+          clientX = 0,
+          clientY = 0;
+        let flag = true;
+        oDiv.ontouchstart = function (event) {
+          if (flag) {
+            start = event.targetTouches[0].clientX;
+            end = event.targetTouches[0].clientY;
+            // flag = false;
+          }
+          console.log("start", start, end);
+        };
+
+        oDiv.ontouchmove = function (event) {
+          clientX = event.targetTouches[0].clientX;
+          clientY = event.targetTouches[0].clientY;
+          let moveX = clientX - start;
+          let moveY = clientY - end;
+          // console.log(moveX, moveY);
+          oDiv.style.transform = `translate(${moveX}px,${moveY}px)`;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>webpack 开篇介绍</title>
-  <script>
-    /*
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webpack 开篇介绍</title>
+    <script>
+      /*
     1.什么是webpack？
     webpack是一套基于NodeJS的打包工具
     webpack一开始就是一个js打包工具，可以将多个模块的js文件合并打包成一个文件；
@@ -16,11 +16,26 @@
     所以我们可以将不同的功能写到不同的模块中，这样就提升代码的可维护性和复用性；
     但是当代码写到不同模块时，新的问题又出现了，
     比如：导入资源变多，请求次数变多，网页性能也就差了；
+
     
+    3.如何通过webpack来打包js模块
+    3.1安装webpack
+    npm init -y
+    npm install --save-dev webpack
+    npm install --save-dev webpack-cli
+    3.2在终端输入打包命令：
+    npx webpack ./index.js
+    注意： index.js就是需要打包的文件
+
+    打包之后的文件会放到dist目录中，名称叫main.js
     */
-  </script>
-</head>
-<body>
-  
-</body>
+    </script>
+  </head>
+  <body>
+    <!-- <script src="head.js"></script>
+    <script src="content.js"></script>
+    <script src="footer.js"></script> -->
+    <!-- <script src="index.js"></script> -->
+    <script src="dist/main.js"></script>
+  </body>
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        height: 100px;
+        width: 100px;
+        background-color: skyblue;
+      }
+    </style>
+    <script>
+      /*
+      js为移动端专门新增了几个事件：
+      touchstart:手指按下
+      touchmove: 手指在元素上移动
+      touchend: 手指抬起
+      */
+      window.onload = function () {
+        let oDiv = document.querySelector("div");
+        console.log(2333);
+        oDiv.ontouchstart = function (event) {
+          console.log("touch start", event.changedTouches);
+        };
+
+        oDiv.ontouchend = function () {
+          console.log("touch end");
+        };
+
+        oDiv.ontouchmove = function () {
+          console.log("touch move");
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="libs/zepto.js"></script>
+    <script src="libs/event.js"></script>
+    <script src="libs/selector.js"></script>
+    <script src="libs/fx.js"></script>
+    <script src="libs/fx_methods.js"></script>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        $("#btn").click(function () {
+          $("div").toggle();
+        });
+        $("#animation").click(function () {
+          $("div").animate({ marginLeft: "200px" }, 2000);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button id="btn">显示/隐藏</button>
+    <button id="animation">animation</button>
+    <div></div>
+  </body>
+</html>
